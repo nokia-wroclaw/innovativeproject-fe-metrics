@@ -1,0 +1,8 @@
+flaga dla pierwszego uruchomienia tworząca tabele w bazie(czy lepiej osobny skrypt?) - function init(db, login, pswd)
+
+połączenie z bazą i komunikacja - influxdb + js(node): https://docs.influxdata.com/influxdb/v2.0/tools/client-libraries/js/
+
+oznaczenie analizowanego elementu - metric(element, time_limit(0 - bez)) -> jeśli błąd lub długo to zapisz ten fakt
+
+start i stop timera mierzącego wszystko pomiędzy - timer.start(), timer.stop()
+
