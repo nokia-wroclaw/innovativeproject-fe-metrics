@@ -1,0 +1,12 @@
+Prerequisites
+-docker
+-linux shell (probably any shell but I'm not sure) 
+
+
+for run this image you need run this 2 commends
+
+docker build -t webserver
+
+docker run -it --rm -d -p 8080:80 --name web webserver
+
+Then you can go to http://localhost:8080/ and see hello-world page
