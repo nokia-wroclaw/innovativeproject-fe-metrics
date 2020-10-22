@@ -5,7 +5,7 @@ Prerequisites
 
 to start running apk you use:
 
-docker-compose up-d
+docker-compose up -d
 
 to stop running apk you use:
 
