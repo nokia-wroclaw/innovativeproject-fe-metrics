@@ -3,10 +3,18 @@ Prerequisites
 -linux shell (probably any shell but I'm not sure) 
 
 
-for run this image you need run this 2 commends
+to start running apk you use:
 
-docker build -t webserver
+docker-compose up -d
 
-docker run -it --rm -d -p 8080:80 --name web webserver
+to stop running apk you use:
 
-Then you can go to http://localhost:8080/ and see hello-world page
+docker-compose down
+
+links:
+
+http://localhost:8080/ - nginx hello world page
+
+http://localhost:3003/ - grafana
+
+http://localhost:3004/ - influx
