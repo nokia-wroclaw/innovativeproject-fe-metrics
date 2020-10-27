@@ -1,8 +1,13 @@
-flaga dla pierwszego uruchomienia tworząca tabele w bazie(czy lepiej osobny skrypt?) - function init(db, login, pswd)
+flaga dla pierwszego uruchomienia tworząca tabele w bazie(czy lepiej osobny skrypt?) - function init(db, login, pswd) - to raczej do konfiguracji startowej (docker-compose up -d)
 
 połączenie z bazą i komunikacja - influxdb + js(node): https://docs.influxdata.com/influxdb/v2.0/tools/client-libraries/js/
 
-oznaczenie analizowanego elementu - metric(element, time_limit(0 - bez)) -> jeśli błąd lub długo to zapisz ten fakt
+oznaczenie analizowanego elementu - metric(id_metryki, wartość) -> całościowa analiza metryk
 
 start i stop timera mierzącego wszystko pomiędzy - timer.start(), timer.stop()
 
+init - konfiguracja przeglądarki do wysyłania metryk do influxdb
+
+zapis tekstu do influxa zamiast wartości - doczytać
+
+https://documentation.js.org/ do dokumentacji?
