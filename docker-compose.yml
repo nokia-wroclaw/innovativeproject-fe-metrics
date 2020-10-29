@@ -13,7 +13,7 @@ services:
   volumes:
    - "./influx:/var/lib/influxdb"
    - "./grafana:/var/lib/grafana"
-   - "./grafana/dashboards:/var/lib/grafana/dashboards"
+   - "./dashboards-scheme:/var/lib/grafana/dashboards"
    - "./datasources:/etc/grafana/provisioning/datasources"
    - "./dashboards:/etc/grafana/provisioning/dashboards"
 
