@@ -13,3 +13,4 @@ services:
   volumes:
    - "./influx:/var/lib/influxdb"
    - "./grafana:/var/lib/grafana"
+   - "./datasources:/etc/grafana/provisioning/datasources"
