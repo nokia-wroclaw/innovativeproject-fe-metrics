@@ -1,7 +1,7 @@
 version: "3.7"
 services:
  web:
-  build: .
+  build: "./frontend"
   ports: 
    - "8080:80"
  influx-grafana:
