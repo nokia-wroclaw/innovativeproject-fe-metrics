@@ -1,7 +1,7 @@
 //Really basic version of sender ready to develop
-//TO RESET NGINX:
+//RELOAD NGINX:
 //docker-compose up -d --build
-//docker exec -it innovativeproject-fe-metrics_web_1 nginx -s reload to reload nginx
+//docker exec -it innovativeproject-fe-metrics_web_1 nginx -s reload
 
 const xhr = new XMLHttpRequest();
 
