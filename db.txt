@@ -1,0 +1,26 @@
+SETTING UP NEW DB, WILL AUTOCREATE DB IN THE END USING SOME COMMANDS FROM THIS FILE
+
+
+
+docker-compose up -d
+docker exec -it innovativeproject-fe-metrics_influx-grafana_1 bash
+influx
+CREATE DATABASE metrics
+USE metrics
+CREATE RETENTION POLICY "inf" ON metrics DURATION INF REPLICATION 1
+
+
+
+EXAMPLE OF INSERTION: "INSERT metric value=1"
+
+"SELECT * FROM metric" returns:
+name: metric
+time                value
+----                -----
+1604444096440430055 1
+
+"SHOW FIELD KEYS" returns:
+name: metric
+fieldKey fieldType
+-------- ---------
+value    float
