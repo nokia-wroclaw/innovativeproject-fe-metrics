@@ -2,11 +2,13 @@
 
 const xhr = new XMLHttpRequest();
 
-function send(id, metric, interval, hostname){
-    let str = 'database,hostname=' + hostname + ' numMeasurements=' + id + 'i,numSeries=' + metric + 'i'
+function send(value, interval){
+    //Sending random value for testing purposes
+    //let str = 'metric value=' + value
 
     function xhrSend(){
-        xhr.open("POST", "http://localhost:8086/write?db=_internal");
+        let str = 'metric value=' + Math.random();
+        xhr.open("POST", "http://localhost:8086/write?db=metrics");
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(str);
     };
@@ -14,4 +16,5 @@ function send(id, metric, interval, hostname){
     var sendIntervalID = setInterval(xhrSend, interval * 1000);
 };
 
-send(420, 1, 5, "LastTest"); //sends metric 1 every 5 seconds for element 42
+
+send(1, 5); //sends value 1 every 5 seconds

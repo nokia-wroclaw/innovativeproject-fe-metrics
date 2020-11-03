@@ -2,6 +2,10 @@ SETTING UP NEW DB, WILL AUTOCREATE DB IN THE END USING SOME COMMANDS FROM THIS F
 
 $influx -import -path=some_commands_from_this_file.txt -precision=s added to compose should autocreate db
 
+TO RESET NGINX:
+docker-compose up -d --build
+$docker exec -it innovativeproject-fe-metrics_web_1 nginx -s reload to reload nginx
+
 
 
 docker-compose up -d
