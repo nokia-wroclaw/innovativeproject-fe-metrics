@@ -1,5 +1,7 @@
 SETTING UP NEW DB, WILL AUTOCREATE DB IN THE END USING SOME COMMANDS FROM THIS FILE
 
+$influx -import -path=some_commands_from_this_file.txt -precision=s added to compose should autocreate db
+
 
 
 docker-compose up -d
