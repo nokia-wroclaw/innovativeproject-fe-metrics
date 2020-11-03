@@ -14,4 +14,4 @@ function send(id, metric, interval, hostname){
     var sendIntervalID = setInterval(xhrSend, interval * 1000);
 };
 
-send(10, 1, 5, "trolololo"); //sends metric 1 every 5 seconds for element 42
+send(420, 1, 5, "LastTest"); //sends metric 1 every 5 seconds for element 42
