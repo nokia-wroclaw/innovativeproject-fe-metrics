@@ -7,6 +7,7 @@
 <body onload="init('http://localhost:8086/write?db=metrics')">
 	<h1>This is hello world from docker nginx</h1>
 	<script src="lib/sender.js"></script>
-	<button onclick="sendXTimes(15,5,42)">Click me and send 15 times</button>
+	<button onclick="basicSend(42)">Click me and send 42</button>
+	<button onclick="sendInInterval(5,11)">Click me and start sending 11</button>
 </body>
 </html>

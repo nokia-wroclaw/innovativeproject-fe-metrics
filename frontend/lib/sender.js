@@ -1,7 +1,7 @@
 //Really basic version of sender ready to develop
 //RELOAD NGINX:
 //docker-compose up -d --build
-//docker exec -it innovativeproject-fe-metrics_web_1 nginx -s reload
+//docker exec -it main-directory-name_web_1 nginx -s reload
 
 const xhr = new XMLHttpRequest();
 var Username;
@@ -22,18 +22,9 @@ function basicSend(value){
     xhr.send(str);
 }
 
-function sendXTimes(counter, interval, value){
-    let localTimer = setInterval(sendXTimes,interval * 1000,counter-1,interval, value);
-    if (counter >0){
-        basicSend(value);
-    }
-    else {
-        clearInterval(localTimer);
-    }
-}
 
 function sendInInterval(interval, value){
-    let localTimer = setInterval(sendXTimes,interval * 1000,counter-1,interval, value);
+    let localTimer = setInterval(sendInInterval,interval * 1000,interval, value);
     basicSend(value);
 }
 
