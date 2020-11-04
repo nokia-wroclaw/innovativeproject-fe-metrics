@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<title>Docker Nginx hello-world</title>
 </head>
-<body>
+<body onload="init('http://localhost:8086/write?db=metrics')">
 	<h1>This is hello world from docker nginx</h1>
 	<script src="lib/sender.js"></script>
+	<button onclick="sendXTimes(15,5,42)">Click me and send 15 times</button>
 </body>
 </html>

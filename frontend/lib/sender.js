@@ -32,17 +32,10 @@ function sendXTimes(counter, interval, value){
     }
 }
 
-
-function send(value, interval){
-    //Sending random value for testing purposes
-    //let str = 'metric value=' + value
-
-    function xhrSend(){
-
-    };
-
-    var sendIntervalID = setInterval(xhrSend, interval * 1000);
-};
+function sendInInterval(interval, value){
+    let localTimer = setInterval(sendXTimes,interval * 1000,counter-1,interval, value);
+    basicSend(value);
+}
 
 
-send(1, 5); //sends value 1 every 5 seconds
+//send(1, 5); //sends value 1 every 5 seconds
