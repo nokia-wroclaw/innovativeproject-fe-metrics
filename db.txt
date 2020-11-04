@@ -1,3 +1,0 @@
-ADD TO COMPOSE:
-influx -import -path=path_to_db_init -precision=s
-

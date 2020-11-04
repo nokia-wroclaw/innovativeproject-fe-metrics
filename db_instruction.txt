@@ -1,0 +1,9 @@
+copy db_init.txt into influx directory
+
+copy to CLI
+
+docker-compose up -d --build
+docker exec -it fem-influx-grafana_1 bash (you can check name using tab)
+cd ../var/lib/influxdb
+influx -import -path=db_init.txt -precision=s
+exit
