@@ -1,37 +1,3 @@
-SETTING UP NEW DB, WILL AUTOCREATE DB IN THE END USING SOME COMMANDS FROM THIS FILE
+ADD TO COMPOSE:
+influx -import -path=path_to_db_init -precision=s
 
-$influx -import -path=some_commands_from_this_file.txt -precision=s added to compose should autocreate db
-
-
-TO SEE SENT DATA IN CHRONOGRAF:
-SELECT * FROM "metrics"."inf"."metric"
-
-
-
-
-
-docker-compose up -d
-docker exec -it innovativeproject-fe-metrics_influx-grafana_1 bash
-influx
-CREATE DATABASE metrics
-USE metrics
-CREATE RETENTION POLICY "inf" ON metrics DURATION INF REPLICATION 1
-ALTER RETENTION POLICY "inf" ON "metrics" DEFAULT
-
-
-
-
-
-EXAMPLE OF INSERTION: "INSERT metric value=1"
-
-"SELECT * FROM metric" returns:
-name: metric
-time                value
-----                -----
-1604444096440430055 1
-
-"SHOW FIELD KEYS" returns:
-name: metric
-fieldKey fieldType
--------- ---------
-value    float
