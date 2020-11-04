@@ -4,6 +4,15 @@
 //docker exec -it innovativeproject-fe-metrics_web_1 nginx -s reload
 
 const xhr = new XMLHttpRequest();
+var Username;
+var Password;
+var Database_address
+
+function init(db, username="",password=""){
+	Username = username;
+	Password = password;
+	Database_address = db;
+}
 
 function send(value, interval){
     //Sending random value for testing purposes
