@@ -6,7 +6,8 @@
 const xhr = new XMLHttpRequest();
 var Username;
 var Password;
-var Database_address
+var Database_address;
+var timer = 0;
 
 function init(db, username="",password=""){
 	Username = username;
@@ -14,15 +15,30 @@ function init(db, username="",password=""){
 	Database_address = db;
 }
 
+function basicSend(value){
+    let str = 'metric value=' + value;
+    xhr.open("POST", Database_address);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send(str);
+}
+
+function sendXTimes(counter, interval, value){
+    let localTimer = setInterval(sendXTimes,interval * 1000,counter-1,interval, value);
+    if (counter >0){
+        basicSend(value);
+    }
+    else {
+        clearInterval(localTimer);
+    }
+}
+
+
 function send(value, interval){
     //Sending random value for testing purposes
     //let str = 'metric value=' + value
 
     function xhrSend(){
-        let str = 'metric value=' + Math.random();
-        xhr.open("POST", "http://localhost:8086/write?db=metrics");
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send(str);
+
     };
 
     var sendIntervalID = setInterval(xhrSend, interval * 1000);
