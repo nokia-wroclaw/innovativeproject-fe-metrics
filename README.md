@@ -12,9 +12,9 @@ _Metrics from frontend into TSDB_
 
 to init apk for first time you use:
 
-`docker-compose up -d --build`
-`docker exec -it <folder_name>-influx-grafana_1 bash` (you can check name using tab)
-`cd ../var/lib/influxdb`
+`docker-compose up -d --build`  
+`docker exec -it <folder_name>-influx-grafana_1 bash` (you can check name using tab)  
+`cd ../var/lib/influxdb`  
 `influx -import -path=db_init.txt -precision=s
 exit`
 
