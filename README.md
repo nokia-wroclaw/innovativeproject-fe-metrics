@@ -15,10 +15,10 @@ to stop running apk you use:
 
 `docker-compose down`
 
-links:
+### links:
 
-http://localhost:8080/ - app demo page
+- http://localhost:8080/ - app demo page
 
-http://localhost:3003/ - grafana
+- http://localhost:3003/ - grafana
 
-http://localhost:3004/ - influx
+- http://localhost:3004/ - influx
