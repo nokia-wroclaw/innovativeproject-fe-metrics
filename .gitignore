@@ -1,2 +1,4 @@
 influx/
 grafana/
+
+!influx/db_init.txt
