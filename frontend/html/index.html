@@ -3,11 +3,66 @@
 <head>
 	<meta charset="utf-8">
 	<title>Docker Nginx hello-world</title>
+	<link rel="stylesheet" href="../css/style.css"/>
 </head>
 <body onload="init('http://localhost:8086/write?db=metrics')">
-	<h1>This is hello world from docker nginx</h1>
+	<div class="header">
+		<h3>Example page created by group of students for innovite project in nokia</h3>
+	</div>
+
+	<div class="container">
+
+		<div class="column">
+			<div class="elem">
+				<div class="elemValue" onclick="basicSend(42)">
+					Click me and send 42
+				</div>
+			</div>
+			<div class="elem" onclick="sendInInterval(5,11)" >
+				<div class="elemValue">
+					Click me and start sending 12 every 2 seconds
+				</div>
+			</div>
+			<div class="elem">
+				<div class="elemValue">
+					Clik me and send 10 9 8 .. one time
+				</div>
+			</div>
+			<div class="elem">
+				<div class="elemValue">
+					Click me and send temperature in NYC
+				</div>
+			</div>
+		</div>
+
+		<div class="column">
+			<div class="elem">
+				<div class="elemValue">
+					Sending how many click was in last 2 minutes
+				</div>
+			</div>
+			<div class="elem">
+				<div class="elemValue">
+					Loading photo
+				</div>
+			</div>
+			<div class="elem">
+				<div class="elemValue">
+					Loading photo forever
+				</div>
+			</div>
+			<div class="elem">
+				<div class="elemValue">
+					Click me and start sending chance for raining in Wroclaw every 15 minutes
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+
 	<script src="lib/sender.js"></script>
-	<button onclick="basicSend(42)">Click me and send 42</button>
-	<button onclick="sendInInterval(5,11)">Click me and start sending 11</button>
+
 </body>
 </html>

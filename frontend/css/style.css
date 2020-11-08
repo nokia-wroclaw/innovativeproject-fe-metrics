@@ -1,0 +1,52 @@
+body{
+    margin: 0;
+}
+
+.header {
+    padding: 30px;
+    text-align: center;
+    background: #222 ;
+    border-color: #080808;
+    color: white;
+    font-size: 25px;
+}
+
+.container{
+    display: flex;
+    background-color: gray;
+    padding: 0px;
+    margin: 0px;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.elem{
+    background-color: darkgray;
+    color: white;
+    height: 500px;
+    width: 700px;
+    margin: 50px 10px 20px 100px ;
+    text-align: center;
+    position: relative;
+
+}
+
+.elemValue{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) ;
+    font-size: 50px;
+
+}
+
+
+.elem:hover{
+    background-color: #404040;
+}
