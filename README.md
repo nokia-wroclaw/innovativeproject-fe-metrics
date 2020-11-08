@@ -13,7 +13,7 @@ _Metrics from frontend into TSDB_
 to init apk for first time you use:
 
 `docker-compose up -d --build`  
-`docker exec -it <folder_name>-influx-grafana_1 bash /var/lib/influxdb/scripts/init.sh` (you can check name using tab)  
+`docker exec -it <folder_name>_influx-grafana_1 bash /var/lib/influxdb/scripts/init.sh` (you can check name using tab)  
 
 to start running apk you use:
 
@@ -22,6 +22,12 @@ to start running apk you use:
 to stop running apk you use:
 
 `docker-compose down`
+
+helpfull commends you can use after `docker-compose up -d --build`  
+
+- `docker exec -it <folder_name>_influx-grafana_1 bash /var/lib/influxdb/scripts/show-db.sh` (show db list)
+
+- `docker exec -it <folder_name>_influx-grafana_1 bash /var/lib/influxdb/scripts/drop-metrics-db.sh` (drop local metrics db)
 
 ### links:
 
