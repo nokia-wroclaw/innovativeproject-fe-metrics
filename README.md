@@ -37,10 +37,17 @@ helpfull commends you can use after `docker-compose up -d --build`
 
 - http://localhost:3004/ - influx
 
-## documentation 
+## Documentation 
 
-### Figma visualisation of page
+### figma visualisation of page
 - https://www.figma.com/file/BAXcGuuqzTz3avPUxSZHqd/Untitled?node-id=4%3A8
+
+### api
+- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/frontend-example/doc/api.pdf
+- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/frontend-example/doc/api.txt
+
+### architecture sketch
+- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/frontend-example/doc/ARCHITECTURE.pdf
 
 
 
