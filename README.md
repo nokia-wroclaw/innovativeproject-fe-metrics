@@ -1,6 +1,14 @@
 # innovativeproject-fe-metrics
 _Metrics from frontend into TSDB_
 
+##Table of contents
+* [Prerequisites](#prerequisites)
+* [First use](#first-use)
+* [Helpfull commends](#helpfull-commends)
+* [Links](#links)
+* [Documentation](#documentation)
+
+
 ## How to run locally
 ### Prerequisites
 - docker
@@ -23,7 +31,9 @@ to stop running apk you use:
 
 `docker-compose down`
 
-#### helpfull commends you can use after `docker-compose up -d --build`  
+#### helpfull commends
+ 
+you can use it after `docker-compose up -d --build`  
 
 - `docker exec -it <folder_name>_influx-grafana_1 bash /var/lib/influxdb/scripts/show-db.sh` (show db list)
 
