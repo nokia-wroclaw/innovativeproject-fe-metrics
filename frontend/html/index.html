@@ -15,12 +15,12 @@
 		<div class="column">
 			<div class="elem" onclick="basicSend('metric' ,42)">
 				<div class="elemValue">
-					Click me and send 42 - fem_metric
+					send 42 - measurement name: fem_metric
 				</div>
 			</div>
-			<div class="elem" onclick="basicSend('newMetric' , 55)" >
+			<div class="elem" onclick="sendInInterval(2, 'metric' ,12)" >
 				<div class="elemValue">
-					Sending how many click was in last 2 minutes - fem_newMetric value 55
+					start sending 2 - measurement name: fem_metric
 				</div>
 			</div>
 			<div class="elem">
@@ -36,12 +36,12 @@
 		</div>
 
 		<div class="column">
-			<div class="elem" onclick="sendInInterval(2,12)">
+			<div class="elem" onclick="basicSend('NewMetric' ,50)">
 				<div class="elemValue">
 					Click me and start sending 12 every 2 seconds
 				</div>
 			</div>
-			<div class="elem">
+			<div class="elem" onclick="sendInInterval(2, 'NewMetric' ,17)">
 				<div class="elemValue">
 					Loading photo
 				</div>

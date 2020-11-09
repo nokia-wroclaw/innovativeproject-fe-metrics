@@ -82,7 +82,7 @@
           ],
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT * FROM \"metrics\".\"inf\".\"metric\"\n",
+          "query": "SELECT * FROM \"metrics\".\"inf\"./fem_*/\n\n",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -160,5 +160,5 @@
   "timezone": "",
   "title": "Metric basic dashboard",
   "uid": "zDQGM52Gk",
-  "version": 1
+  "version": 4
 }
