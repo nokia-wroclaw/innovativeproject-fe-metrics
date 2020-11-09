@@ -37,3 +37,10 @@ helpfull commends you can use after `docker-compose up -d --build`
 
 - http://localhost:3004/ - influx
 
+## documentation 
+
+### Figma visualisation of page
+- https://www.figma.com/file/BAXcGuuqzTz3avPUxSZHqd/Untitled?node-id=4%3A8
+
+
+
