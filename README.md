@@ -23,7 +23,7 @@ to stop running apk you use:
 
 `docker-compose down`
 
-helpfull commends you can use after `docker-compose up -d --build`  
+#### helpfull commends you can use after `docker-compose up -d --build`  
 
 - `docker exec -it <folder_name>_influx-grafana_1 bash /var/lib/influxdb/scripts/show-db.sh` (show db list)
 
