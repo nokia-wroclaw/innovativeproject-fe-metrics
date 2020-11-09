@@ -1,4 +1,5 @@
-influx/
-grafana/
+docker-influx-volume/
+docker-grafana-volume/
+.backend/
 
-!influx/db_init.txt
+!docker-influx-volume/db_init.txt

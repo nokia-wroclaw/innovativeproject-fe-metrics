@@ -11,9 +11,9 @@ services:
   - "3004:8083"
   - "8086:8086"
   volumes:
-   - "./influx:/var/lib/influxdb"
+   - "./docker-influx-volume:/var/lib/influxdb"
    - "./backend/scripts:/var/lib/influxdb/scripts"
-   - "./grafana:/var/lib/grafana"
+   - "./docker-grafana-volume:/var/lib/grafana"
    - "./backend/dashboards-scheme:/var/lib/grafana/dashboards"
    - "./backend/datasources:/etc/grafana/provisioning/datasources"
    - "./backend/dashboards:/etc/grafana/provisioning/dashboards"
