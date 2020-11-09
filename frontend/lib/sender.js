@@ -7,25 +7,26 @@ const xhr = new XMLHttpRequest();
 var Username;
 var Password;
 var Database_address;
-var timer = 0;
+var Measurement_prefix;
 
-function init(db, username="",password=""){
+function init(db, username="",password="", measurement_prefix="fem"){
 	Username = username;
 	Password = password;
 	Database_address = db;
+	Measurement_prefix = measurement_prefix;
 }
 
-function basicSend(value){
-    let str = 'metric value=' + value;
+function basicSend(measurement_name, value){
+    let str = '' + Measurement_prefix+ '_' + measurement_name + ' value=' + value;
     xhr.open("POST", Database_address);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(str);
 }
 
 
-function sendInInterval(interval, value){
-    let localTimer = setInterval(sendInInterval,interval * 1000,interval, value);
-    basicSend(value);
+function sendInInterval(interval, measurement_name, value){
+    let localTimer = setInterval(sendInInterval,interval * 1000,interval, measurement_name, value);
+    basicSend(measurement_name, value);
 }
 
 
