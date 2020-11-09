@@ -1,7 +1,7 @@
 # innovativeproject-fe-metrics
 _Metrics from frontend into TSDB_
 
-##Table of contents
+## Table of contents
 * [Prerequisites](#prerequisites)
 * [First use](#first-use)
 * [Helpfull commends](#helpfull-commends)
