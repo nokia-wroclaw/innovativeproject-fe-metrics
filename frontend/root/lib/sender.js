@@ -40,7 +40,6 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 
 function checkDb(){
 
-
 	getJSON('http://localhost:8086/query?q=show%20databases',  function(err, data) {
 		let x = data.results[0].series[0].values;
    		for(let i =0; i < x.length ; i++){
@@ -48,6 +47,21 @@ function checkDb(){
 		}
 });
 
+
+}
+
+function createDb(db_name){
+	let q1 = 'CREATE DATABASE ' + db_name;
+	let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1';
+	let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT';
+	let q4 = 'CONTEXT-DATABASE: ' +db_name;
+	let q5 = 'CONTEXT-RETENTION-POLICY: "inf"';
+	let fullQ = q1+';'+q2+';'+q3+';'+q4+';'+q5;
+
+	console.log('http://localhost:8086/query?q='+fullQ);
+	xhr.open("POST", 'http://localhost:8086/query?q='+fullQ)
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send();
 
 }
 
@@ -63,7 +77,7 @@ function basicSend(measurement_name, value, tags={}){
 	console.log(str);
     xhr.open("POST", Database_address);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send(str);
+    xhr.send();
 }
 
 

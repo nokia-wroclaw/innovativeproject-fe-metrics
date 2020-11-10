@@ -27,8 +27,8 @@ body{
 .elem{
     background-color: darkgray;
     color: white;
-    height: 500px;
-    width: 700px;
+    height: 50px;
+    width: 70px;
     margin: 50px 30px 20px 50px ;
     text-align: center;
     position: relative;
@@ -42,7 +42,7 @@ body{
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%) ;
-    font-size: 50px;
+    font-size: 8px;
 
 }
 
