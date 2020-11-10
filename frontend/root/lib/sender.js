@@ -8,13 +8,49 @@ var Username;
 var Password;
 var Database_address;
 var Measurement_prefix;
+var Database_name;
 
-function init(db, username="",password="", measurement_prefix="fem"){
+var getJSON = function(url, callback) {
+
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    
+    xhr.onload = function() {
+    
+        var status = xhr.status;
+        
+        if (status == 200) {
+            callback(null, xhr.response);
+        } else {
+            callback(status);
+        }
+    };
+    
+    xhr.send();
+};
+
+
+function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
 	Username = username;
 	Password = password;
-	Database_address = db;
+	Database_address = db_addr;
+	Database_name = db_name;
 	Measurement_prefix = measurement_prefix;
 }
+
+function checkDb(){
+
+
+	getJSON('http://localhost:8086/query?q=show%20databases',  function(err, data) {
+		let x = data.results[0].series[0].values;
+   		for(let i =0; i < x.length ; i++){
+			console.log(x[i][0]);	
+		}
+});
+
+
+}
+
 
 function basicSend(measurement_name, value, tags={}){
 	let str = '' + Measurement_prefix+ '_' + measurement_name;
