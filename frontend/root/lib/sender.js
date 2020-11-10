@@ -16,8 +16,15 @@ function init(db, username="",password="", measurement_prefix="fem"){
 	Measurement_prefix = measurement_prefix;
 }
 
-function basicSend(measurement_name, value){
-    let str = '' + Measurement_prefix+ '_' + measurement_name + ' value=' + value;
+function basicSend(measurement_name, value, tags={}){
+	let str = '' + Measurement_prefix+ '_' + measurement_name;
+	for (const [key, key_value] of Object.entries(tags)){
+		str = str + ','+key+'='+key_value;
+	}
+
+
+	str = str + ' value=' + value;
+	console.log(str);
     xhr.open("POST", Database_address);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.send(str);
