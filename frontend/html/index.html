@@ -20,17 +20,17 @@
 			</div>
 			<div class="elem" onclick="sendInInterval(2, 'metric' ,12)" >
 				<div class="elemValue">
-					start sending 2 - measurement name: fem_metric
+					start sending 2 - measurement name: metric
 				</div>
 			</div>
 			<div class="elem">
 				<div class="elemValue">
-					Clik me and send 10 9 8 .. one time
+					Do nothing
 				</div>
 			</div>
 			<div class="elem">
 				<div class="elemValue">
-					Click me and send temperature in NYC
+					do nothing
 				</div>
 			</div>
 		</div>
@@ -38,22 +38,22 @@
 		<div class="column">
 			<div class="elem" onclick="basicSend('NewMetric' ,50)">
 				<div class="elemValue">
-					Click me and start sending 12 every 2 seconds
+					send 50 - measurement name: NewMetric
 				</div>
 			</div>
 			<div class="elem" onclick="sendInInterval(2, 'NewMetric' ,17)">
 				<div class="elemValue">
-					Loading photo
+					start sending 17 - measurement name: NewMetric
 				</div>
 			</div>
-			<div class="elem">
+			<div class="elem" onclick="basicSend('newMetric' ,30)">
 				<div class="elemValue">
-					Loading photo forever
+					send 30 - measurement name: newMetric
 				</div>
 			</div>
-			<div class="elem">
+			<div class="elem" onclick="sendInInterval(2, 'newMetric' ,20)" >
 				<div class="elemValue">
-					Click me and start sending chance for raining in Wroclaw every 15 minutes
+					start sending 20 - measurement name: newMetric
 				</div>
 			</div>
 		</div>
