@@ -10,24 +10,12 @@ var Database_address;
 var Measurement_prefix;
 var Database_name;
 
-var getJSON = function(url, callback) {
 
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    
-    xhr.onload = function() {
-    
-        var status = xhr.status;
-        
-        if (status == 200) {
-            callback(null, xhr.response);
-        } else {
-            callback(status);
-        }
-    };
-    
-    xhr.send();
-};
+function sendRequest(type,url){
+	xhr.open(type, url,false)
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send();
+}
 
 
 function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
@@ -36,19 +24,34 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 	Database_address = db_addr;
 	Database_name = db_name;
 	Measurement_prefix = measurement_prefix;
+	if (!checkDb(db_name)) {
+		createDb(db_name);
+		console.log("there");
+	}
 }
 
-function checkDb(){
+function checkDb(db_name){
 
-	getJSON('http://localhost:8086/query?q=show%20databases',  function(err, data) {
-		let x = data.results[0].series[0].values;
-   		for(let i =0; i < x.length ; i++){
-			console.log(x[i][0]);	
+	var jsonIssues = {};
+	$.ajax({
+		url: "http://localhost:8086/query?q=show%20databases",
+		async: false,
+		dataType: 'json',
+		success: function(data) {
+			jsonIssues = data;
 		}
-});
-
+	});
+	let x = jsonIssues.results[0].series[0].values;
+	let flag = false
+	for(let i =0; i < x.length ; i++){
+		if (x[i][0] === db_name){
+			flag = true;
+		};
+	}
+	return flag;
 
 }
+
 
 function createDb(db_name){
 	let q1 = 'CREATE DATABASE ' + db_name;
@@ -56,34 +59,28 @@ function createDb(db_name){
 	let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT';
 	let q4 = 'CONTEXT-DATABASE: ' +db_name;
 	let q5 = 'CONTEXT-RETENTION-POLICY: "inf"';
-	let fullQ = q1+';'+q2+';'+q3+';'+q4+';'+q5;
-
-	console.log('http://localhost:8086/query?q='+fullQ);
-	xhr.open("POST", 'http://localhost:8086/query?q='+fullQ)
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send();
+	let addr = 'http://localhost:8086/query?q=';
+	sendRequest('POST',addr+q1);
+	sendRequest('POST',addr+q2);
+	sendRequest('POST',addr+q3);
 
 }
-
 
 function basicSend(measurement_name, value, tags={}){
 	let str = '' + Measurement_prefix+ '_' + measurement_name;
 	for (const [key, key_value] of Object.entries(tags)){
 		str = str + ','+key+'='+key_value;
 	}
-
-
 	str = str + ' value=' + value;
-	console.log(str);
-    xhr.open("POST", Database_address);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send();
+	xhr.open("POST", Database_address);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send(str);
 }
 
 
 function sendInInterval(interval, measurement_name, value){
-    let localTimer = setInterval(sendInInterval,interval * 1000,interval, measurement_name, value);
-    basicSend(measurement_name, value);
+	let localTimer = setInterval(sendInInterval,interval * 1000,interval, measurement_name, value);
+	basicSend(measurement_name, value);
 }
 
 

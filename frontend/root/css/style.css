@@ -27,8 +27,8 @@ body{
 .elem{
     background-color: darkgray;
     color: white;
-    height: 50px;
-    width: 70px;
+    height: 500px;
+    width: 700px;
     margin: 50px 30px 20px 50px ;
     text-align: center;
     position: relative;
