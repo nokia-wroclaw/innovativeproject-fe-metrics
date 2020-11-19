@@ -53,11 +53,11 @@ you can use it after `docker-compose up -d --build`
 - https://www.figma.com/file/BAXcGuuqzTz3avPUxSZHqd/Untitled?node-id=4%3A8
 
 ### api
-- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/frontend-example/doc/api.pdf
-- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/frontend-example/doc/api.txt
+- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/main/doc/api.pdf
+- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/main/doc/api.txt
 
 ### architecture sketch
-- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/frontend-example/doc/ARCHITECTURE.pdf
+- https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/main/doc/ARCHITECTURE.pdf
 
 
 
