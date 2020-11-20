@@ -4,6 +4,9 @@ services:
   build: "./frontend"
   ports: 
    - "8080:80"
+  volumes:
+      - './frontend:/app'
+      - '/frontend/app/node_modules'
  influx-grafana:
   image: "philhawthorne/docker-influxdb-grafana:latest"
   ports:
