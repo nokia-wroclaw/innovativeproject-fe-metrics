@@ -3,12 +3,34 @@
 //docker-compose up -d --build
 //docker exec -it main-directory-name_web_1 nginx -s reload
 
+window.addEventListener('error', function(ev){
+            ev.preventDefault();
+			ev.stopImmediatePropagation();
+			let tags = 
+			{
+				"filename":'"'+ev.filename+'"',
+				"lineo":'"'+ev.lineo+'"',
+				//"originalTarget":'"'+ev.originalTarget+'"',
+				"returnValue":'"'+ev.returnValue+'"'
+			};
+			//console.log(ev.filename);	
+			//console.log(ev.lineo);
+			//console.log(ev.originalTarget);
+			//console.log(ev.returnValue);
+			basicSend('error','"'+ev.message+'"',tags);
+
+        });
+
 const xhr = new XMLHttpRequest();
 var Username;
 var Password;
 var Database_address;
 var Measurement_prefix;
 var Database_name;
+
+function throwBasicError(mess){
+	throw mess;
+}
 
 
 function sendRequest(type,url){
@@ -76,6 +98,8 @@ function basicSend(measurement_name, value, tags={}){
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send(str);
 }
+
+
 
 
 function sendInInterval(interval, measurement_name, value){
