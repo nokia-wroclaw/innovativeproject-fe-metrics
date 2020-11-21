@@ -6,18 +6,25 @@
 window.addEventListener('error', function(ev){
             ev.preventDefault();
 			ev.stopImmediatePropagation();
-			let tags = 
-			{
-				"filename":'"'+ev.filename+'"',
-				"lineo":'"'+ev.lineo+'"',
-				//"originalTarget":'"'+ev.originalTarget+'"',
-				"returnValue":'"'+ev.returnValue+'"'
-			};
-			//console.log(ev.filename);	
-			//console.log(ev.lineo);
-			//console.log(ev.originalTarget);
-			//console.log(ev.returnValue);
-			basicSend('error','"'+ev.message+'"',tags);
+			let tags1 = {};
+			for (let propt in ev){;
+				if (typeof ev[propt] === "object"){
+					tags1[propt] = '"'+ ev[propt].constructor.name + '"';
+				}
+				else {
+
+					let string = '"'+ev[propt]+'"';
+					if(string.includes("[native")){
+						continue;
+					}
+					else {
+						let validString = string.replaceAll(" ", "_");
+						tags1[propt] = validString;
+
+					}
+				}
+			}
+			basicSend('error','"'+ev.message+'"',tags1);
 
         });
 
@@ -29,7 +36,7 @@ var Measurement_prefix;
 var Database_name;
 
 function throwBasicError(mess){
-	throw mess;
+	throw new Error(mess);
 }
 
 
