@@ -299,8 +299,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 7,
+        "w": 24,
         "x": 0,
         "y": 9
       },
@@ -359,7 +359,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 17
+        "y": 16
       },
       "id": 4,
       "title": "Row title",
@@ -381,5 +381,5 @@
   "timezone": "",
   "title": "Metric basic dashboard",
   "uid": "zDQGM52Gk",
-  "version": 8
+  "version": 9
 }
