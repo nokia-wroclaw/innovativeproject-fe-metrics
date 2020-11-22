@@ -2,7 +2,7 @@
 //RELOAD NGINX:
 //docker-compose up -d --build
 //docker exec -it main-directory-name_web_1 nginx -s reload
-
+//test
 $('body').on("click mousedown mouseup focus blur keydown" +
 	" change mouseup click dblclick mousemove mouseover mouseout mousewheel" +
 	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
