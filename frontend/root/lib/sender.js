@@ -3,6 +3,57 @@
 //docker-compose up -d --build
 //docker exec -it main-directory-name_web_1 nginx -s reload
 
+$('body').on("click mousedown mouseup focus blur keydown" +
+	" change mouseup click dblclick mousemove mouseover mouseout mousewheel" +
+	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
+	" zoom focus blur select change submit reset",function(ev){
+	//console.log(ev);
+	let tags1 = {};
+	//console.log(ev);
+	for (let propt in ev) {
+		let string = "";
+		if (typeof ev[propt] ==="string"){
+			string = '"'+ev[propt]+'"';
+			string.replaceAll(" ", "_");
+		}
+		else if (typeof ev[propt] === "number"){
+			string = ev[propt]
+		}
+		else if (typeof ev[propt] === "boolean"){
+			string = ev[propt];
+		}
+		if (string === ""){
+			continue;
+		}
+		else {
+			tags1[propt] = string;
+		}
+	}
+	basicSend('log','"'+ev.type+'"',tags1);
+});
+
+
+//$('body').on("click mousedown mouseup focus blur keydown" +
+///	" change mouseup click dblclick mousemove mouseover mouseout mousewheel" +
+//	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
+//	" zoom focus blur select change submit reset",function(ev){
+//	let tags1 = {};
+//	for (let propt in ev){;
+//		if (typeof ev[propt] === "object"){
+//			tags1[propt] = '"'+ ev[propt].constructor.name + '"';
+//		}
+//		else {
+//
+//			let string = '"'+ev[propt]+'"';
+//			let validString = string.replaceAll(" ", "_");
+//			tags1[propt] = validString;
+//
+//		}
+//	}
+//	basicSend('log','"'+ev.type+'"',tags1);
+//	console.log(ev);
+//});
+
 window.addEventListener('error', function(ev){
             ev.preventDefault();
 			ev.stopImmediatePropagation();
