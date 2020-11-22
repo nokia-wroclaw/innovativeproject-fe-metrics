@@ -1,90 +1,80 @@
-//Really basic version of sender ready to develop
-//RELOAD NGINX:
-//docker-compose up -d --build
-//docker exec -it main-directory-name_web_1 nginx -s reload
-//test
-$('body').on("click mousedown mouseup focus blur keydown" +
-	" change mouseup click dblclick mousemove mouseover mouseout mousewheel" +
-	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
-	" zoom focus blur select change submit reset",function(ev){
-	//console.log(ev);
-	let tags1 = {};
-	//console.log(ev);
-	for (let propt in ev) {
-		let string = "";
-		if (typeof ev[propt] ==="string"){
-			string = '"'+ev[propt]+'"';
-			string.replaceAll(" ", "_");
-		}
-		else if (typeof ev[propt] === "number"){
-			string = ev[propt]
-		}
-		else if (typeof ev[propt] === "boolean"){
-			string = ev[propt];
-		}
-		if (string === ""){
-			continue;
-		}
-		else {
-			tags1[propt] = string;
-		}
-	}
-	basicSend('log','"'+ev.type+'"',tags1);
-});
-
-
-//$('body').on("click mousedown mouseup focus blur keydown" +
-///	" change mouseup click dblclick mousemove mouseover mouseout mousewheel" +
-//	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
-//	" zoom focus blur select change submit reset",function(ev){
-//	let tags1 = {};
-//	for (let propt in ev){;
-//		if (typeof ev[propt] === "object"){
-//			tags1[propt] = '"'+ ev[propt].constructor.name + '"';
-//		}
-//		else {
-//
-//			let string = '"'+ev[propt]+'"';
-//			let validString = string.replaceAll(" ", "_");
-//			tags1[propt] = validString;
-//
-//		}
-//	}
-//	basicSend('log','"'+ev.type+'"',tags1);
-//	console.log(ev);
-//});
-
-window.addEventListener('error', function(ev){
-            ev.preventDefault();
-			ev.stopImmediatePropagation();
-			let tags1 = {};
-			for (let propt in ev){;
-				if (typeof ev[propt] === "object"){
-					tags1[propt] = '"'+ ev[propt].constructor.name + '"';
-				}
-				else {
-
-					let string = '"'+ev[propt]+'"';
-					if(string.includes("[native")){
-						continue;
-					}
-					else {
-						let validString = string.replaceAll(" ", "_");
-						tags1[propt] = validString;
-
-					}
-				}
-			}
-			basicSend('error','"'+ev.message+'"',tags1);
-
-        });
-
 const xhr = new XMLHttpRequest();
 var Username;
 var Password;
 var Database_address;
 var Measurement_prefix;
 var Database_name;
+const events = ("mousedown mouseup focus keydown" +
+	" change mouseup dblclick mousemove mouseover mouseout mousewheel" +
+	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
+	" zoom focus blur select change submit reset").split(" ");
+const oneEvent = "keydown submit mousemove".split(" ");
+
+function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
+	Username = username;
+	Password = password;
+	Database_address = db_addr;
+	Database_name = db_name;
+	Measurement_prefix = measurement_prefix;
+	if (!checkDb(db_name)) {
+		createDb(db_name);
+		console.log("there");
+	}
+}
+
+
+function catchingEventsLogs(elem="body",eventsList = events){
+	$(elem).on(eventsList.join(" "),function(ev){
+		let tags1 = {};
+		for (let property in ev) {
+			let string = "";
+			if (typeof ev[property] ==="string"){
+				string = '"'+ev[property]+'"';
+				string.replaceAll(" ", "_");
+			}
+			else if (typeof ev[property] === "number"){
+				string = ev[property]
+			}
+			else if (typeof ev[property] === "boolean"){
+				string = ev[property];
+			}
+			if (string === ""){
+				continue;
+			}
+			else {
+				tags1[property] = string;
+			}
+		}
+		basicSend('log','"'+ev.type+'"',tags1);
+	});
+}
+
+function autoCatchErrors(measurementName='error'){
+	window.addEventListener('error', function(ev){
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+		let tags1 = {};
+		for (let propt in ev){;
+			if (typeof ev[propt] === "object"){
+				tags1[propt] = '"'+ ev[propt].constructor.name + '"';
+			}
+			else {
+
+				let string = '"'+ev[propt]+'"';
+				if(string.includes("[native")){
+					continue;
+				}
+				else {
+					let validString = string.replaceAll(" ", "_");
+					tags1[propt] = validString;
+
+				}
+			}
+		}
+		basicSend(measurementName,'"'+ev.message+'"',tags1);
+
+	});
+}
 
 function throwBasicError(mess){
 	throw new Error(mess);
@@ -98,17 +88,6 @@ function sendRequest(type,url){
 }
 
 
-function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
-	Username = username;
-	Password = password;
-	Database_address = db_addr;
-	Database_name = db_name;
-	Measurement_prefix = measurement_prefix;
-	if (!checkDb(db_name)) {
-		createDb(db_name);
-		console.log("there");
-	}
-}
 
 function checkDb(db_name){
 
