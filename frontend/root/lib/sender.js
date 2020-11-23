@@ -8,7 +8,6 @@ const events = ("mousedown mouseup focus keydown" +
 	" change mouseup dblclick mousemove mouseover mouseout mousewheel" +
 	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
 	" zoom focus blur select change submit reset").split(" ");
-const oneEvent = "keydown submit mousemove".split(" ");
 
 function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
 	Username = username;
@@ -25,27 +24,25 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 
 function catchingEventsLogs(elem="body",eventsList = events){
 	$(elem).on(eventsList.join(" "),function(ev){
-		let tags1 = {};
+		let tags = {};
+
 		for (let property in ev) {
-			let string = "";
+			let tagValue = "";
 			if (typeof ev[property] ==="string"){
-				string = '"'+ev[property]+'"';
-				string.replaceAll(" ", "_");
+				tagValue = '"'+ev[property]+'"';
+				tagValue.replaceAll(" ", "_");
 			}
-			else if (typeof ev[property] === "number"){
-				string = ev[property]
+			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
+				tagValue= ev[property]
 			}
-			else if (typeof ev[property] === "boolean"){
-				string = ev[property];
-			}
-			if (string === ""){
+			if (tagValue === ""){
 				continue;
 			}
 			else {
-				tags1[property] = string;
+				tags[property] = tagValue;
 			}
 		}
-		basicSend('log','"'+ev.type+'"',tags1);
+		basicSend('log','"'+ev.type+'"',tags);
 	});
 }
 
@@ -53,26 +50,27 @@ function autoCatchErrors(measurementName='error'){
 	window.addEventListener('error', function(ev){
 		ev.preventDefault();
 		ev.stopImmediatePropagation();
-		let tags1 = {};
-		for (let propt in ev){;
-			if (typeof ev[propt] === "object"){
-				tags1[propt] = '"'+ ev[propt].constructor.name + '"';
+		console.log(ev.message);
+		let tags = {};
+		for (let property in ev){
+			if (typeof ev[property] === "object"){
+				tags[property] = '"'+ ev[property].constructor.name + '"';
 			}
-			else {
-
-				let string = '"'+ev[propt]+'"';
+			else if (typeof ev[property] === "string") {
+				let string = '"'+ev[property]+'"';
 				if(string.includes("[native")){
 					continue;
 				}
 				else {
 					let validString = string.replaceAll(" ", "_");
-					tags1[propt] = validString;
-
+					tags[property] = validString;
 				}
 			}
+			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
+				tags[property] = ev[property];
+			}
 		}
-		basicSend(measurementName,'"'+ev.message+'"',tags1);
-
+		basicSend(measurementName,'"'+ev.message+'"',tags);
 	});
 }
 
