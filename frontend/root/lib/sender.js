@@ -131,6 +131,9 @@ function basicSend(measurement_name, value, tags={}){
 	xhr.send(str);
 }
 
+function dropDatabase(addr){
+	sendRequest("POST",addr+"/query?db="+Database_name+"&q=DROP DATABASE "+Database_name);
+}
 
 
 //NOT WORK YET

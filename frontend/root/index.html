@@ -17,7 +17,7 @@
 			<div class="elem" onclick="basicSend('metric' ,42, 
 {'tag1':'test', tag2:30, 'tag3':40})">
 				<div class="elemValue">
-					send 42 - measurement name: fem_metric
+					send measurement name: fem_metric, value:40 with 3 tags
 				</div>
 			</div>
 			 <div class="elem" onclick="checkDb('metrics')" >
@@ -30,9 +30,9 @@
 					THROW ERROR
 				</div>
 			</div>
-			<div class="elem">
+			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
 				<div class="elemValue">
-					do nothing
+					DROP DATABASES
 				</div>
 			</div>
 		</div>
