@@ -17,7 +17,6 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 	Measurement_prefix = measurement_prefix;
 	if (!checkDb(db_name)) {
 		createDb(db_name);
-		console.log("there");
 	}
 }
 
@@ -98,14 +97,14 @@ function checkDb(db_name){
 			jsonIssues = data;
 		}
 	});
-	let x = jsonIssues.results[0].series[0].values;
-	let flag = false
-	for(let i =0; i < x.length ; i++){
-		if (x[i][0] === db_name){
-			flag = true;
+	let databasesNames = jsonIssues.results[0].series[0].values;
+	let isDatabaseExists = false
+	for(let i =0; i < databasesNames.length ; i++){
+		if (databasesNames[i][0] === db_name){
+			isDatabaseExists = true;
 		};
 	}
-	return flag;
+	return isDatabaseExists;
 
 }
 
@@ -114,8 +113,6 @@ function createDb(db_name){
 	let q1 = 'CREATE DATABASE ' + db_name;
 	let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1';
 	let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT';
-	let q4 = 'CONTEXT-DATABASE: ' +db_name;
-	let q5 = 'CONTEXT-RETENTION-POLICY: "inf"';
 	let addr = 'http://localhost:8086/query?q=';
 	sendRequest('POST',addr+q1);
 	sendRequest('POST',addr+q2);
@@ -136,11 +133,10 @@ function basicSend(measurement_name, value, tags={}){
 
 
 
+//NOT WORK YET
+//function sendInInterval(interval, measurement_name, value){
+//	let localTimer = setInterval(sendInInterval,interval * 1000,interval, measurement_name, value);
+//	basicSend(measurement_name, value);
+//}
 
-function sendInInterval(interval, measurement_name, value){
-	let localTimer = setInterval(sendInInterval,interval * 1000,interval, measurement_name, value);
-	basicSend(measurement_name, value);
-}
 
-
-//send(1, 5); //sends value 1 every 5 seconds
