@@ -4,8 +4,9 @@
 	<meta charset="utf-8">
 	<title>Docker Nginx hello-world</title>
 	<link rel="stylesheet" href="/css/style.css"/>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
-<body onload="init('http://localhost:8086/write?db=metrics')">
+<body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();autoCatchErrors()">
 	<div class="header">
 		<h3>Example page created by group of students for innovite project in nokia</h3>
 	</div>
@@ -14,19 +15,19 @@
 
 		<div class="column">
 			<div class="elem" onclick="basicSend('metric' ,42, 
-{'tag1':20, tag2:30, 'tag3':40})">
+{'tag1':'test', tag2:30, 'tag3':40})">
 				<div class="elemValue">
 					send 42 - measurement name: fem_metric
 				</div>
 			</div>
-			<div class="elem" onclick="sendInInterval(2, 'metric' ,12)" >
+			 <div class="elem" onclick="checkDb('metrics')" >
 				<div class="elemValue">
-					start sending 2 - measurement name: metric
+					TEST
 				</div>
 			</div>
-			<div class="elem">
+			<div class="elem" onclick="throwBasicError('FIRST ERROR')">
 				<div class="elemValue">
-					Do nothing
+					THROW ERROR
 				</div>
 			</div>
 			<div class="elem">
@@ -42,9 +43,10 @@
 					send 50 - measurement name: NewMetric
 				</div>
 			</div>
-			<div class="elem" onclick="sendInInterval(2, 'NewMetric' ,17)">
+
+			<div class="elem" onclick="createDb('test')">
 				<div class="elemValue">
-					start sending 17 - measurement name: NewMetric
+						create DB
 				</div>
 			</div>
 			<div class="elem" onclick="basicSend('newMetric' ,30)">
