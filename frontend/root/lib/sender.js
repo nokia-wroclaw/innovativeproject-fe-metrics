@@ -135,6 +135,58 @@ function dropDatabase(addr){
 	sendRequest("POST",addr+"/query?db="+Database_name+"&q=DROP DATABASE "+Database_name);
 }
 
+function getPerformance(){
+	sendPerformanceEntry(performance.getEntries());
+
+	function sendPerformanceEntry(entries){
+		for(let i = 0; i < entries.length; i++){
+			//let str = 'fem_performance ';
+			let entry = entries[i].toJSON();
+			let value = entry.duration;
+
+			//str += convert(JSON.stringify(entry)) + ' value=' + value;
+			//console.log(str);
+			
+			let tags = {};
+			for (let property in entry){
+				if (typeof entry[property] === "object"){
+					tags[property] = '"'+ entry[property].constructor.name + '"';
+				}
+				else if (typeof entry[property] === "string") {
+					let string = '"'+entry[property]+'"';
+					if(string.includes("[native")){
+						continue;
+					}
+					else {
+						let validString = string.replaceAll(" ", "_");
+						tags[property] = validString;
+					}
+				}
+				else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
+					tags[property] = entry[property];
+				}
+			}
+			basicSend("performance", value, tags);
+		}
+	}
+
+	/*function convert(json){
+		str = '';
+		for(let i = 0; i < json.length; i++){
+			if(json[i] == '{' || json[i] == '}' || json[i] == ' '){
+				continue;
+			}
+			else if(json[i] == ":"){
+				str += '=';
+			}
+			else{
+				str += json[i];
+			}
+		}
+		return str;
+	}*/
+}
+
 
 //NOT WORK YET
 //function sendInInterval(interval, measurement_name, value){
