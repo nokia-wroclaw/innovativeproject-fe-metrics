@@ -139,13 +139,9 @@ function getPerformance(){
 	sendPerformanceEntry(performance.getEntries());
 
 	function sendPerformanceEntry(entries){
-		for(let i = 0; i < entries.length; i++){
-			//let str = 'fem_performance ';
+		for(let i = 0; i < entries.length - 1; i++){
 			let entry = entries[i].toJSON();
 			let value = entry.duration;
-
-			//str += convert(JSON.stringify(entry)) + ' value=' + value;
-			//console.log(str);
 			
 			let tags = {};
 			for (let property in entry){
@@ -170,21 +166,6 @@ function getPerformance(){
 		}
 	}
 
-	/*function convert(json){
-		str = '';
-		for(let i = 0; i < json.length; i++){
-			if(json[i] == '{' || json[i] == '}' || json[i] == ' '){
-				continue;
-			}
-			else if(json[i] == ":"){
-				str += '=';
-			}
-			else{
-				str += json[i];
-			}
-		}
-		return str;
-	}*/
 }
 
 
