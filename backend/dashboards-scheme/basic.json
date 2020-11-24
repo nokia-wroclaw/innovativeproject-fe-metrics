@@ -470,7 +470,20 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 322
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -480,7 +493,13 @@
       },
       "id": 12,
       "options": {
-        "showHeader": true
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Time"
+          }
+        ]
       },
       "pluginVersion": "7.2.0",
       "targets": [
