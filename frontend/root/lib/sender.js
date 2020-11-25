@@ -136,29 +136,25 @@ function dropDatabase(addr){
 }
 
 function getPerformance(){
-	sendPerformanceEntry(performance.getEntries());
-
-	function sendPerformanceEntry(entries){
-		for(let i = 0; i < entries.length - 1; i++){
-			let entry = entries[i].toJSON();
-			let value = entry.duration;
-			
-			let tags = {};
-			for (let property in entry){
-				if (typeof entry[property] === "object"){
-					tags[property] = '"'+ entry[property].constructor.name + '"';
-				}
-				else if (typeof entry[property] === "string") {
-					let string = '"'+entry[property]+'"';
-					let validString = string.replaceAll(" ", "_");
-					tags[property] = validString;
-				}
-				else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
-					tags[property] = entry[property];
-				}
+	let entries = performance.getEntries();
+	for(let i = 0; i < entries.length - 1; i++){
+		let entry = entries[i].toJSON();
+		let value = entry.duration;		
+		let tags = {};
+		for (let property in entry){
+			if (typeof entry[property] === "object"){
+				tags[property] = '"'+ entry[property].constructor.name + '"';
 			}
-			basicSend("performance", value, tags);
+			else if (typeof entry[property] === "string") {
+				let string = '"'+entry[property]+'"';
+				let validString = string.replaceAll(" ", "_");
+				tags[property] = validString;
+			}
+			else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
+				tags[property] = entry[property];
+			}
 		}
+		basicSend("performance", value, tags);
 	}
 
 }
