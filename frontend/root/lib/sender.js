@@ -150,13 +150,8 @@ function getPerformance(){
 				}
 				else if (typeof entry[property] === "string") {
 					let string = '"'+entry[property]+'"';
-					if(string.includes("[native")){
-						continue;
-					}
-					else {
-						let validString = string.replaceAll(" ", "_");
-						tags[property] = validString;
-					}
+					let validString = string.replaceAll(" ", "_");
+					tags[property] = validString;
 				}
 				else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
 					tags[property] = entry[property];
