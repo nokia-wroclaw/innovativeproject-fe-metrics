@@ -139,24 +139,47 @@ function getPerformance(){
 	let entries = performance.getEntries();
 	for(let i = 0; i < entries.length - 1; i++){
 		let entry = entries[i].toJSON();
-		let value = entry.duration;		
-		let tags = {};
-		for (let property in entry){
-			if (typeof entry[property] === "object"){
-				tags[property] = '"'+ entry[property].constructor.name + '"';
-			}
-			else if (typeof entry[property] === "string") {
-				let string = '"'+entry[property]+'"';
-				let validString = string.replaceAll(" ", "_");
-				tags[property] = validString;
-			}
-			else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
-				tags[property] = entry[property];
-			}
-		}
-		basicSend("performance", value, tags);
+		sendPerformance(entry);
 	}
 
+}
+
+function sendPerformance(entry){
+	let tags = {};
+	let value = entry.duration;
+	for (let property in entry){
+		if (typeof entry[property] === "object"){
+			tags[property] = '"'+ entry[property].constructor.name + '"';
+		}
+		else if (typeof entry[property] === "string") {
+			let string = '"'+entry[property]+'"';
+			let validString = string.replaceAll(" ", "_");
+			tags[property] = validString;
+		}
+		else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
+			tags[property] = entry[property];
+		}
+	}
+	basicSend("performance", value, tags);
+}
+
+function randomInt(min, max) {
+	return min + Math.floor((max - min) * Math.random());
+}
+
+
+function longCount(){
+	let random = randomInt(100000000,1000000000);
+	console.log(random);
+	performance.mark("p1");
+	for (let i = 0; i <random ; i++) {
+		let x = i;
+	}
+	performance.mark("p2");
+	performance.measure("measure p1 to p2", "p1", "p2");
+	sendPerformance(performance.getEntriesByName("measure p1 to p2")[0].toJSON());
+	performance.clearMarks();
+	performance.clearMeasures();
 }
 
 

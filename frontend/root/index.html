@@ -5,7 +5,6 @@
 	<title>Docker Nginx hello-world</title>
 	<link rel="stylesheet" href="/css/style.css"/>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="lib/longScript.js"></script>
 
 </head>
 <body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();autoCatchErrors();getPerformance()">
@@ -56,9 +55,9 @@
 					send 30 - measurement name: newMetric
 				</div>
 			</div>
-			<div class="elem" onclick="getPerformance()" >
+			<div class="elem" onclick="longCount()" >
 				<div class="elemValue">
-					get performance
+					long count
 				</div>
 			</div>
 			<div class="elem">
