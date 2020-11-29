@@ -139,12 +139,12 @@ function getPerformance(){
 	let entries = performance.getEntries();
 	for(let i = 0; i < entries.length - 1; i++){
 		let entry = entries[i].toJSON();
-		sendPerformance(entry);
+		sendJson(entry);
 	}
 
 }
 
-function sendPerformance(entry){
+function sendJson(entry){
 	let tags = {};
 	let value = entry.duration;
 	for (let property in entry){
@@ -168,18 +168,23 @@ function randomInt(min, max) {
 }
 
 
-function longCount(){
+function longCount(x){
 	let random = randomInt(100000000,1000000000);
-	console.log(random);
-	performance.mark("p1");
 	for (let i = 0; i <random ; i++) {
 		let x = i;
 	}
+	alert(x);
+}
+
+function checkHowLong(func){
+	performance.mark("p1");
+	func();
 	performance.mark("p2");
 	performance.measure("measure p1 to p2", "p1", "p2");
-	sendPerformance(performance.getEntriesByName("measure p1 to p2")[0].toJSON());
+	sendJson(performance.getEntriesByName("measure p1 to p2")[0].toJSON());
 	performance.clearMarks();
 	performance.clearMeasures();
+
 }
 
 
