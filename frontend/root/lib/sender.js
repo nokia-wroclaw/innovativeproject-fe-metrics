@@ -168,20 +168,27 @@ function randomInt(min, max) {
 }
 
 
-function longCount(x){
+function longCount(){
 	let random = randomInt(100000000,1000000000);
 	for (let i = 0; i <random ; i++) {
 		let x = i;
 	}
-	alert(x);
 }
 
-function checkHowLong(func){
-	performance.mark("p1");
+
+function shortCount(){
+	let random = randomInt(10,100);
+	for (let i = 0; i <random ; i++) {
+		let x = i;
+	}
+}
+
+function checkHowLong(func,startName,endName){
+	performance.mark(startName);
 	func();
-	performance.mark("p2");
-	performance.measure("measure p1 to p2", "p1", "p2");
-	sendJson(performance.getEntriesByName("measure p1 to p2")[0].toJSON());
+	performance.mark(endName);
+	performance.measure("measure "+startName+" to "+endName, startName, endName);
+	sendJson(performance.getEntriesByName("measure "+startName+" to "+endName)[0].toJSON());
 	performance.clearMarks();
 	performance.clearMeasures();
 

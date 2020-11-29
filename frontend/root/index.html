@@ -55,9 +55,14 @@
 					send 3000 - measurement name: newMetric
 				</div>
 			</div>
-			<div class="elem" onclick="checkHowLong(function(){longCount('test')})" >
+			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
 				<div class="elemValue">
 					long count
+				</div>
+			</div>
+			<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
+				<div class="elemValue">
+					short count
 				</div>
 			</div>
 			<div class="elem">
