@@ -15,10 +15,10 @@
 	<div class="container">
 
 		<div class="column">
-			<div class="elem" onclick="basicSend('metric' ,42, 
-{'tag1':'test', tag2:30, 'tag3':40})">
+			<div class="elem" onclick="basicSend('metric' ,4200,
+{'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">
-					send measurement name: fem_metric, value:40 with 3 tags
+					send measurement name: fem_metric, value:4200 with 3 tags
 				</div>
 			</div>
 			 <div class="elem" onclick="checkDb('metrics')" >
@@ -39,9 +39,9 @@
 		</div>
 
 		<div class="column">
-			<div class="elem" onclick="basicSend('NewMetric' ,50)">
+			<div class="elem" onclick="basicSend('NewMetric' ,5000)">
 				<div class="elemValue">
-					send 50 - measurement name: NewMetric
+					send 5000 - measurement name: NewMetric
 				</div>
 			</div>
 
@@ -50,9 +50,9 @@
 						create DB
 				</div>
 			</div>
-			<div class="elem" onclick="basicSend('newMetric' ,30)">
+			<div class="elem" onclick="basicSend('newMetric' ,3000)">
 				<div class="elemValue">
-					send 30 - measurement name: newMetric
+					send 3000 - measurement name: newMetric
 				</div>
 			</div>
 			<div class="elem" onclick="checkHowLong(function(){longCount('test')})" >
