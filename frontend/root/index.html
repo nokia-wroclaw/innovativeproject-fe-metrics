@@ -5,6 +5,8 @@
 	<title>Docker Nginx hello-world</title>
 	<link rel="stylesheet" href="/css/style.css"/>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="lib/longScript.js"></script>
+
 </head>
 <body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();autoCatchErrors();getPerformance()">
 	<div class="header">
@@ -22,7 +24,7 @@
 			</div>
 			 <div class="elem" onclick="checkDb('metrics')" >
 				<div class="elemValue">
-					TEST
+					TEST is db exist
 				</div>
 			</div>
 			<div class="elem" onclick="throwBasicError('FIRST ERROR')">
@@ -54,15 +56,13 @@
 					send 30 - measurement name: newMetric
 				</div>
 			</div>
-			<div class="elem" onclick="sendInInterval(2, 'newMetric' ,20)" >
+			<div class="elem" onclick="getPerformance()" >
 				<div class="elemValue">
-					start sending 20 - measurement name: newMetric
+					get performance
 				</div>
 			</div>
 			<div class="elem">
-				<div class="elemValue">
-					<img src="img/logo.png" alt="Girl in a jacket">
-				</div>
+					<img src="img/logo.png" alt="logo" width="700", height="500">
 			</div>
 
 		</div>
