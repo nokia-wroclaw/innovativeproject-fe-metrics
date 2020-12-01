@@ -127,8 +127,9 @@ function basicSend(measurement_name, value, tags={}){
 		str = str + ','+key+'='+key_value;
 	}
 	str = str + ' value=' + value;
-	str = str+"\n";
-	query = query + str;
+	str = str+" "+ (Date.now()*1000000) +"\n";
+	console.log(str);
+	query = query +str;
 }
 
 function dropDatabase(addr){
@@ -198,7 +199,8 @@ function multipleSend(){
 	xhr.open("POST", Database_address);
 	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	xhr.send(query);
-	console.log("WYSŁANE")
+	console.log("WYSŁANE");
+	query = "";
 }
 
 
