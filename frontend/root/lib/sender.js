@@ -21,6 +21,7 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 		createDb(db_name);
 	}
 	setInterval(multipleSend,4000);
+	setInterval(sendInCyckle,300);
 }
 
 
@@ -145,7 +146,14 @@ function getPerformance(){
 	}
 
 }
+function sendInCyckle(){
+	let timestamp = new Date();
+	let tags = {}
+	tags['seconds'] = timestamp.getSeconds();
+	tags['minutes'] = timestamp.getMinutes();
+	basicSend("time",timestamp.getSeconds(),tags);
 
+}
 function sendJson(entry){
 	let tags = {};
 	let value = entry.duration;
@@ -201,13 +209,8 @@ function multipleSend(){
 		xhr.open("POST", Database_address);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 		xhr.send(query);
-		console.log("WYSŁANE");
 		query = "";
 	}
-	else {
-		console.log("PUSTO");
-	}
-
 }
 
 
