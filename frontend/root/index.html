@@ -15,30 +15,23 @@
 	<div class="container">
 
 		<div class="column">
-			<div class="elem" onclick="multipleSend()">
-				<div class="elemValue">
-					MULTIPLE
-				</div>
-			</div>
 			<div class="elem" onclick="basicSend('metric' ,4200,
 {'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">
-					send measurement name: fem_metric, value:4200 with 3 tags
-				</div>
-			</div>
-			 <div class="elem" onclick="checkDb('metrics')" >
-				<div class="elemValue">
-					TEST is db exist
-				</div>
-			</div>
-			<div class="elem" onclick="throwBasicError('FIRST ERROR')">
-				<div class="elemValue">
-					THROW ERROR
+					send metric:<br>
+					measurement name: fem_metric, <br>
+					value: 4200, <br>
+					tags: 'tag1':'test', tag2:3000, 'tag3':4000
 				</div>
 			</div>
 			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
 				<div class="elemValue">
 					DROP DATABASES
+				</div>
+			</div>
+			<div class="elem" onclick="throwBasicError('FIRST ERROR')">
+				<div class="elemValue">
+					THROW ERROR
 				</div>
 			</div>
 			<div class="elem" id="image">
@@ -49,28 +42,28 @@
 		<div class="column">
 			<div class="elem" onclick="basicSend('NewMetric' ,5000)">
 				<div class="elemValue">
-					send 5000 - measurement name: NewMetric
-				</div>
-			</div>
-
-			<div class="elem" onclick="createDb('test')">
-				<div class="elemValue">
-						create DB
+					send metric:<br>
+					measurement name: fem_NewMetric, <br>
+					value: 5000, <br>
+					tags: None
 				</div>
 			</div>
 			<div class="elem" onclick="basicSend('newMetric' ,3000)">
 				<div class="elemValue">
-					send 3000 - measurement name: newMetric
+					send metric:<br>
+					measurement name: fem_newMetric, <br>
+					value: 3000 <br>
+					tags: None
 				</div>
 			</div>
 			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
 				<div class="elemValue">
-					long count
+					simulate long calculations
 				</div>
 			</div>
 			<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
 				<div class="elemValue">
-					short count
+					simulate short calculations
 				</div>
 			</div>
 		</div>

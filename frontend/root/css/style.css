@@ -29,7 +29,7 @@ body{
     color: white;
     height: 500px;
     width: 700px;
-    margin: 50px 30px 20px 50px ;
+    margin: 50px 30px 20px 110px ;
     text-align: center;
     position: relative;
 
@@ -42,7 +42,7 @@ body{
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%) ;
-    font-size: 80px;
+    font-size: 50px;
 
 }
 
