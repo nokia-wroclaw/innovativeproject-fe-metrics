@@ -20,7 +20,7 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 	if (!checkDb(db_name)) {
 		createDb(db_name);
 	}
-	setInterval(multipleSend,4000);
+	setInterval(sendQueries,4000);
 	setInterval(sendInCyckle,300);
 }
 
@@ -45,11 +45,11 @@ function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertisement){
 				tags[property] = tagValue;
 			}
 		}
-		basicSend('log','"'+ev.type+'"',tags);
+		prepareQuery('log','"'+ev.type+'"',tags);
 	});
 }
 
-function autoCatchErrors(measurementName='error'){
+function catchingErrors(measurementName='error'){
 	window.addEventListener('error', function(ev){
 		ev.preventDefault();
 		ev.stopImmediatePropagation();
@@ -73,7 +73,7 @@ function autoCatchErrors(measurementName='error'){
 				tags[property] = ev[property];
 			}
 		}
-		basicSend(measurementName,'"'+ev.message+'"',tags);
+		prepareQuery(measurementName,'"'+ev.message+'"',tags);
 	});
 }
 
@@ -124,7 +124,7 @@ function createDb(db_name){
 
 }
 
-function basicSend(measurement_name, value, tags={}){
+function prepareQuery(measurement_name, value, tags={}){
 	let str = '' + Measurement_prefix+ '_' + measurement_name;
 	for (const [key, key_value] of Object.entries(tags)){
 		str = str + ','+key+'='+key_value;
@@ -151,7 +151,7 @@ function sendInCyckle(){
 	let tags = {}
 	tags['seconds'] = timestamp.getSeconds();
 	tags['minutes'] = timestamp.getMinutes();
-	basicSend("time",timestamp.getSeconds(),tags);
+	prepareQuery("time",timestamp.getSeconds(),tags);
 
 }
 function sendJson(entry){
@@ -170,7 +170,7 @@ function sendJson(entry){
 			tags[property] = entry[property];
 		}
 	}
-	basicSend("performance", value, tags);
+	prepareQuery("performance", value, tags);
 }
 
 function randomInt(min, max) {
@@ -204,7 +204,7 @@ function checkHowLong(func,startName,endName){
 
 }
 
-function multipleSend(){
+function sendQueries(){
 	if (query !== ""){
 		xhr.open("POST", Database_address);
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
