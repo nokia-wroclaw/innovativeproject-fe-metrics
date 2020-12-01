@@ -7,7 +7,7 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 </head>
-<body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();autoCatchErrors();getPerformance()">
+<body onload="init('http://localhost:8086/write?db=metrics','metrics')">
 	<div class="header">
 		<h3>Example page created by group of students for innovite project in nokia</h3>
 	</div>
@@ -15,6 +15,11 @@
 	<div class="container">
 
 		<div class="column">
+			<div class="elem" onclick="multipleSend()">
+				<div class="elemValue">
+					MULTIPLE
+				</div>
+			</div>
 			<div class="elem" onclick="basicSend('metric' ,4200,
 {'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">

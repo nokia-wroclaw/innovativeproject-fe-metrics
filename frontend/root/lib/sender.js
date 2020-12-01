@@ -8,6 +8,7 @@ const events = ("mousedown mouseup focus keydown" +
 	" change mouseup dblclick mousemove mouseover mouseout mousewheel" +
 	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
 	" zoom focus blur select change submit reset").split(" ");
+var query = "";
 
 function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
 	Username = username;
@@ -126,9 +127,8 @@ function basicSend(measurement_name, value, tags={}){
 		str = str + ','+key+'='+key_value;
 	}
 	str = str + ' value=' + value;
-	xhr.open("POST", Database_address);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send(str);
+	str = str+"\n";
+	query = query + str;
 }
 
 function dropDatabase(addr){
@@ -177,7 +177,7 @@ function longCount(){
 
 
 function shortCount(){
-	let random = randomInt(10,100);
+	let random = randomInt(1000000,10000000);
 	for (let i = 0; i <random ; i++) {
 		let x = i;
 	}
@@ -193,6 +193,14 @@ function checkHowLong(func,startName,endName){
 	performance.clearMeasures();
 
 }
+
+function multipleSend(){
+	xhr.open("POST", Database_address);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send(query);
+	console.log("WYSŁANE")
+}
+
 
 
 //NOT WORK YET
