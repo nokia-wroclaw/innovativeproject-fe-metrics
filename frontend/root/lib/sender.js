@@ -8,6 +8,7 @@ const events = ("mousedown mouseup focus keydown" +
 	" change mouseup dblclick mousemove mouseover mouseout mousewheel" +
 	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
 	" zoom focus blur select change submit reset").split(" ");
+const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
 
 function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
@@ -19,10 +20,11 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 	if (!checkDb(db_name)) {
 		createDb(db_name);
 	}
+	setInterval(multipleSend,4000);
 }
 
 
-function catchingEventsLogs(elem="body",eventsList = events){
+function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertisement){
 	$(elem).on(eventsList.join(" "),function(ev){
 		let tags = {};
 
@@ -128,7 +130,6 @@ function basicSend(measurement_name, value, tags={}){
 	}
 	str = str + ' value=' + value;
 	str = str+" "+ (Date.now()*1000000) +"\n";
-	console.log(str);
 	query = query +str;
 }
 
@@ -196,11 +197,17 @@ function checkHowLong(func,startName,endName){
 }
 
 function multipleSend(){
-	xhr.open("POST", Database_address);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send(query);
-	console.log("WYSŁANE");
-	query = "";
+	if (query !== ""){
+		xhr.open("POST", Database_address);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.send(query);
+		console.log("WYSŁANE");
+		query = "";
+	}
+	else {
+		console.log("PUSTO");
+	}
+
 }
 
 

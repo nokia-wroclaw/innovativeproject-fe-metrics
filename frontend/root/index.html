@@ -7,8 +7,8 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 </head>
-<body onload="init('http://localhost:8086/write?db=metrics','metrics')">
-	<div class="header">
+<body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();autoCatchErrors();getPerformance()">
+<div class="header">
 		<h3>Example page created by group of students for innovite project in nokia</h3>
 	</div>
 
@@ -41,7 +41,7 @@
 					DROP DATABASES
 				</div>
 			</div>
-			<div class="elem">
+			<div class="elem" id="image">
 				<img src="img/logo.png" alt="logo" width="700", height="500">
 			</div>
 		</div>
