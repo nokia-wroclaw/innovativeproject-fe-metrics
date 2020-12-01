@@ -213,12 +213,12 @@ function sendQueries(){
 	}
 }
 
+function dateSend(measurement_name){
+	basicSend(measurement_name, Date.now());
+}
 
-
-//NOT WORK YET
-//function sendInInterval(interval, measurement_name, value){
-//	let localTimer = setInterval(sendInInterval,interval * 1000,interval, measurement_name, value);
-//	basicSend(measurement_name, value);
-//}
-
-
+function CountSend(measurement_name, limit) {
+	for (let i = 0; i < limit; i++) {
+		basicSend(measurement_name, i);
+	}
+}
