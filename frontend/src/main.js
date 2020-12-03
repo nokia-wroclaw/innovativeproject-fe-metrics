@@ -3,6 +3,7 @@ import App from './App.vue'
 import vuetify from './plugins/vuetify';
 // import vue-jquery from 'vue-jquery'
 // Vue.use(vue-jquery)
+window.$ = window.jQuery = require('jquery');
 
 Vue.config.productionTip = false
 
