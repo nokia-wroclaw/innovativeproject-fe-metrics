@@ -58,7 +58,10 @@ you can use it after `docker-compose up -d --build`
 
 ### architecture sketch
 - https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/blob/main/doc/ARCHITECTURE.pdf
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/dev
 
 
 

@@ -1243,14 +1243,24 @@
     "list": []
   },
   "time": {
+<<<<<<< HEAD
     "from": "2020-12-02T22:22:09.989Z",
     "to": "2020-12-02T22:49:57.023Z"
+=======
+    "from": "now-5m",
+    "to": "now+5m"
+>>>>>>> origin/dev
   },
   "timepicker": {},
   "timezone": "",
   "title": "Metric basic dashboard",
   "uid": "zDQGM52Gk",
+<<<<<<< HEAD
   "version": 8
 }
 
 
+=======
+  "version": 6
+}
+>>>>>>> origin/dev

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .DS_Store
 node_modules
 /dist
@@ -21,3 +22,10 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+=======
+docker-influx-volume/
+docker-grafana-volume/
+.backend/
+.idea/
+!docker-influx-volume/db_init.txt
+>>>>>>> origin/dev
