@@ -1,4 +1,3 @@
-const xhr = new XMLHttpRequest();
 var Username;
 var Password;
 var Database_address;
@@ -82,13 +81,6 @@ function throwBasicError(mess){
 }
 
 
-//function sendRequest(type,url){
-//	xhr.open(type, url,false)
-//	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-//	xhr.send();
-//}
-
-
 
 function checkDb(db_name){
 
@@ -118,10 +110,12 @@ function createDb(db_name){
 	//let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1;';
 	//let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT;';
 	let addr = 'http://localhost:8086/query?q=';
-	xhr.open("POST",addr+q1);
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send();
-
+	fetch(addr+q1,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	})
 }
 
 function prepareQuery(measurement_name, value, tags={}){
@@ -135,7 +129,12 @@ function prepareQuery(measurement_name, value, tags={}){
 }
 
 function dropDatabase(addr){
-	sendRequest("POST",addr+"/query?db="+Database_name+"&q=DROP DATABASE "+Database_name);
+	fetch(addr+"/query?db="+Database_name+"&q=DROP DATABASE "+Database_name,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	})
 }
 
 function getPerformance(){
@@ -206,9 +205,14 @@ function checkHowLong(func,startName,endName){
 
 function sendQueries(){
 	if (query !== ""){
-		xhr.open("POST", Database_address);
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.send(query);
+
+		fetch(Database_address,{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: query
+		})
 		query = "";
 	}
 }
