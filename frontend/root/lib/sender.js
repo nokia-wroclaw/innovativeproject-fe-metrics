@@ -21,7 +21,7 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 		createDb(db_name);
 	}
 	setInterval(sendQueries,4000);
-	setInterval(sendInCyckle,300);
+	//setInterval(sendInCyckle,300);
 }
 
 
@@ -82,11 +82,11 @@ function throwBasicError(mess){
 }
 
 
-function sendRequest(type,url){
-	xhr.open(type, url,false)
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send();
-}
+//function sendRequest(type,url){
+//	xhr.open(type, url,false)
+//	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//	xhr.send();
+//}
 
 
 
@@ -114,13 +114,13 @@ function checkDb(db_name){
 
 
 function createDb(db_name){
-	let q1 = 'CREATE DATABASE ' + db_name;
-	let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1';
-	let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT';
+	let q1 = 'CREATE DATABASE ' + db_name + ";";
+	//let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1;';
+	//let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT;';
 	let addr = 'http://localhost:8086/query?q=';
-	sendRequest('POST',addr+q1);
-	sendRequest('POST',addr+q2);
-	sendRequest('POST',addr+q3);
+	xhr.open("POST",addr+q1);
+	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xhr.send();
 
 }
 
