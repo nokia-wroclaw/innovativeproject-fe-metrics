@@ -20,7 +20,7 @@ function init(db_addr, db_name , username="",password="", measurement_prefix="fe
 		createDb(db_name);
 	}
 	setInterval(sendQueries,4000);
-	//setInterval(sendInCyckle,300);
+	setInterval(sendInCyckle,300);
 }
 
 
