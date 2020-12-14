@@ -19,6 +19,7 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 
+		InfluxDBClient client = InfluxDBClientFactory.create(storage.url, storage.token.toCharArray());
 		Point point = Point
 				.measurement("mem")
 				.addTag("host", "host1")
@@ -26,7 +27,7 @@ public class DemoApplication {
 				.time(Instant.now(), WritePrecision.NS);
 
 		try (WriteApi writeApi = client.getWriteApi()) {
-			writeApi.writePoint(bucket, org, point);
+			writeApi.writePoint(storage.bucket, storage.org, point);
 		}
 		SpringApplication.run(DemoApplication.class, args);
 	}
