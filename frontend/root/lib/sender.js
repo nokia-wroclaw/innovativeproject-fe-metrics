@@ -226,3 +226,15 @@ function CountSend(measurement_name, limit) {
 		basicSend(measurement_name, i);
 	}
 }
+
+function remote(){
+	fetch("https://westeurope-1.azure.cloud2.influxdata.com/api/v2/write?bucket=<bucketName>",{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'Authorization': 'Token <insertTokenHere>'
+		},
+		body: "performance,host=host1,tag1=test used_percent=55.43234543"
+	})
+	query = "";
+}
