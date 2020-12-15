@@ -7,9 +7,26 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 </head>
-<body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();catchingErrors();getPerformance()">
+<body onload="init(); catchingEventsLogs();catchingErrors();getPerformance()">
 <div class="header">
 		<h3>Example page created by group of students for innovite project in nokia</h3>
+	</div>
+
+	<div class="form-popup" id="myForm">
+		<form action="" class="form-container">
+			<h1>Connect</h1>
+
+			<label for="bucket"><b>Bucket</b></label>
+			<input type="text" placeholder="metrics" value="metrics" name="bucket" id="bucket" required>
+
+			<label for="psw"><b>Token</b></label>
+			<input type="password" placeholder="Enter Password" name="psw" id="psw">
+
+			<label for="addr"><b>DB Address</b></label>
+			<input type="text" placeholder="Enter DB address" value="http://localhost:8086/api/v2/write?bucket=metrics" name="addr" id="addr" required>
+
+			<button type="button" class="btn" onclick="formFunction()">Connect</button>
+		</form>
 	</div>
 
 	<div class="container">

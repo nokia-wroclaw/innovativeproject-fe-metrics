@@ -10,17 +10,17 @@ const events = ("mousedown mouseup focus keydown" +
 const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
 
-function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
+function init(db_addr="", db_name="" , username="",password="", measurement_prefix="fem"){
 	Username = username;
 	Password = password;
 	Database_address = db_addr;
 	Database_name = db_name;
 	Measurement_prefix = measurement_prefix;
-	if (!checkDb(db_name)) {
-		createDb(db_name);
-	}
+	//if (!checkDb(db_name)) {
+	//	createDb(db_name);
+	//}
 	setInterval(sendQueries,4000);
-	setInterval(sendInCyckle,300);
+	//setInterval(sendInCyckle,300);
 }
 
 
@@ -120,6 +120,7 @@ function createDb(db_name){
 
 function prepareQuery(measurement_name, value, tags={}){
 	let str = '' + Measurement_prefix+ '_' + measurement_name;
+	//let str = measurement_name;
 	for (const [key, key_value] of Object.entries(tags)){
 		str = str + ','+key+'='+key_value;
 	}
@@ -204,15 +205,28 @@ function checkHowLong(func,startName,endName){
 }
 
 function sendQueries(){
-	if (query !== ""){
+	if (query !== "" && Database_address !== "" && Database_name){
+		if (Password !== ""){
+			console.log("here")
+			fetch(Database_address,{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Authorization': 'Token '+Password
+				},
+				body: query
+			})
+		} else{
+			console.log("jednak tu")
+			fetch(Database_address,{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: query
+			})
+		}
 
-		fetch(Database_address,{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-			},
-			body: query
-		})
 		query = "";
 	}
 }
@@ -237,4 +251,11 @@ function remote(){
 		body: "performance,host=host1,tag1=test used_percent=55.43234543"
 	})
 	query = "";
+}
+
+function formFunction(){
+	Database_address = $("#addr").val();
+	Database_name = $("#bucket").val();
+	Password = $("#psw").val();
+	$("#myForm").hide();
 }
