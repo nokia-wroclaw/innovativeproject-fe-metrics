@@ -16,11 +16,6 @@ function init(db_addr="", db_name="" , username="",password="", measurement_pref
 	Database_address = db_addr;
 	Database_name = db_name;
 	Measurement_prefix = measurement_prefix;
-	//if (!checkDb(db_name)) {
-	//	createDb(db_name);
-	//}
-	setInterval(sendQueries,4000);
-	//setInterval(sendInCyckle,300);
 }
 
 
@@ -83,7 +78,10 @@ function throwBasicError(mess){
 
 
 function checkDb(db_name){
-
+    console.log(db_name)
+    if (!Database_address.includes("localhost:8086")){
+        return true
+    }
 	var jsonIssues = {};
 	$.ajax({
 		url: "http://localhost:8086/query?q=show%20databases",
@@ -100,6 +98,7 @@ function checkDb(db_name){
 			isDatabaseExists = true;
 		};
 	}
+	console.log(isDatabaseExists)
 	return isDatabaseExists;
 
 }
@@ -217,7 +216,6 @@ function sendQueries(){
 				body: query
 			})
 		} else{
-			console.log("jednak tu")
 			fetch(Database_address,{
 				method: 'POST',
 				headers: {
@@ -258,4 +256,9 @@ function formFunction(){
 	Database_name = $("#bucket").val();
 	Password = $("#psw").val();
 	$("#myForm").hide();
+    if (!checkDb(Database_name)) {
+    	createDb(Database_name);
+    }
+    setInterval(sendQueries,4000);
+    setInterval(sendInCyckle,300);
 }
