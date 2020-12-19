@@ -10,11 +10,20 @@ const events = ("mousedown mouseup focus keydown" +
 const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
 
-function init(db_addr="", db_name="" , username="",password="", measurement_prefix="fem"){
-	Username = username;
-	Password = password;
-	Database_address = db_addr;
-	Database_name = db_name;
+function init(measurement_prefix="fem"){
+	if (!checkCookie()){
+		$("#myForm").css("display","block");
+	}
+	else{
+		Database_address = getCookie("database_address");
+		Database_name = getCookie("bucket");
+		Password = getCookie("token");
+		if (!checkDb(Database_name)) {
+			createDb(Database_name);
+		}
+		setInterval(sendQueries,4000);
+		//setInterval(sendInCyckle,300);
+	}
 	Measurement_prefix = measurement_prefix;
 }
 
@@ -78,7 +87,6 @@ function throwBasicError(mess){
 
 
 function checkDb(db_name){
-    console.log(db_name)
     if (!Database_address.includes("localhost:8086")){
         return true
     }
@@ -98,7 +106,6 @@ function checkDb(db_name){
 			isDatabaseExists = true;
 		};
 	}
-	console.log(isDatabaseExists)
 	return isDatabaseExists;
 
 }
@@ -206,7 +213,6 @@ function checkHowLong(func,startName,endName){
 function sendQueries(){
 	if (query !== "" && Database_address !== "" && Database_name){
 		if (Password !== ""){
-			console.log("here")
 			fetch(Database_address,{
 				method: 'POST',
 				headers: {
@@ -255,10 +261,41 @@ function formFunction(){
 	Database_address = $("#addr").val();
 	Database_name = $("#bucket").val();
 	Password = $("#psw").val();
+	setCookie("database_address",Database_address);
+	setCookie("token",Password)
+	setCookie("bucket",Database_name);
 	$("#myForm").hide();
-    if (!checkDb(Database_name)) {
-    	createDb(Database_name);
-    }
+	if (!checkDb(Database_name)) {
+		createDb(Database_name);
+	}
     setInterval(sendQueries,4000);
     setInterval(sendInCyckle,300);
+}
+
+function setCookie(cname, cvalue) {
+	//var d = new Date();
+	//d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	//var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue //+ ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	let name = cname + "=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+function checkCookie() {
+	let addr = getCookie("database_address");
+	let bucket = getCookie("bucket")
+	return !((addr === "") || (bucket === ""));
 }
