@@ -269,7 +269,7 @@ function formFunction(){
 		createDb(Database_name);
 	}
     setInterval(sendQueries,4000);
-    setInterval(sendInCyckle,300);
+    //setInterval(sendInCyckle,300);
 }
 
 function setCookie(cname, cvalue) {
