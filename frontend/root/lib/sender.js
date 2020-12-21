@@ -3,10 +3,6 @@ var Password;
 var Database_address;
 var Measurement_prefix;
 var Database_name;
-const events = ("mousedown mouseup focus keydown" +
-	" change mouseup dblclick mousemove mouseover mouseout mousewheel" +
-	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
-	" zoom focus blur select change submit reset").split(" ");
 const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
 
@@ -31,23 +27,19 @@ function init(measurement_prefix="fem"){
 function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertisement){
 	$(elem).on(eventsList.join(" "),function(ev){
 		let tags = {};
-
 		for (let property in ev) {
-			let tagValue = "";
-			if (typeof ev[property] ==="string"){
-				tagValue = '"'+ev[property]+'"';
-				tagValue.replaceAll(" ", "_");
+				let tagValue = "";
+				if (typeof ev[property] ==="string"){
+					tagValue = '"'+ev[property]+'"';
+					tagValue.replaceAll(" ", "_");
+				}
+				else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
+					tagValue= ev[property]
+				}
+				if (tagValue !== ""){
+					tags[property] = tagValue;
+				}
 			}
-			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
-				tagValue= ev[property]
-			}
-			if (tagValue === ""){
-				continue;
-			}
-			else {
-				tags[property] = tagValue;
-			}
-		}
 		prepareQuery('log','"'+ev.type+'"',tags);
 	});
 }
@@ -59,23 +51,19 @@ function catchingErrors(measurementName='error'){
 		console.log(ev.message);
 		let tags = {};
 		for (let property in ev){
-			if (typeof ev[property] === "object"){
-				tags[property] = '"'+ ev[property].constructor.name + '"';
-			}
-			else if (typeof ev[property] === "string") {
-				let string = '"'+ev[property]+'"';
-				if(string.includes("[native")){
-					continue;
+				if (typeof ev[property] === "object"){
+					tags[property] = '"'+ ev[property].constructor.name + '"';
 				}
-				else {
-					let validString = string.replaceAll(" ", "_");
-					tags[property] = validString;
+				else if (typeof ev[property] === "string") {
+					let string = '"'+ev[property]+'"';
+					if(!string.includes("[native")){
+						tags[property] = string.replaceAll(" ", "_");
+					}
+				}
+				else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
+					tags[property] = ev[property];
 				}
 			}
-			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
-				tags[property] = ev[property];
-			}
-		}
 		prepareQuery(measurementName,'"'+ev.message+'"',tags);
 	});
 }
@@ -90,31 +78,31 @@ function checkDb(db_name){
     if (!Database_address.includes("localhost:8086")){
         return true
     }
-	var jsonIssues = {};
+    let jsonIssues = {};
 	$.ajax({
 		url: "http://localhost:8086/query?q=show%20databases",
 		async: false,
 		dataType: 'json',
 		success: function(data) {
 			jsonIssues = data;
+			let isDatabaseExists = false
+			let databasesNames = jsonIssues.results[0].series[0].values;
+			for(let i =0; i < databasesNames.length ; i++){
+				if (databasesNames[i][0] === db_name){
+					isDatabaseExists = true;
+				}
+			}
+			return isDatabaseExists;
+		},
+		fail: function (data){
+			return  false
 		}
 	});
-	let databasesNames = jsonIssues.results[0].series[0].values;
-	let isDatabaseExists = false
-	for(let i =0; i < databasesNames.length ; i++){
-		if (databasesNames[i][0] === db_name){
-			isDatabaseExists = true;
-		};
-	}
-	return isDatabaseExists;
-
 }
 
 
 function createDb(db_name){
 	let q1 = 'CREATE DATABASE ' + db_name + ";";
-	//let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1;';
-	//let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT;';
 	let addr = 'http://localhost:8086/query?q=';
 	fetch(addr+q1,{
 		method: 'POST',
@@ -126,7 +114,6 @@ function createDb(db_name){
 
 function prepareQuery(measurement_name, value, tags={}){
 	let str = '' + Measurement_prefix+ '_' + measurement_name;
-	//let str = measurement_name;
 	for (const [key, key_value] of Object.entries(tags)){
 		str = str + ','+key+'='+key_value;
 	}
@@ -152,6 +139,7 @@ function getPerformance(){
 	}
 
 }
+
 function sendInCyckle(){
 	let timestamp = new Date();
 	let tags = {}
@@ -164,17 +152,16 @@ function sendJson(entry){
 	let tags = {};
 	let value = entry.duration;
 	for (let property in entry){
-		if (typeof entry[property] === "object"){
-			tags[property] = '"'+ entry[property].constructor.name + '"';
-		}
-		else if (typeof entry[property] === "string") {
-			let string = '"'+entry[property]+'"';
-			let validString = string.replaceAll(" ", "_");
-			tags[property] = validString;
-		}
-		else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
-			tags[property] = entry[property];
-		}
+			if (typeof entry[property] === "object"){
+				tags[property] = '"'+ entry[property].constructor.name + '"';
+			}
+			else if (typeof entry[property] === "string") {
+				let string = '"'+entry[property]+'"';
+				tags[property] = string.replaceAll(" ", "_");
+			}
+			else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
+				tags[property] = entry[property];
+			}
 	}
 	prepareQuery("performance", value, tags);
 }
@@ -230,31 +217,8 @@ function sendQueries(){
 				body: query
 			})
 		}
-
 		query = "";
 	}
-}
-
-function dateSend(measurement_name){
-	basicSend(measurement_name, Date.now());
-}
-
-function CountSend(measurement_name, limit) {
-	for (let i = 0; i < limit; i++) {
-		basicSend(measurement_name, i);
-	}
-}
-
-function remote(){
-	fetch("https://westeurope-1.azure.cloud2.influxdata.com/api/v2/write?bucket=<bucketName>",{
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-			'Authorization': 'Token <insertTokenHere>'
-		},
-		body: "performance,host=host1,tag1=test used_percent=55.43234543"
-	})
-	query = "";
 }
 
 function formFunction(){
@@ -284,10 +248,10 @@ function getCookie(cname) {
 	let ca = document.cookie.split(';');
 	for(let i = 0; i < ca.length; i++) {
 		let c = ca[i];
-		while (c.charAt(0) == ' ') {
+		while (c.charAt(0) === ' ') {
 			c = c.substring(1);
 		}
-		if (c.indexOf(name) == 0) {
+		if (c.indexOf(name) === 0) {
 			return c.substring(name.length, c.length);
 		}
 	}
