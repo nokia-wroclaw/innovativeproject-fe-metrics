@@ -5,6 +5,9 @@ var Measurement_prefix;
 var Database_name;
 const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
+var DatabaseExist = false;
+
+
 
 function init(measurement_prefix="fem"){
 	if (!checkCookie()){
@@ -14,9 +17,7 @@ function init(measurement_prefix="fem"){
 		Database_address = getCookie("database_address");
 		Database_name = getCookie("bucket");
 		Password = getCookie("token");
-		if (!checkDb(Database_name)) {
-			createDb(Database_name);
-		}
+		checkDb(Database_name)
 		setInterval(sendQueries,4000);
 		//setInterval(sendInCyckle,300);
 	}
@@ -76,12 +77,11 @@ function throwBasicError(mess){
 
 function checkDb(db_name){
     if (!Database_address.includes("localhost:8086")){
-        return true
+        DatabaseExist = true;
     }
     let jsonIssues = {};
 	$.ajax({
 		url: "http://localhost:8086/query?q=show%20databases",
-		async: false,
 		dataType: 'json',
 		success: function(data) {
 			jsonIssues = data;
@@ -92,10 +92,15 @@ function checkDb(db_name){
 					isDatabaseExists = true;
 				}
 			}
-			return isDatabaseExists;
+			if (!isDatabaseExists){
+				createDb(db_name)
+			}
+			else {
+				DatabaseExist = true
+			}
 		},
 		fail: function (data){
-			return  false
+			createDb(db_name)
 		}
 	});
 }
@@ -109,7 +114,10 @@ function createDb(db_name){
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		}
+	}).then(function (){
+		DatabaseExist = true;
 	})
+
 }
 
 function prepareQuery(measurement_name, value, tags={}){
@@ -198,7 +206,7 @@ function checkHowLong(func,startName,endName){
 }
 
 function sendQueries(){
-	if (query !== "" && Database_address !== "" && Database_name){
+	if (query !== "" && Database_address !== "" && Database_name !== "" && DatabaseExist){
 		if (Password !== ""){
 			fetch(Database_address,{
 				method: 'POST',
