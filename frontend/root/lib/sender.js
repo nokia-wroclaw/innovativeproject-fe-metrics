@@ -28,18 +28,18 @@ function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertisement){
 	$(elem).on(eventsList.join(" "),function(ev){
 		let tags = {};
 		for (let property in ev) {
-				let tagValue = "";
-				if (typeof ev[property] ==="string"){
-					tagValue = '"'+ev[property]+'"';
-					tagValue.replaceAll(" ", "_");
-				}
-				else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
-					tagValue= ev[property]
-				}
-				if (tagValue !== ""){
-					tags[property] = tagValue;
-				}
+			let tagValue = "";
+			if (typeof ev[property] ==="string"){
+				tagValue = '"'+ev[property]+'"';
+				tagValue.replaceAll(" ", "_");
 			}
+			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
+				tagValue= ev[property]
+			}
+			if (tagValue !== ""){
+				tags[property] = tagValue;
+			}
+		}
 		prepareQuery('log','"'+ev.type+'"',tags);
 	});
 }
@@ -51,19 +51,19 @@ function catchingErrors(measurementName='error'){
 		console.log(ev.message);
 		let tags = {};
 		for (let property in ev){
-				if (typeof ev[property] === "object"){
-					tags[property] = '"'+ ev[property].constructor.name + '"';
-				}
-				else if (typeof ev[property] === "string") {
-					let string = '"'+ev[property]+'"';
-					if(!string.includes("[native")){
-						tags[property] = string.replaceAll(" ", "_");
-					}
-				}
-				else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
-					tags[property] = ev[property];
+			if (typeof ev[property] === "object"){
+				tags[property] = '"'+ ev[property].constructor.name + '"';
+			}
+			else if (typeof ev[property] === "string") {
+				let string = '"'+ev[property]+'"';
+				if(!string.includes("[native")){
+					tags[property] = string.replaceAll(" ", "_");
 				}
 			}
+			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
+				tags[property] = ev[property];
+			}
+		}
 		prepareQuery(measurementName,'"'+ev.message+'"',tags);
 	});
 }
@@ -152,16 +152,16 @@ function sendJson(entry){
 	let tags = {};
 	let value = entry.duration;
 	for (let property in entry){
-			if (typeof entry[property] === "object"){
-				tags[property] = '"'+ entry[property].constructor.name + '"';
-			}
-			else if (typeof entry[property] === "string") {
-				let string = '"'+entry[property]+'"';
-				tags[property] = string.replaceAll(" ", "_");
-			}
-			else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
-				tags[property] = entry[property];
-			}
+		if (typeof entry[property] === "object"){
+			tags[property] = '"'+ entry[property].constructor.name + '"';
+		}
+		else if (typeof entry[property] === "string") {
+			let string = '"'+entry[property]+'"';
+			tags[property] = string.replaceAll(" ", "_");
+		}
+		else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
+			tags[property] = entry[property];
+		}
 	}
 	prepareQuery("performance", value, tags);
 }
