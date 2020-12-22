@@ -1,8 +1,7 @@
-var Username;
-var Password;
-var Database_address;
+var Token;
+var Url;
 var Measurement_prefix;
-var Database_name;
+var Bucket;
 const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
 var DatabaseExist = false;
@@ -14,10 +13,10 @@ function init(measurement_prefix="fem"){
 		$("#myForm").css("display","block");
 	}
 	else{
-		Database_address = getCookie("database_address");
-		Database_name = getCookie("bucket");
-		Password = getCookie("token");
-		checkDb(Database_name)
+		Url = getCookie("database_address");
+		Bucket = getCookie("bucket");
+		Token = getCookie("token");
+		checkDb(Bucket)
 		setInterval(sendQueries,4000);
 		//setInterval(sendInCyckle,300);
 	}
@@ -76,12 +75,12 @@ function throwBasicError(mess){
 
 
 function checkDb(db_name){
-    if (!Database_address.includes("localhost:8086")){
+    if (!Url.includes("localhost:8086")){
         DatabaseExist = true;
     }
     let jsonIssues = {};
 	$.ajax({
-		url: "http://localhost:8086/query?q=show%20databases",
+		url: Url+"/query?q=show%20databases",
 		dataType: 'json',
 		success: function(data) {
 			jsonIssues = data;
@@ -108,8 +107,8 @@ function checkDb(db_name){
 
 function createDb(db_name){
 	let q1 = 'CREATE DATABASE ' + db_name + ";";
-	let addr = 'http://localhost:8086/query?q=';
-	fetch(addr+q1,{
+	let addr = Url + '/query?q='+q1;
+	fetch(addr,{
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -131,7 +130,8 @@ function prepareQuery(measurement_name, value, tags={}){
 }
 
 function dropDatabase(addr){
-	fetch(addr+"/query?db="+Database_name+"&q=DROP DATABASE "+Database_name,{
+	DatabaseExist = false;
+	fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -206,18 +206,18 @@ function checkHowLong(func,startName,endName){
 }
 
 function sendQueries(){
-	if (query !== "" && Database_address !== "" && Database_name !== "" && DatabaseExist){
-		if (Password !== ""){
-			fetch(Database_address,{
+	if (query !== "" && Url !== "" && Bucket !== "" && DatabaseExist){
+		if (Token !== ""){
+			fetch(Url + "/api/v2/write?bucket=metrics",{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
-					'Authorization': 'Token '+Password
+					'Authorization': 'Token '+Token
 				},
 				body: query
 			})
 		} else{
-			fetch(Database_address,{
+			fetch(Url + "/api/v2/write?bucket=metrics",{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded'
@@ -230,15 +230,15 @@ function sendQueries(){
 }
 
 function formFunction(){
-	Database_address = $("#addr").val();
-	Database_name = $("#bucket").val();
-	Password = $("#psw").val();
-	setCookie("database_address",Database_address);
-	setCookie("token",Password)
-	setCookie("bucket",Database_name);
+	Url = $("#addr").val();
+	Bucket = $("#bucket").val();
+	Token = $("#psw").val();
+	setCookie("database_address",Url);
+	setCookie("token",Token)
+	setCookie("bucket",Bucket);
 	$("#myForm").hide();
-	if (!checkDb(Database_name)) {
-		createDb(Database_name);
+	if (!checkDb(Bucket)) {
+		createDb(Bucket);
 	}
     setInterval(sendQueries,4000);
     //setInterval(sendInCyckle,300);

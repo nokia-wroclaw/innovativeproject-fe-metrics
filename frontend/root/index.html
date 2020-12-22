@@ -23,7 +23,7 @@
 			<input type="password" placeholder="Enter Password" name="psw" id="psw">
 
 			<label for="addr"><b>DB Address</b></label>
-			<input type="text" placeholder="Enter DB address" value="http://localhost:8086/api/v2/write?bucket=metrics" name="addr" id="addr" required>
+			<input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
 
 			<button type="button" class="btn" onclick="formFunction()">Connect</button>
 		</form>
@@ -41,7 +41,7 @@
 					tags: tag1:'test', tag2:3000, 'tag3':4000
 				</div>
 			</div>
-			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
+			<div class="elem" onclick="dropDatabase()">
 				<div class="elemValue">
 					DROP DATABASES
 				</div>
