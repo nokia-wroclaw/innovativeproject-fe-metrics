@@ -1,48 +1,4 @@
-var Token;
-var Url;
-var Measurement_prefix;
-var Bucket;
-const eventsForAdvertisement = ("hover click").split(" ");
-var query = "";
-var DatabaseExist = false;
 
-
-
-function init(measurement_prefix="fem"){
-	if (!checkCookie()){
-		$("#myForm").css("display","block");
-	}
-	else{
-		Url = getCookie("database_address");
-		Bucket = getCookie("bucket");
-		Token = getCookie("token");
-		checkDb(Bucket)
-		setInterval(sendQueries,4000);
-		//setInterval(sendInCyckle,300);
-	}
-	Measurement_prefix = measurement_prefix;
-}
-
-
-function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertisement){
-	$(elem).on(eventsList.join(" "),function(ev){
-		let tags = {};
-		for (let property in ev) {
-			let tagValue = "";
-			if (typeof ev[property] ==="string"){
-				tagValue = '"'+ev[property]+'"';
-				tagValue.replaceAll(" ", "_");
-			}
-			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
-				tagValue= ev[property]
-			}
-			if (tagValue !== ""){
-				tags[property] = tagValue;
-			}
-		}
-		prepareQuery('log','"'+ev.type+'"',tags);
-	});
-}
 
 function catchingErrors(measurementName='error'){
 	window.addEventListener('error', function(ev){
@@ -74,70 +30,11 @@ function throwBasicError(mess){
 
 
 
-function checkDb(db_name){
-    if (!Url.includes("localhost:8086")){
-        DatabaseExist = true;
-    }
-    let jsonIssues = {};
-	$.ajax({
-		url: Url+"/query?q=show%20databases",
-		dataType: 'json',
-		success: function(data) {
-			jsonIssues = data;
-			let isDatabaseExists = false
-			let databasesNames = jsonIssues.results[0].series[0].values;
-			for(let i =0; i < databasesNames.length ; i++){
-				if (databasesNames[i][0] === db_name){
-					isDatabaseExists = true;
-				}
-			}
-			if (!isDatabaseExists){
-				createDb(db_name)
-			}
-			else {
-				DatabaseExist = true
-			}
-		},
-		fail: function (data){
-			createDb(db_name)
-		}
-	});
-}
 
 
-function createDb(db_name){
-	let q1 = 'CREATE DATABASE ' + db_name + ";";
-	let addr = Url + '/query?q='+q1;
-	fetch(addr,{
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
-	}).then(function (){
-		DatabaseExist = true;
-	})
 
-}
 
-function prepareQuery(measurement_name, value, tags={}){
-	let str = '' + Measurement_prefix+ '_' + measurement_name;
-	for (const [key, key_value] of Object.entries(tags)){
-		str = str + ','+key+'='+key_value;
-	}
-	str = str + ' value=' + value;
-	str = str+" "+ (Date.now()*1000000) +"\n";
-	query = query +str;
-}
 
-function dropDatabase(addr){
-	DatabaseExist = false;
-	fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
-	})
-}
 
 function getPerformance(){
 	let entries = performance.getEntries();
@@ -205,29 +102,6 @@ function checkHowLong(func,startName,endName){
 
 }
 
-function sendQueries(){
-	if (query !== "" && Url !== "" && Bucket !== "" && DatabaseExist){
-		if (Token !== ""){
-			fetch(Url + "/api/v2/write?bucket=metrics",{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'Authorization': 'Token '+Token
-				},
-				body: query
-			})
-		} else{
-			fetch(Url + "/api/v2/write?bucket=metrics",{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				body: query
-			})
-		}
-		query = "";
-	}
-}
 
 function formFunction(){
 	Url = $("#addr").val();
@@ -244,30 +118,3 @@ function formFunction(){
     //setInterval(sendInCyckle,300);
 }
 
-function setCookie(cname, cvalue) {
-	//var d = new Date();
-	//d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-	//var expires = "expires="+d.toUTCString();
-	document.cookie = cname + "=" + cvalue //+ ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-	let name = cname + "=";
-	let ca = document.cookie.split(';');
-	for(let i = 0; i < ca.length; i++) {
-		let c = ca[i];
-		while (c.charAt(0) === ' ') {
-			c = c.substring(1);
-		}
-		if (c.indexOf(name) === 0) {
-			return c.substring(name.length, c.length);
-		}
-	}
-	return "";
-}
-
-function checkCookie() {
-	let addr = getCookie("database_address");
-	let bucket = getCookie("bucket")
-	return !((addr === "") || (bucket === ""));
-}
