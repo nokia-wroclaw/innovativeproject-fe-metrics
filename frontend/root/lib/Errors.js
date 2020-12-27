@@ -2,7 +2,7 @@ class Errors{
     constructor() {
     }
 
-    catchingErrors(measurementName='error', errorEvent) {
+    catchingErrors(errorEvent,measurementName='error') {
         errorEvent.preventDefault();
         errorEvent.stopImmediatePropagation();
         console.log(errorEvent.message);

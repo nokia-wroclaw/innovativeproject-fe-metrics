@@ -3,7 +3,7 @@ class Events{
     constructor() {
     }
 
-    catchingEventsLogs(measurementName="log",event){
+    catchingEventsLogs(event,measurementName="log"){
         let tags = {};
         for (let property in event) {
             let tagValue = "";

@@ -1,13 +1,6 @@
 
 
 
-
-
-
-
-
-
-
 function getPerformance(){
 	let entries = performance.getEntries();
 	for(let i = 0; i < entries.length - 1; i++){
