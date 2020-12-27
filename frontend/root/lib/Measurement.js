@@ -1,4 +1,4 @@
-class Measurement{
+export default class Measurement{
 
     constructor(name,value,tags) {
         this.name = name;

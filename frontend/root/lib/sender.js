@@ -1,53 +1,54 @@
-let DatabaseController = ""
-let Cookies = new Cookies();
+let databaseController = ""
+let cookies = new Cookies();
 
 function init(){
-	if (!checkCookie()){
+	if (!cookies.checkCookie()){
 		$("#myForm").css("display","block");
 	}
 	else{
-		let Url = Cookies.getCookie("database_address");
-		let Bucket = Cookies.getCookie("bucket");
-		let Token = Cookies.getCookie("token");
-		DatabaseController = new DatabaseController(Url,Bucket,Token)
+		let Url = cookies.getCookie("database_address");
+		let Bucket = cookies.getCookie("bucket");
+		let Token = cookies.getCookie("token");
+		databaseController = new DatabaseController(Url,Bucket,Token)
+		databaseController.catchEvents(document.getElementById("image"),["hover","click"])
+		databaseController.catchErrors();
+		databaseController.catchPerformanceMeasurements();
+		setListeners()
 		//setInterval(sendInCycle,300);
 	}
+}
+
+function setListeners(){
 
 	document.getElementById("basicSendOne").addEventListener("click",function (){
-		DatabaseController.prepareQuery('metric' ,4200,
+		databaseController.prepareQuery('metric' ,4200,
 			{'tag1':'test', 'tag2':3000, 'tag3':4000})
 	})
 
 	document.getElementById("basicSendTwo").addEventListener("click",function (){
-		DatabaseController.prepareQuery('NewMetric' ,5000)
+		databaseController.prepareQuery('NewMetric' ,5000)
 	})
 
 	document.getElementById("basicSendThree").addEventListener("click",function (){
-		DatabaseController.prepareQuery('newMetric' ,3000)
+		databaseController.prepareQuery('newMetric' ,3000)
 	})
 
 	document.getElementById("dropDb").addEventListener("click",function (){
-		DatabaseController.dropDatabase();
+		databaseController.dropDatabase();
 	})
 
 	document.getElementById("basicError").addEventListener("click",function (){
-		DatabaseController.throwBasicError("example error")
+		databaseController.throwBasicError("example error")
 	})
 
 	document.getElementById("longCount").addEventListener("click",function (){
-		DatabaseController.catchOwnFunctionPerformance(longCount,"longStart","longEnd")
+		databaseController.catchOwnFunctionPerformance(longCount,"longStart","longEnd")
 	})
 
 	document.getElementById("shortCount").addEventListener("click",function (){
-		DatabaseController.catchOwnFunctionPerformance(shortCount,"shortStart","shortEnd")
+		databaseController.catchOwnFunctionPerformance(shortCount,"shortStart","shortEnd")
 	})
-
-	DatabaseController.catchEvents(document.getElementById("image"),["hover","click"])
-	DatabaseController.catchErrors();
-	DatabaseController.catchPerformanceMeasurements();
 }
-
-
 
 
 function sendInCycle(){
@@ -55,7 +56,7 @@ function sendInCycle(){
 	let tags = {}
 	tags['seconds'] = timestamp.getSeconds();
 	tags['minutes'] = timestamp.getMinutes();
-	DatabaseController.prepareQuery("time",timestamp.getSeconds(),tags);
+	databaseController.prepareQuery("time",timestamp.getSeconds(),tags);
 
 }
 
@@ -81,14 +82,19 @@ function shortCount(){
 }
 
 function formFunction(){
+	let cookies = new Cookies();
 	let Url = $("#addr").val();
 	let Bucket = $("#bucket").val();
 	let Token = $("#psw").val();
-	Cookies.setCookie("database_address",Url);
-	Cookies.setCookie("token",Token)
-	Cookies.setCookie("bucket",Bucket);
+	cookies.setCookie("database_address",Url);
+	cookies.setCookie("token",Token)
+	cookies.setCookie("bucket",Bucket);
 	$("#myForm").hide();
-	DatabaseController = new DatabaseController(Url,Bucket,Token);
+	databaseController = new DatabaseController(Url,Bucket,Token)
+	databaseController.catchEvents(document.getElementById("image"),["hover","click"])
+	databaseController.catchErrors();
+	databaseController.catchPerformanceMeasurements();
+	setListeners()
 	//setInterval(sendInCycle,300);
 }
 

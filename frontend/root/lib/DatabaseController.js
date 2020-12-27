@@ -1,5 +1,7 @@
-
-class DatabaseController{
+import Errors from "./Errors";
+import Events from "./Events";
+import Performance from "./Performance";
+export default class DatabaseController{
 
     constructor(Url,Bucket,Token="",intervalTime=4000,measurement_prefix="fem") {
         this.Url = Url;
@@ -134,4 +136,3 @@ class DatabaseController{
     }
 
 }
-

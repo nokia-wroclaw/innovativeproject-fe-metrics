@@ -1,4 +1,5 @@
-class Errors{
+import Measurement from "./Measurement";
+export default class Errors{
     constructor() {
     }
 

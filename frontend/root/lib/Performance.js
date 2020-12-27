@@ -1,4 +1,5 @@
-class Performance{
+import Measurement from "./Measurement";
+export default class Performance{
 
     constructor() {
     }

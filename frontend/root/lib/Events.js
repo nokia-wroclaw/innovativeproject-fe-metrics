@@ -1,4 +1,5 @@
-class Events{
+import Measurement from "./Measurement";
+export default class Events{
 
     constructor() {
     }
