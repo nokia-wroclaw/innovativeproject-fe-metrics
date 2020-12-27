@@ -1,25 +1,64 @@
-var Token;
-var Url;
-var Bucket;
-var query = "";
-var DatabaseExist = false;
 
+class DatabaseController{
 
-
-function init(measurement_prefix="fem"){
-    if (!checkCookie()){
-        $("#myForm").css("display","block");
+    constructor(Url,Bucket,Token="",intervalTime=4000,measurement_prefix="fem") {
+        this.Url = Url;
+        this.Bucket = Bucket;
+        this.Token = Token;
+        this.Measurement_prefix = measurement_prefix;
+        this.query = "";
+        this.DatabaseExist = false;
+        setInterval(sendQueries,intervalTime)
     }
-    else{
-        Url = getCookie("database_address");
-        Bucket = getCookie("bucket");
-        Token = getCookie("token");
-        checkDb(Bucket)
-        setInterval(sendQueries,4000);
-        //setInterval(sendInCyckle,300);
+
+    prepareQuery(measurement_name, value, tags={}){
+        let str = '' + this.Measurement_prefix+ '_' + measurement_name;
+        for (const [key, key_value] of Object.entries(tags)){
+            str = str + ','+key+'='+key_value;
+        }
+        str = str + ' value=' + value;
+        str = str+" "+ (Date.now()*1000000) +"\n";
+        this.query = this.query +str;
     }
-    Measurement_prefix = measurement_prefix;
+
+    dropDatabase(addr){
+        this.DatabaseExist = false;
+        fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+    }
+
+    sendQueries(){
+        if (this.query !== "" && this.Url !== "" && this.Bucket !== "" && this.DatabaseExist){
+            if (this.Token !== ""){
+                fetch(this.Url + "/api/v2/write?bucket=metrics",{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Authorization': 'Token '+this.Token
+                    },
+                    body: this.query
+                })
+            } else{
+                fetch(this.Url + "/api/v2/write?bucket=metrics",{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: this.query
+                })
+            }
+            this.query = "";
+        }
+    }
+
+
 }
+
+
 
 function checkDb(db_name){
     if (!Url.includes("localhost:8086")){
@@ -63,49 +102,4 @@ function createDb(db_name){
         DatabaseExist = true;
     })
 
-}
-
-function prepareQuery(measurement_name, value, tags={}){
-    let str = '' + Measurement_prefix+ '_' + measurement_name;
-    for (const [key, key_value] of Object.entries(tags)){
-        str = str + ','+key+'='+key_value;
-    }
-    str = str + ' value=' + value;
-    str = str+" "+ (Date.now()*1000000) +"\n";
-    query = query +str;
-}
-
-function dropDatabase(addr){
-    DatabaseExist = false;
-    fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    })
-}
-
-
-function sendQueries(){
-    if (query !== "" && Url !== "" && Bucket !== "" && DatabaseExist){
-        if (Token !== ""){
-            fetch(Url + "/api/v2/write?bucket=metrics",{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Token '+Token
-                },
-                body: query
-            })
-        } else{
-            fetch(Url + "/api/v2/write?bucket=metrics",{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: query
-            })
-        }
-        query = "";
-    }
 }

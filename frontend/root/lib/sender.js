@@ -1,4 +1,18 @@
 
+function init(measurement_prefix="fem"){
+	if (!checkCookie()){
+		$("#myForm").css("display","block");
+	}
+	else{
+		Url = getCookie("database_address");
+		Bucket = getCookie("bucket");
+		Token = getCookie("token");
+		checkDb(Bucket)
+		setInterval(sendQueries,4000);
+		//setInterval(sendInCyckle,300);
+	}
+	Measurement_prefix = measurement_prefix;
+}
 
 
 function sendInCyckle(){
