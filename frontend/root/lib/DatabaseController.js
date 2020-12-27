@@ -100,5 +100,32 @@ class DatabaseController{
         });
     }
 
+    catchPerformanceMeasurements(){
+        const performance = new Performance();
+        const performanceMeasurements = performance.getPerformance();
+        for (let measurement in performanceMeasurements){
+            this.prepareQuery(measurement.name,measurement.value,measurement.tags)
+        }
+    }
+
+    catchErrors(){
+        window.addEventListener('error',function (ev){
+            const errors = new Errors();
+            const errorMeasurement = errors.catchingErrors(ev);
+            this.prepareQuery(errorMeasurement.name,errorMeasurement.value,errorMeasurement.tags);
+        })
+    }
+
+    catchEvents(elem,eventList){
+        for(let event in eventList){
+            elem.addEventListener(event,function (ev){
+                const events = new Events();
+                const eventMeasurement = events.catchingEventsLogs(ev);
+                this.prepareQuery(eventMeasurement.name,eventMeasurement.value,eventMeasurement.tags);
+            })
+        }
+    }
+
+
 }
 
