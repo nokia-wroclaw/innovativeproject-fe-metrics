@@ -21,4 +21,8 @@ class Errors{
         }
         return new Measurement(measurementName, '"'+errorEvent.message+'"', tags)
     }
+
+    throwBasicError(mess){
+        throw new Error(mess);
+    }
 }

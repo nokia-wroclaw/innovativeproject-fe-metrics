@@ -1,33 +1,5 @@
 
 
-function catchingErrors(measurementName='error'){
-	window.addEventListener('error', function(ev){
-		ev.preventDefault();
-		ev.stopImmediatePropagation();
-		console.log(ev.message);
-		let tags = {};
-		for (let property in ev){
-			if (typeof ev[property] === "object"){
-				tags[property] = '"'+ ev[property].constructor.name + '"';
-			}
-			else if (typeof ev[property] === "string") {
-				let string = '"'+ev[property]+'"';
-				if(!string.includes("[native")){
-					tags[property] = string.replaceAll(" ", "_");
-				}
-			}
-			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
-				tags[property] = ev[property];
-			}
-		}
-		prepareQuery(measurementName,'"'+ev.message+'"',tags);
-	});
-}
-
-function throwBasicError(mess){
-	throw new Error(mess);
-}
-
 
 
 
