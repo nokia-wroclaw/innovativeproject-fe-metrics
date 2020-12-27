@@ -1,15 +1,6 @@
 
 
 
-function getPerformance(){
-	let entries = performance.getEntries();
-	for(let i = 0; i < entries.length - 1; i++){
-		let entry = entries[i].toJSON();
-		sendJson(entry);
-	}
-
-}
-
 function sendInCyckle(){
 	let timestamp = new Date();
 	let tags = {}
@@ -18,23 +9,7 @@ function sendInCyckle(){
 	prepareQuery("time",timestamp.getSeconds(),tags);
 
 }
-function sendJson(entry){
-	let tags = {};
-	let value = entry.duration;
-	for (let property in entry){
-		if (typeof entry[property] === "object"){
-			tags[property] = '"'+ entry[property].constructor.name + '"';
-		}
-		else if (typeof entry[property] === "string") {
-			let string = '"'+entry[property]+'"';
-			tags[property] = string.replaceAll(" ", "_");
-		}
-		else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
-			tags[property] = entry[property];
-		}
-	}
-	prepareQuery("performance", value, tags);
-}
+
 
 function randomInt(min, max) {
 	return min + Math.floor((max - min) * Math.random());
