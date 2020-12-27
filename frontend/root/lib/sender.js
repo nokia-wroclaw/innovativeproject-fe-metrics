@@ -1,14 +1,15 @@
+let DatabaseController = ""
+let Cookies = new Cookies();
 
-function init(measurement_prefix="fem"){
+function init(){
 	if (!checkCookie()){
 		$("#myForm").css("display","block");
 	}
 	else{
-		Url = getCookie("database_address");
-		Bucket = getCookie("bucket");
-		Token = getCookie("token");
-		checkDb(Bucket)
-		setInterval(sendQueries,4000);
+		let Url = Cookies.getCookie("database_address");
+		let Bucket = Cookies.getCookie("bucket");
+		let Token = Cookies.getCookie("token");
+		DatabaseController = new DatabaseController(Url,Bucket,Token)
 		//setInterval(sendInCyckle,300);
 	}
 	Measurement_prefix = measurement_prefix;
@@ -20,7 +21,7 @@ function sendInCyckle(){
 	let tags = {}
 	tags['seconds'] = timestamp.getSeconds();
 	tags['minutes'] = timestamp.getMinutes();
-	prepareQuery("time",timestamp.getSeconds(),tags);
+	DatabaseController.prepareQuery("time",timestamp.getSeconds(),tags);
 
 }
 
@@ -45,30 +46,14 @@ function shortCount(){
 	}
 }
 
-function checkHowLong(func,startName,endName){
-	performance.mark(startName);
-	func();
-	performance.mark(endName);
-	performance.measure("measure "+startName+" to "+endName, startName, endName);
-	sendJson(performance.getEntriesByName("measure "+startName+" to "+endName)[0].toJSON());
-	performance.clearMarks();
-	performance.clearMeasures();
-
-}
-
-
 function formFunction(){
-	Url = $("#addr").val();
-	Bucket = $("#bucket").val();
-	Token = $("#psw").val();
-	setCookie("database_address",Url);
-	setCookie("token",Token)
-	setCookie("bucket",Bucket);
+	let Url = $("#addr").val();
+	let Bucket = $("#bucket").val();
+	let Token = $("#psw").val();
+	Cookies.setCookie("database_address",Url);
+	Cookies.setCookie("token",Token)
+	Cookies.setCookie("bucket",Bucket);
 	$("#myForm").hide();
-	if (!checkDb(Bucket)) {
-		createDb(Bucket);
-	}
-    setInterval(sendQueries,4000);
-    //setInterval(sendInCyckle,300);
+	DatabaseController = new DatabaseController(Url,Bucket,Token);
 }
 

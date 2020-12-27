@@ -12,6 +12,17 @@ class Performance{
         }
         return performanceMeasurements
     }
+
+    checkHowLong(func,startName,endName){
+        performance.mark(startName);
+        func();
+        performance.mark(endName);
+        performance.measure("measure "+startName+" to "+endName, startName, endName);
+        preparePerformanceMeasurement(performance.getEntriesByName("measure "+startName+" to "+endName)[0].toJSON());
+        performance.clearMarks();
+        performance.clearMeasures();
+
+    }
 }
 
 function preparePerformanceMeasurement(entry,name="performance"){

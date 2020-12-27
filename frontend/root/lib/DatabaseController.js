@@ -125,6 +125,9 @@ class DatabaseController{
             })
         }
     }
+    catchOwnFunctionPerformance(func,startName,endName){
+        new Performance().checkHowLong(func,startName,endName)
+    }
 
 
 }
