@@ -7,7 +7,7 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 </head>
-<body onload="init(); catchingEventsLogs();catchingErrors();getPerformance()">
+<body onload="init()">
 <div class="header">
 		<h3>Example page created by group of students for innovite project in nokia</h3>
 	</div>
@@ -32,8 +32,7 @@
 	<div class="container">
 
 		<div class="column">
-			<div class="elem" onclick="prepareQuery('metric' ,4200,
-{'tag1':'test', tag2:3000, 'tag3':4000})">
+			<div class="elem" id="basicSendOne">
 				<div class="elemValue">
 					send metric:<br>
 					measurement name: fem_metric, <br>
@@ -41,12 +40,12 @@
 					tags: tag1:'test', tag2:3000, 'tag3':4000
 				</div>
 			</div>
-			<div class="elem" onclick="dropDatabase()">
+			<div class="elem" id="dropDb">
 				<div class="elemValue">
 					DROP DATABASES
 				</div>
 			</div>
-			<div class="elem" onclick="throwBasicError('example error')">
+			<div class="elem" id="basicError">
 				<div class="elemValue">
 					THROW ERROR
 				</div>
@@ -57,7 +56,7 @@
 		</div>
 
 		<div class="column">
-			<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
+			<div class="elem" id="basicSendTwo">
 				<div class="elemValue">
 					send metric:<br>
 					measurement name: fem_NewMetric, <br>
@@ -65,7 +64,7 @@
 					tags: None
 				</div>
 			</div>
-			<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
+			<div class="elem" id="basicSendThree">
 				<div class="elemValue">
 					send metric:<br>
 					measurement name: fem_newMetric, <br>
@@ -73,12 +72,12 @@
 					tags: None
 				</div>
 			</div>
-			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
+			<div class="elem" id="longCount">
 				<div class="elemValue">
 					simulate long calculations
 				</div>
 			</div>
-			<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
+			<div class="elem" id="shortCount">
 				<div class="elemValue">
 					simulate short calculations
 				</div>

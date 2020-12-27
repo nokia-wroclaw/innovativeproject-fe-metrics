@@ -22,7 +22,7 @@ class DatabaseController{
         this.query = this.query +str;
     }
 
-    dropDatabase(addr){
+    dropDatabase(){
         this.DatabaseExist = false;
         fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
             method: 'POST',
@@ -129,6 +129,9 @@ class DatabaseController{
         new Performance().checkHowLong(func,startName,endName)
     }
 
+    throwBasicError(mess){
+        new Errors().throwBasicError(mess);
+    }
 
 }
 
