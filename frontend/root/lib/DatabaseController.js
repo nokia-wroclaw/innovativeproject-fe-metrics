@@ -8,7 +8,7 @@ class DatabaseController{
         this.Measurement_prefix = measurement_prefix;
         this.query = "";
         this.DatabaseExist = false;
-        setInterval(sendQueries,intervalTime)
+        setInterval(this.sendQueries,intervalTime)
     }
 
     prepareQuery(measurement_name, value, tags={}){
@@ -55,51 +55,49 @@ class DatabaseController{
         }
     }
 
+    createDb(db_name){
+        let q1 = 'CREATE DATABASE ' + db_name + ";";
+        let addr = this.Url + '/query?q='+q1;
+        fetch(addr,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (){
+            this.DatabaseExist = true;
+        })
 
-}
-
-
-
-function checkDb(db_name){
-    if (!Url.includes("localhost:8086")){
-        DatabaseExist = true;
     }
-    let jsonIssues = {};
-    $.ajax({
-        url: Url+"/query?q=show%20databases",
-        dataType: 'json',
-        success: function(data) {
-            jsonIssues = data;
-            let isDatabaseExists = false
-            let databasesNames = jsonIssues.results[0].series[0].values;
-            for(let i =0; i < databasesNames.length ; i++){
-                if (databasesNames[i][0] === db_name){
-                    isDatabaseExists = true;
+
+    checkDb(db_name){
+        if (!this.Url.includes("localhost:8086")){
+            this.DatabaseExist = true;
+        }
+        let jsonIssues = {};
+        $.ajax({
+            url: this.Url+"/query?q=show%20databases",
+            dataType: 'json',
+            success: function(data) {
+                jsonIssues = data;
+                let isDatabaseExists = false
+                let databasesNames = jsonIssues.results[0].series[0].values;
+                for(let i =0; i < databasesNames.length ; i++){
+                    if (databasesNames[i][0] === db_name){
+                        isDatabaseExists = true;
+                    }
                 }
+                if (!isDatabaseExists){
+                    this.createDb(db_name)
+                }
+                else {
+                    this.DatabaseExist = true
+                }
+            },
+            fail: function (data){
+                this.createDb(db_name)
             }
-            if (!isDatabaseExists){
-                createDb(db_name)
-            }
-            else {
-                DatabaseExist = true
-            }
-        },
-        fail: function (data){
-            createDb(db_name)
-        }
-    });
-}
-
-function createDb(db_name){
-    let q1 = 'CREATE DATABASE ' + db_name + ";";
-    let addr = Url + '/query?q='+q1;
-    fetch(addr,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-    }).then(function (){
-        DatabaseExist = true;
-    })
+        });
+    }
 
 }
+
