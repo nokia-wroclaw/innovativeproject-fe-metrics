@@ -8,6 +8,7 @@ class DatabaseController{
         this.Measurement_prefix = measurement_prefix;
         this.query = "";
         this.DatabaseExist = false;
+        this.checkDb(Bucket)
         setInterval(this.sendQueries,intervalTime)
     }
 
