@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Sample page </title>
 	<link rel="stylesheet" href="/css/style.css"/>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -44,14 +45,7 @@
 			<h2>Content</h2>
 			<p> Architecto blanditiis deleniti, est fuga iusto perspiciatis suscipit voluptatibus! </p>
 		</div>
-	</div>
 
-
-	<div class="container">
-
-		
-
-		<div class="column">
 			<div class="elem" onclick="prepareQuery('metric' ,4200,
 {'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">
@@ -61,22 +55,20 @@
 					tags: tag1:'test', tag2:3000, 'tag3':4000
 				</div>
 			</div>
+
 			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
 				<div class="elemValue">
 					DROP DATABASES
 				</div>
 			</div>
+
 			<div class="elem" onclick="throwBasicError('example error')">
 				<div class="elemValue">
 					THROW ERROR
 				</div>
 			</div>
-			<div class="elem" id="image">
-				<img src="img/logo.png" alt="logo" width="700", height="500">
-			</div>
-		</div>
 
-		<div class="column">
+
 			<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
 				<div class="elemValue">
 					send metric:<br>
@@ -85,6 +77,7 @@
 					tags: None
 				</div>
 			</div>
+
 			<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
 				<div class="elemValue">
 					send metric:<br>
@@ -93,19 +86,27 @@
 					tags: None
 				</div>
 			</div>
+
 			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
 				<div class="elemValue">
 					simulate long calculations
 				</div>
 			</div>
+
 			<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
 				<div class="elemValue">
 					simulate short calculations
 				</div>
 			</div>
-		</div>
+
+			<div class="img" id="image">
+					<img src="img/logo.png" alt="logo" width="350", height="250">
+				</div>
+
 
 	</div>
+
+
 
 
 
