@@ -1,31 +1,47 @@
-import Errors from "./Errors";
-import Events from "./Events";
-import Performance from "./Performance";
-export default class DatabaseController{
+import { catchingEventsLogs } from "./Events";
+import { catchingErrors } from "./Errors";
+import { getPerformance } from "./Performance";
+import { checkHowLong } from "./Performance";
 
-    constructor(Url,Bucket,Token="",intervalTime=4000,measurement_prefix="fem") {
-        this.Url = Url;
-        this.Bucket = Bucket;
-        this.Token = Token;
-        this.Measurement_prefix = measurement_prefix;
-        this.query = "";
-        this.DatabaseExist = false;
-        this.checkDb(Bucket)
-        setInterval(this.sendQueries,intervalTime)
-    }
+export var Url = "";
+export var Bucket ="";
+export var Token = "";
+export var Measurement_prefix = "fem"
+export var query = "";
+export var DatabaseExist = false;
 
-    prepareQuery(measurement_name, value, tags={}){
-        let str = '' + this.Measurement_prefix+ '_' + measurement_name;
+export function setUrl(url){
+    Url = url;
+}
+
+export function setBucket(bucket){
+    Bucket = bucket;
+}
+export function setToken(token){
+    Token = token;
+}
+export function setPrefix(prefix){
+    Measurement_prefix = prefix;
+}
+export function setQuery(newQuery){
+    query = newQuery;
+}
+export function setExist(exist){
+    DatabaseExist =exist
+}
+
+export function prepareQuery(measurement_name, value, tags={}){
+        let str = '' + Measurement_prefix+ '_' + measurement_name;
         for (const [key, key_value] of Object.entries(tags)){
             str = str + ','+key+'='+key_value;
         }
         str = str + ' value=' + value;
         str = str+" "+ (Date.now()*1000000) +"\n";
-        this.query = this.query +str;
+        query = query +str;
     }
 
-    dropDatabase(){
-        this.DatabaseExist = false;
+export function dropDatabase(){
+        DatabaseExist = false;
         fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
             method: 'POST',
             headers: {
@@ -34,105 +50,103 @@ export default class DatabaseController{
         })
     }
 
-    sendQueries(){
-        if (this.query !== "" && this.Url !== "" && this.Bucket !== "" && this.DatabaseExist){
-            if (this.Token !== ""){
-                fetch(this.Url + "/api/v2/write?bucket=metrics",{
+export function sendQueries(){
+        if (query !== "" && Url !== "" && Bucket !== "" && DatabaseExist){
+            if (Token !== ""){
+                fetch(Url,{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Token '+this.Token
+                        'Authorization': 'Token '+Token
                     },
-                    body: this.query
+                    body: query
                 })
             } else{
-                fetch(this.Url + "/api/v2/write?bucket=metrics",{
+                fetch(Url + "/api/v2/write?bucket=metrics",{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     },
-                    body: this.query
+                    body: query
                 })
             }
-            this.query = "";
+            query = "";
         }
     }
 
-    createDb(db_name){
+export function createDb(db_name){
         let q1 = 'CREATE DATABASE ' + db_name + ";";
-        let addr = this.Url + '/query?q='+q1;
+        let addr = Url + '/query?q='+q1;
         fetch(addr,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function (){
-            this.DatabaseExist = true;
+            DatabaseExist = true;
         })
 
     }
 
-    checkDb(db_name){
-        if (!this.Url.includes("localhost:8086")){
-            this.DatabaseExist = true;
-        }
-        let jsonIssues = {};
-        $.ajax({
-            url: this.Url+"/query?q=show%20databases",
-            dataType: 'json',
-            success: function(data) {
-                jsonIssues = data;
-                let isDatabaseExists = false
-                let databasesNames = jsonIssues.results[0].series[0].values;
-                for(let i =0; i < databasesNames.length ; i++){
-                    if (databasesNames[i][0] === db_name){
-                        isDatabaseExists = true;
+export function checkDb(db_name){
+        if (!Url.includes("localhost:8086")){
+            DatabaseExist = true;
+        }else{
+            let jsonIssues = {};
+            $.ajax({
+                url: Url+"/query?q=show%20databases",
+                dataType: 'json',
+                success: function(data) {
+                    jsonIssues = data;
+                    let isDatabaseExists = false
+                    let databasesNames = jsonIssues.results[0].series[0].values;
+                    for(let i =0; i < databasesNames.length ; i++){
+                        if (databasesNames[i][0] === db_name){
+                            isDatabaseExists = true;
+                        }
                     }
+                    if (!isDatabaseExists){
+                        createDb(db_name)
+                    }
+                    else {
+                        DatabaseExist = true
+                    }
+                },
+                fail: function (data){
+                    createDb(db_name)
                 }
-                if (!isDatabaseExists){
-                    this.createDb(db_name)
-                }
-                else {
-                    this.DatabaseExist = true
-                }
-            },
-            fail: function (data){
-                this.createDb(db_name)
-            }
-        });
-    }
-
-    catchPerformanceMeasurements(){
-        const performance = new Performance();
-        const performanceMeasurements = performance.getPerformance();
-        for (let measurement in performanceMeasurements){
-            this.prepareQuery(measurement.name,measurement.value,measurement.tags)
+            });
         }
+
     }
 
-    catchErrors(){
+export function catchPerformanceMeasurements(){
+    const performanceMeasurements = getPerformance();
+    for (let measurement of performanceMeasurements){
+        prepareQuery(measurement[0],measurement[1],measurement[2])
+    }
+}
+
+export function catchErrors(){
         window.addEventListener('error',function (ev){
-            const errors = new Errors();
-            const errorMeasurement = errors.catchingErrors(ev);
-            this.prepareQuery(errorMeasurement.name,errorMeasurement.value,errorMeasurement.tags);
+            const errorMeasurement = catchingErrors(ev);
+            prepareQuery(errorMeasurement[0],errorMeasurement[1],errorMeasurement[2]);
         })
     }
 
-    catchEvents(elem,eventList){
-        for(let event in eventList){
-            elem.addEventListener(event,function (ev){
-                const events = new Events();
-                const eventMeasurement = events.catchingEventsLogs(ev);
-                this.prepareQuery(eventMeasurement.name,eventMeasurement.value,eventMeasurement.tags);
+export function catchEvents(elem,eventList){
+        for(let event of eventList){
+            elem.addEventListener(event, function (ev){
+                const eventMeasurement = catchingEventsLogs(ev);
+                prepareQuery(eventMeasurement[0],eventMeasurement[1],eventMeasurement[2]);
             })
         }
     }
-    catchOwnFunctionPerformance(func,startName,endName){
-        new Performance().checkHowLong(func,startName,endName)
+export function catchOwnFunctionPerformance(func,startName,endName){
+        const score = checkHowLong(func,startName,endName)
+        prepareQuery(score[0],score[1],score[2]);
     }
 
-    throwBasicError(mess){
-        new Errors().throwBasicError(mess);
+export function throwBasicError(mess){
+        throwBasicError(mess);
     }
-
-}

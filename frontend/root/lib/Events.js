@@ -1,10 +1,5 @@
-import Measurement from "./Measurement";
-export default class Events{
 
-    constructor() {
-    }
-
-    catchingEventsLogs(event,measurementName="log"){
+export function catchingEventsLogs(event,measurementName="log"){
         let tags = {};
         for (let property in event) {
             let tagValue = "";
@@ -19,6 +14,5 @@ export default class Events{
                 tags[property] = tagValue;
             }
         }
-            return new Measurement(measurementName, '"'+event.type+'"', tags)
+            return [measurementName,'"'+event.type+'"', tags]
     }
-}

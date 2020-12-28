@@ -1,16 +1,12 @@
-import Measurement from "./Measurement";
-export default class Errors{
-    constructor() {
-    }
 
-    catchingErrors(errorEvent,measurementName='error') {
+export function catchingErrors(errorEvent,measurementName='error') {
         errorEvent.preventDefault();
         errorEvent.stopImmediatePropagation();
         console.log(errorEvent.message);
         let tags = {};
         for (let property in errorEvent) {
             if (typeof errorEvent[property] === "object") {
-                tags[property] = '"' + ev[property].constructor.name + '"';
+                tags[property] = '"' + errorEvent[property].constructor.name + '"';
             } else if (typeof errorEvent[property] === "string") {
                 let string = '"' + errorEvent[property] + '"';
                 if (!string.includes("[native")) {
@@ -20,10 +16,9 @@ export default class Errors{
                 tags[property] = errorEvent[property];
             }
         }
-        return new Measurement(measurementName, '"'+errorEvent.message+'"', tags)
+        return [measurementName, '"'+errorEvent.message+'"', tags]
     }
 
-    throwBasicError(mess){
+export function throwBasicError(mess){
         throw new Error(mess);
     }
-}

@@ -1,32 +1,25 @@
-import Measurement from "./Measurement";
-export default class Performance{
-
-    constructor() {
-    }
-
-    getPerformance(){
+export function getPerformance(){
         let entries = performance.getEntries();
         const performanceMeasurements = []
-        for(let i = 0; i < entries.length - 1; i++){
+        for(let i = 0; i < entries.length; i++){
             let entry = entries[i].toJSON();
             performanceMeasurements.push(preparePerformanceMeasurement(entry));
         }
         return performanceMeasurements
     }
 
-    checkHowLong(func,startName,endName){
+export function checkHowLong(func,startName,endName){
         performance.mark(startName);
         func();
         performance.mark(endName);
         performance.measure("measure "+startName+" to "+endName, startName, endName);
-        preparePerformanceMeasurement(performance.getEntriesByName("measure "+startName+" to "+endName)[0].toJSON());
+        const performanceMes  = preparePerformanceMeasurement(performance.getEntriesByName("measure "+startName+" to "+endName)[0].toJSON());
         performance.clearMarks();
         performance.clearMeasures();
+        return performanceMes;
 
     }
-}
-
-function preparePerformanceMeasurement(entry,name="performance"){
+export function preparePerformanceMeasurement(entry,name="performance"){
     let tags = {};
     let value = entry.duration;
     for (let property in entry){
@@ -41,5 +34,5 @@ function preparePerformanceMeasurement(entry,name="performance"){
             tags[property] = entry[property];
         }
     }
-    return new Measurement("performance",value,tags)
+    return [name,value,tags]
 }

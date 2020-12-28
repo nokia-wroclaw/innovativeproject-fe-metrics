@@ -5,7 +5,7 @@ services:
   ports: 
    - "8080:80"
   volumes:
-   - "../frontend/root:/usr/share/nginx/html"
+   - "../frontend/root/dist:/usr/share/nginx/html"
  influx-grafana:
   image: "philhawthorne/docker-influxdb-grafana:latest"
   ports:

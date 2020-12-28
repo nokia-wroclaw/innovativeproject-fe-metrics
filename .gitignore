@@ -2,4 +2,8 @@ docker-influx-volume/
 docker-grafana-volume/
 .backend/
 .idea/
+frontend/root/.cache/
+frontend/root/dist/
+frontend/root/node_modules/
 !docker-influx-volume/db_init.txt
+

@@ -1,15 +1,11 @@
-export default class  Cookies{
-
-    constructor() {
-    }
-    setCookie(cname, cvalue) {
+ export function setCookie(cname, cvalue) {
         //var d = new Date();
         //d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
         //var expires = "expires="+d.toUTCString();
         document.cookie = cname + "=" + cvalue //+ ";" + expires + ";path=/";
     }
 
-    getCookie(cname) {
+ export function getCookie(cname) {
         let name = cname + "=";
         let ca = document.cookie.split(';');
         for(let i = 0; i < ca.length; i++) {
@@ -24,10 +20,10 @@ export default class  Cookies{
         return "";
     }
 
-    checkCookie() {
+ export function checkCookie() {
         let addr = getCookie("database_address");
         let bucket = getCookie("bucket")
         return !((addr === "") || (bucket === ""));
     }
-}
+
 

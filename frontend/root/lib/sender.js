@@ -1,18 +1,29 @@
-let databaseController = ""
-let cookies = new Cookies();
+import  * as Cookies  from "./Cookies";
+import  * as DatabaseController   from "./DatabaseController";
+import {checkDb} from "./DatabaseController";
+
+window.addEventListener('DOMContentLoaded', init, false);
+
 
 function init(){
-	if (!cookies.checkCookie()){
+	document.getElementById("connectBtn").addEventListener("click",function (){
+		formFunction();
+	})
+	if (!Cookies.checkCookie()){
 		$("#myForm").css("display","block");
 	}
 	else{
-		let Url = cookies.getCookie("database_address");
-		let Bucket = cookies.getCookie("bucket");
-		let Token = cookies.getCookie("token");
-		databaseController = new DatabaseController(Url,Bucket,Token)
-		databaseController.catchEvents(document.getElementById("image"),["hover","click"])
-		databaseController.catchErrors();
-		databaseController.catchPerformanceMeasurements();
+		let Url = Cookies.getCookie("database_address");
+		let Bucket = Cookies.getCookie("bucket");
+		let Token = Cookies.getCookie("token");
+		DatabaseController.setBucket(Bucket);
+		DatabaseController.setUrl(Url);
+		DatabaseController.setToken(Token)
+		DatabaseController.catchEvents(document.getElementById("image"),["click"])
+		DatabaseController.catchErrors();
+		DatabaseController.catchPerformanceMeasurements();
+		DatabaseController.checkDb(Bucket);
+		setInterval(DatabaseController.sendQueries,4000);
 		setListeners()
 		//setInterval(sendInCycle,300);
 	}
@@ -21,32 +32,32 @@ function init(){
 function setListeners(){
 
 	document.getElementById("basicSendOne").addEventListener("click",function (){
-		databaseController.prepareQuery('metric' ,4200,
+		DatabaseController.prepareQuery('metric' ,4200,
 			{'tag1':'test', 'tag2':3000, 'tag3':4000})
 	})
 
 	document.getElementById("basicSendTwo").addEventListener("click",function (){
-		databaseController.prepareQuery('NewMetric' ,5000)
+		DatabaseController.prepareQuery('NewMetric' ,5000)
 	})
 
 	document.getElementById("basicSendThree").addEventListener("click",function (){
-		databaseController.prepareQuery('newMetric' ,3000)
+		DatabaseController.prepareQuery('newMetric' ,3000)
 	})
 
 	document.getElementById("dropDb").addEventListener("click",function (){
-		databaseController.dropDatabase();
+		DatabaseController.dropDatabase();
 	})
 
 	document.getElementById("basicError").addEventListener("click",function (){
-		databaseController.throwBasicError("example error")
+		DatabaseController.throwBasicError("example error")
 	})
 
 	document.getElementById("longCount").addEventListener("click",function (){
-		databaseController.catchOwnFunctionPerformance(longCount,"longStart","longEnd")
+		DatabaseController.catchOwnFunctionPerformance(longCount,"longStart","longEnd")
 	})
 
 	document.getElementById("shortCount").addEventListener("click",function (){
-		databaseController.catchOwnFunctionPerformance(shortCount,"shortStart","shortEnd")
+		DatabaseController.catchOwnFunctionPerformance(shortCount,"shortStart","shortEnd")
 	})
 }
 
@@ -56,7 +67,7 @@ function sendInCycle(){
 	let tags = {}
 	tags['seconds'] = timestamp.getSeconds();
 	tags['minutes'] = timestamp.getMinutes();
-	databaseController.prepareQuery("time",timestamp.getSeconds(),tags);
+	DatabaseController.prepareQuery("time",timestamp.getSeconds(),tags);
 
 }
 
@@ -82,19 +93,24 @@ function shortCount(){
 }
 
 function formFunction(){
-	let cookies = new Cookies();
 	let Url = $("#addr").val();
 	let Bucket = $("#bucket").val();
 	let Token = $("#psw").val();
-	cookies.setCookie("database_address",Url);
-	cookies.setCookie("token",Token)
-	cookies.setCookie("bucket",Bucket);
+	Cookies.setCookie("database_address",Url);
+	Cookies.setCookie("token",Token)
+	Cookies.setCookie("bucket",Bucket);
 	$("#myForm").hide();
-	databaseController = new DatabaseController(Url,Bucket,Token)
-	databaseController.catchEvents(document.getElementById("image"),["hover","click"])
-	databaseController.catchErrors();
-	databaseController.catchPerformanceMeasurements();
+	DatabaseController.setBucket(Bucket);
+	DatabaseController.setUrl(Url);
+	DatabaseController.setToken(Token)
+	DatabaseController.catchEvents(document.getElementById("image"),["click"])
+	DatabaseController.catchErrors();
+	DatabaseController.catchPerformanceMeasurements();
+	DatabaseController.checkDb(Bucket);
+	setInterval(DatabaseController.sendQueries,4000);
 	setListeners()
+
+
 	//setInterval(sendInCycle,300);
 }
 

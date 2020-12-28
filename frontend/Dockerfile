@@ -1,6 +1,3 @@
 FROM nginx:latest
 
-COPY ./root/index.html /usr/share/nginx/html/index.html
-COPY ./root/lib /usr/share/nginx/html/lib
-COPY ./root/img /usr/share/nginx/html/img
-COPY ./root/css /usr/share/nginx/html/css
+COPY ./root/dist /usr/share/nginx/html
