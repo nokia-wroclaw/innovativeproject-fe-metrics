@@ -49,7 +49,36 @@ nav a {
 	background-size: cover;
 	background-position: center center;
 }
+.column {
+	float: left;
+	width: 25%;
+	padding: 130px;
+  }
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+	content: "";
+	clear: both;
+	display: table;
+  }
 
+.float-my-children > * {
+    float:center;
+    margin-right:5px;
+}
+
+.clearfix {
+	*zoom:1 /* for IE */
+}
+
+.clearfix:after {
+    content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
 
 .banner-area h2 {
 	padding-top: 10%;
