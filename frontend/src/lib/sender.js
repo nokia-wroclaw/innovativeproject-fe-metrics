@@ -1,35 +1,32 @@
-
-const xhr = new XMLHttpRequest();
-var Username;
-var Password;
-var Database_address;
+var Token;
+var Url;
 var Measurement_prefix;
-var Database_name;
-const events = ("mousedown mouseup focus keydown" +
-	" change mouseup dblclick mousemove mouseover mouseout mousewheel" +
-	" keydown keyup keypress textInput touchstart touchmove touchend touchcancel resize scroll" +//
-	" zoom focus blur select change submit reset").split(" ");
+var Bucket;
 const eventsForAdvertisement = ("hover click").split(" ");
 var query = "";
+var DatabaseExist = false;
 
-export function init(db_addr, db_name , username="",password="", measurement_prefix="fem"){
-	Username = username;
-	Password = password;
-	Database_address = db_addr;
-	Database_name = db_name;
-	Measurement_prefix = measurement_prefix;
-	if (!checkDb(db_name)) {
-		createDb(db_name);
+
+
+export function init(measurement_prefix="fem"){
+	if (!checkCookie()){
+		$("#myForm").css("display","block");
 	}
-	setInterval(sendQueries,4000);
-	//setInterval(sendInCyckle,300);
+	else{
+		Url = getCookie("database_address");
+		Bucket = getCookie("bucket");
+		Token = getCookie("token");
+		checkDb(Bucket)
+		setInterval(sendQueries,4000);
+		//setInterval(sendInCyckle,300);
+	}
+	Measurement_prefix = measurement_prefix;
 }
 
 
 export function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertisement){
 	$(elem).on(eventsList.join(" "),function(ev){
 		let tags = {};
-
 		for (let property in ev) {
 			let tagValue = "";
 			if (typeof ev[property] ==="string"){
@@ -39,10 +36,7 @@ export function catchingEventsLogs(elem="#image",eventsList = eventsForAdvertise
 			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean"){
 				tagValue= ev[property]
 			}
-			if (tagValue === ""){
-				continue;
-			}
-			else {
+			if (tagValue !== ""){
 				tags[property] = tagValue;
 			}
 		}
@@ -62,12 +56,8 @@ export function catchingErrors(measurementName='error'){
 			}
 			else if (typeof ev[property] === "string") {
 				let string = '"'+ev[property]+'"';
-				if(string.includes("[native")){
-					continue;
-				}
-				else {
-					let validString = string.replaceAll(" ", "_");
-					tags[property] = validString;
+				if(!string.includes("[native")){
+					tags[property] = string.replaceAll(" ", "_");
 				}
 			}
 			else if (typeof ev[property] === "number" || typeof ev[property] ==="boolean") {
@@ -83,47 +73,52 @@ export function throwBasicError(mess){
 }
 
 
-export function sendRequest(type,url){
-	xhr.open(type, url,false)
-	xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	xhr.send();
-}
-
-
 
 export function checkDb(db_name){
-
-	var jsonIssues = {};
+    if (!Url.includes("localhost:8086")){
+        DatabaseExist = true;
+    }
+    let jsonIssues = {};
 	$.ajax({
-		url: "http://localhost:8086/query?q=show%20databases",
-		async: false,
+		url: Url+"/query?q=show%20databases",
 		dataType: 'json',
 		success: function(data) {
 			jsonIssues = data;
+			let isDatabaseExists = false
+			let databasesNames = jsonIssues.results[0].series[0].values;
+			for(let i =0; i < databasesNames.length ; i++){
+				if (databasesNames[i][0] === db_name){
+					isDatabaseExists = true;
+				}
+			}
+			if (!isDatabaseExists){
+				createDb(db_name)
+			}
+			else {
+				DatabaseExist = true
+			}
+		},
+		fail: function (data){
+			createDb(db_name)
 		}
 	});
-	let databasesNames = jsonIssues.results[0].series[0].values;
-	let isDatabaseExists = false
-	for(let i =0; i < databasesNames.length ; i++){
-		if (databasesNames[i][0] === db_name){
-			isDatabaseExists = true;
-		};
-	}
-	return isDatabaseExists;
-
 }
 
 
 export function createDb(db_name){
-	let q1 = 'CREATE DATABASE ' + db_name;
-	let q2 = 'CREATE RETENTION POLICY "inf" ON '+db_name +' DURATION INF REPLICATION 1';
-	let q3 = 'ALTER RETENTION POLICY "inf" ON '+db_name +' DEFAULT';
-	let addr = 'http://localhost:8086/query?q=';
-	sendRequest('POST',addr+q1);
-	sendRequest('POST',addr+q2);
-	sendRequest('POST',addr+q3);
+	let q1 = 'CREATE DATABASE ' + db_name + ";";
+	let addr = Url + '/query?q='+q1;
+	fetch(addr,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	}).then(function (){
+		DatabaseExist = true;
+	})
 
 }
+
 export function prepareQuery(measurement_name, value, tags={}){
 	let str = '' + Measurement_prefix+ '_' + measurement_name;
 	for (const [key, key_value] of Object.entries(tags)){
@@ -135,7 +130,13 @@ export function prepareQuery(measurement_name, value, tags={}){
 }
 
 export function dropDatabase(addr){
-	sendRequest("POST",addr+"/query?db="+Database_name+"&q=DROP DATABASE "+Database_name);
+	DatabaseExist = false;
+	fetch(Url+"/query?db="+Bucket+"&q=DROP DATABASE "+Bucket,{
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	})
 }
 
 export function getPerformance(){
@@ -146,6 +147,7 @@ export function getPerformance(){
 	}
 
 }
+
 export function sendInCyckle(){
 	let timestamp = new Date();
 	let tags = {}
@@ -163,8 +165,7 @@ export function sendJson(entry){
 		}
 		else if (typeof entry[property] === "string") {
 			let string = '"'+entry[property]+'"';
-			let validString = string.replaceAll(" ", "_");
-			tags[property] = validString;
+			tags[property] = string.replaceAll(" ", "_");
 		}
 		else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
 			tags[property] = entry[property];
@@ -205,21 +206,68 @@ export function checkHowLong(func,startName,endName){
 }
 
 export function sendQueries(){
-	if (query !== ""){
-		xhr.open("POST", Database_address);
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.send(query);
-		console.log(query)
+	if (query !== "" && Url !== "" && Bucket !== "" && DatabaseExist){
+		if (Token !== ""){
+			fetch(Url + "/api/v2/write?bucket=metrics",{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'Authorization': 'Token '+Token
+				},
+				body: query
+			})
+		} else{
+			fetch(Url + "/api/v2/write?bucket=metrics",{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: query
+			})
+		}
 		query = "";
 	}
 }
 
-export function dateSend(measurement_name){
-	basicSend(measurement_name, Date.now());
+export function formFunction(){
+	Url = $("#addr").val();
+	Bucket = $("#bucket").val();
+	Token = $("#psw").val();
+	setCookie("database_address",Url);
+	setCookie("token",Token)
+	setCookie("bucket",Bucket);
+	$("#myForm").hide();
+	if (!checkDb(Bucket)) {
+		createDb(Bucket);
+	}
+    setInterval(sendQueries,4000);
+    //setInterval(sendInCyckle,300);
 }
 
-export function CountSend(measurement_name, limit) {
-	for (let i = 0; i < limit; i++) {
-		basicSend(measurement_name, i);
+export function setCookie(cname, cvalue) {
+	//var d = new Date();
+	//d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	//var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue //+ ";" + expires + ";path=/";
+}
+
+export function getCookie(cname) {
+	let name = cname + "=";
+	let ca = document.cookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) === ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) === 0) {
+			return c.substring(name.length, c.length);
+		}
 	}
+	return "";
+}
+
+export function checkCookie() {
+	let addr = getCookie("database_address");
+	let bucket = getCookie("bucket")
+	return !((addr === "") || (bucket === ""));
 }

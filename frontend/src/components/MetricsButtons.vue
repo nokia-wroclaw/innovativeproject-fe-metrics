@@ -36,7 +36,7 @@
   <v-btn 
   block
   v-on:click="prepareQuery('NewMetric' ,5000)">
-    do nothing
+    sending new metric 5000
   </v-btn>
   </div>
   <div class="pa-3">
@@ -47,9 +47,14 @@
   </v-btn>
   </div>
   <div class="pa-3">
+    <v-btn block v-on:click="checkHowLong()">
+
+    </v-btn>
+  </div>
+  <div class="pa-3">
    <v-btn
    block 
-   v-on:click="checkHowLong(function(){longCount()},'longStart','longEnd')">
+   v-on:click="checkHowLong(longCount,'longStart','longEnd')">
     longcount
   </v-btn>
   </div>
