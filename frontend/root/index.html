@@ -13,18 +13,19 @@
 	<header>
 		<div class="navibar">
 			<div class="logo">
-				<a href="#">femetrics</a> 
+				<a href="#">eFEmetrics</a> 
 			</div>
 			<nav>
 				<a href="#">Home</a> 
 				<a href="#About">About</a> 
 				<a href="#Team">Team</a> 
-				<a href="#Content">Content</a> 
-				<a href="#">Links</a> 
+				<a href="#Demo Page">Demo Page</a> 
+				<a href="#Links">Links</a> 
 			</nav>
 		</div>
 	</header>
 	
+	<main>
 	<div class="banner-area">
 			<h2>.</h2>
 	</div>
@@ -33,13 +34,14 @@
 		<div class="navibar">
 			<a id="About"> </a>
 			<h2>About</h2>
-			<p>	FEmetrics - liczniki czasu i logowań dla aplikacji frontendowych.</p>
-			<p>	Celem projektu było znalezienie rozwiązania do raportowania metryk i zdarzeń z dowolnej aplikacji internetowej.
-				W tym celu stworzyliśmy bibliotekę, której podstawową funkcjonalnością jest wysyłanie metryk. Każda metryka w bazie ma 
-				pole oznaczające czas wysłania, wartość oraz liste tagów.
-				wysyłanie mozę być wyołąne zdarzeniem np. kliknięcie przycisku bądź działać ałkowicie w tle.
-				Pozwala to na między innymi na :
-				....[...]
+			<p>	eFEmetrics - timers and logins counter for frontend applications</p>
+			<p>	
+					The main purpose of the project was to find a solution to reporting metrics and events from a web application. 
+					To achieve that, we have created a library. Its basic functionality is sending metrics. 
+					Each metric has a separate field indicating the sending time, value and tag list. 
+					Sending the metric can be initiated by event such as click on button or run completely in the background. 
+					It allows, inter alia, to: .... [...]
+
 			</p>
 		</div>
 		<div class="navibar">
@@ -49,51 +51,52 @@
 			<div class="row">
 				<div class="column">
 					<div class="clearfix float-my-children">
-							<img src="img/Marek.jpeg" alt="Dawid" width="290", height="290">
+							<img src="img/Marek.jpeg" alt="Dawid" width="230", height="230">
 							<p>Marek Kwaśny</p>
 					</div>
 					<p></p>
 					<div class="clearfix float-my-children">
-							<img src="img/Karolina.png" alt="Dawid" width="290", height="290">
+							<img src="img/Karolina.png" alt="Dawid" width="230", height="230">
 							<p>Karolina Szlęk</p>
 					</div>
 					<p></p>
 				</div>
 				<div class="column">
 					<div class="clearfix float-my-children">
-							<img src="img/Dawid.jpeg" alt="Dawid" width="290", height="290">
+							<img src="img/Dawid.jpeg" alt="Dawid" width="230", height="230">
 							<p>Dawid Dudek</p>
 					</div>
 					<p></p>
 
 					<div class="clearfix float-my-children">
-							<img src="img/Gosia.jpeg" alt="Dawid" width="290", height="290">
+							<img src="img/Gosia.jpeg" alt="Dawid" width="230", height="230">
 							<p>Małogrzata Leśniak</p>
 					</div>
-					<p></p>
 				</div>
 			</div>	
 		</div>
 		
 
 		<div class="navibar">
-				<a id="Content"></a>
-			<h2>Content</h2>
-			<p> Architecto blanditiis deleniti, est fuga iusto perspiciatis suscipit voluptatibus! </p>
+				<a id="Demo Page"></a>
+			<h2>Demo Page</h2>
+			<p> Below are several buttons that shows how our porject works.<br>
+				Each button has a different use and was carefuly described.<br>
+				After pressing the button, we can see the effect in the grafana</p>
 		</div>
 
 			<div class="elem" onclick="prepareQuery('metric' ,4200,
 {'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">
-					send metric:<br>
+					Click on this button to send the metric with value 4200 <br>				
 					measurement name: fem_metric, <br>
-					value: 4200, <br>
-					tags: tag1:'test', tag2:3000, 'tag3':4000
 				</div>
 			</div>
 
 			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
 				<div class="elemValue">
+					If you click, here You will<br>
+					 <br>
 					DROP DATABASES
 				</div>
 			</div>
@@ -139,14 +142,20 @@
 					<img src="img/logo.png" alt="logo" width="350", height="250">
 				</div>
 
+				
+
+		<div class="footer">
+			<a id="Links"></a>
+			<div class="img_container">
+				<a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics">
+					<img src="img/github-logo.png" alt="git" width="50", height="50">
+				</a>
+			</div>
+		</div>
 
 	</div>
-
-
-
-
-
 	<script src="lib/sender.js"></script>
-
 </body>
+</main>
+
 </html>

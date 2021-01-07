@@ -52,10 +52,11 @@ nav a {
 .column {
 	float: left;
 	width: 25%;
-	padding: 130px;
+	padding: 50px;
+	margin-left: 130px;
   }
   
-  /* Clearfix (clear floats) */
+
   .row::after {
 	content: "";
 	clear: both;
@@ -92,7 +93,7 @@ nav a {
 	position: relative;
 	top: 550px;
 	background: #ebebeb;
-	height: 4000px;
+	height: 4700px;
 
 }
 .content-area h2 {
@@ -113,7 +114,7 @@ nav a {
 	top: 70px;
     background-color: darkgray;
     color: white;
-    height: 120px;
+    height: 280px;
     width: 700px;
 	margin: 0 auto;
 	margin-top: 50px;
@@ -143,4 +144,21 @@ nav a {
 
 .elem:hover{
     background-color: #404040;
+}
+
+
+.footer{
+	height: 80px;
+	background: #262626;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	color: #fff;
+    position: absolute;
+    bottom: 0;
+}
+.img_container{
+	display: blocks;
+	margin: 10px auto;
+	height: 100%
 }
