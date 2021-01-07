@@ -4,8 +4,8 @@ docker-grafana-volume/
 .idea/
 frontend/root/.cache/
 frontend/root/dist/
-fronted/root/lib/dist
-fronted/root/lib/.cache
+frontend/root/lib/dist/
+frontend/root/lib/.cache/
 frontend/root/node_modules/
 frontend/dist/
 frontend/node_modules/
