@@ -17,4 +17,5 @@ services:
    - "./backend/dashboards-scheme:/var/lib/grafana/dashboards"
    - "./backend/datasources:/etc/grafana/provisioning/datasources"
    - "./backend/dashboards:/etc/grafana/provisioning/dashboards"
+   - "./docker-grafana-volume/grafana.ini:/etc/grafana/grafana.ini"
 
