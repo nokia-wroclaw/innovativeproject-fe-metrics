@@ -1,22 +1,17 @@
 {
-  "name": "root",
+  "name": "efemetrics2",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
+  "main": "./dist/efemetrics.js",
+   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build index.html"
+
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
-  },
-  "dependencies": {
-    "efemetrics2": "^1.0.0"
   }
 }

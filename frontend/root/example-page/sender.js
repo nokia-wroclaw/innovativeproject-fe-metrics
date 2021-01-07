@@ -1,6 +1,5 @@
-import  * as Cookies  from "./Cookies";
-import  * as DatabaseController   from "./DatabaseController";
-import {checkDb} from "./DatabaseController";
+import  * as DatabaseController   from "efemetrics2";
+
 
 window.addEventListener('DOMContentLoaded', init, false);
 
@@ -9,13 +8,13 @@ function init(){
 	document.getElementById("connectBtn").addEventListener("click",function (){
 		formFunction();
 	})
-	if (!Cookies.checkCookie()){
+	if (!DatabaseController.checkCookie()){
 		$("#myForm").css("display","block");
 	}
 	else{
-		let Url = Cookies.getCookie("database_address");
-		let Bucket = Cookies.getCookie("bucket");
-		let Token = Cookies.getCookie("token");
+		let Url = DatabaseController.getCookie("database_address");
+		let Bucket = DatabaseController.getCookie("bucket");
+		let Token = DatabaseController.getCookie("token");
 		DatabaseController.setBucket(Bucket);
 		DatabaseController.setUrl(Url);
 		DatabaseController.setToken(Token)
@@ -96,9 +95,9 @@ function formFunction(){
 	let Url = $("#addr").val();
 	let Bucket = $("#bucket").val();
 	let Token = $("#psw").val();
-	Cookies.setCookie("database_address",Url);
-	Cookies.setCookie("token",Token)
-	Cookies.setCookie("bucket",Bucket);
+	DatabaseController.setCookie("database_address",Url);
+	DatabaseController.setCookie("token",Token)
+	DatabaseController.setCookie("bucket",Bucket);
 	$("#myForm").hide();
 	DatabaseController.setBucket(Bucket);
 	DatabaseController.setUrl(Url);
