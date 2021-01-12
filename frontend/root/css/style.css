@@ -5,11 +5,11 @@ body{
 }
 
 .navibar {
-    width: 1170px;
+    width: 70%;
 	margin: 0 auto;
 }
 header {
-	height: 80px;
+	height: 13%;
 	background: #262626;
 	width: 100%;
 	z-index: 10;
@@ -22,12 +22,13 @@ header {
 }
 .logo a {
 	text-decoration: none;
-	font-size: 30px;
+	font-size: 1.7vw;
 	font-family: poppins;
 	color: #fff;
 	letter-spacing: 5px;
 }
 nav {
+	width: 60%;
 	float: right;
 	line-height: 100px;
 }
@@ -35,7 +36,7 @@ nav a {
     text-decoration: none;
 	font-family: poppins;
 	letter-spacing: 4px;
-	font-size: 20px;
+	font-size: 1.2vw;
 	margin: 0 15px;
 	color: #fff;
 }
@@ -49,38 +50,6 @@ nav a {
 	background-size: cover;
 	background-position: center center;
 }
-.column {
-	float: left;
-	width: 25%;
-	padding: 50px;
-	margin-left: 130px;
-  }
-  
-
-  .row::after {
-	content: "";
-	clear: both;
-	display: table;
-  }
-
-.float-my-children > * {
-    float:center;
-    margin-right:5px;
-}
-
-.clearfix {
-	*zoom:1 /* for IE */
-}
-
-.clearfix:after {
-    content: " ";
-	display: table;
-}
-
-.clearfix:after {
-	clear: both;
-}
-
 .banner-area h2 {
 	padding-top: 10%;
 	font-size: 70px;
@@ -114,8 +83,8 @@ nav a {
 	top: 70px;
     background-color: darkgray;
     color: white;
-    height: 280px;
-    width: 700px;
+    height: 5%;
+    width: 60%;
 	margin: 0 auto;
 	margin-top: 50px;
     text-align: center;
@@ -162,3 +131,4 @@ nav a {
 	margin: 10px auto;
 	height: 100%
 }
+

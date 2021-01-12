@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--For responsive-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<title>Sample page </title>
 	<link rel="stylesheet" href="/css/style.css"/>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -33,7 +34,7 @@
 
 		<div class="navibar">
 			<a id="About"> </a>
-			<h2>About</h2>
+			<h2 style="font-size:vw">About</h2>
 			<p>	eFEmetrics - timers and logins counter for frontend applications</p>
 			<p>	
 					The main purpose of the project was to find a solution to reporting metrics and events from a web application. 
@@ -44,39 +45,13 @@
 
 			</p>
 		</div>
+
 		<div class="navibar">
 			<a id="Team"></a>
 			<h2>Team</h2>
-
-			<div class="row">
-				<div class="column">
-					<div class="clearfix float-my-children">
-							<img src="img/Marek.jpeg" alt="Dawid" width="230", height="230">
-							<p>Marek Kwaśny</p>
-					</div>
-					<p></p>
-					<div class="clearfix float-my-children">
-							<img src="img/Karolina.png" alt="Dawid" width="230", height="230">
-							<p>Karolina Szlęk</p>
-					</div>
-					<p></p>
-				</div>
-				<div class="column">
-					<div class="clearfix float-my-children">
-							<img src="img/Dawid.jpeg" alt="Dawid" width="230", height="230">
-							<p>Dawid Dudek</p>
-					</div>
-					<p></p>
-
-					<div class="clearfix float-my-children">
-							<img src="img/Gosia.jpeg" alt="Dawid" width="230", height="230">
-							<p>Małogrzata Leśniak</p>
-					</div>
-				</div>
-			</div>	
+			<p>	Hi ! We are a group of 4 IT students from University of Wrocław</p>
 		</div>
 		
-
 		<div class="navibar">
 				<a id="Demo Page"></a>
 			<h2>Demo Page</h2>
@@ -85,49 +60,67 @@
 				After pressing the button, we can see the effect in the grafana</p>
 		</div>
 
+		<div class="form-popup blank" id="myForm">
+			<p> To conect with data base click Conect button</p>
+			<form action="" class="form-container">
+				<h1>Connect</h1>
+	
+				<label for="bucket"><b>Bucket</b></label>
+				<input type="text" placeholder="metrics" value="metrics" name="bucket" id="bucket" required>
+	
+				<label for="psw"><b>Token</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" id="psw">
+	
+				<label for="addr"><b>DB Address</b></label>
+				<input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
+	
+				<button type="button" class="btn" id="connectBtn" >Connect</button>
+			</form>
+		</div>
+
+		
+
 			<div class="elem" onclick="prepareQuery('metric' ,4200,
 {'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">
-					Click on this button to send the metric with value 4200 <br>				
-					measurement name: fem_metric, <br>
+					Click on this button to send the metric with <br>				
+					value 4200 and 3 tags <br>
 				</div>
 			</div>
 
 			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
 				<div class="elemValue">
-					If you click, here You will<br>
-					 <br>
-					DROP DATABASES
+
+					This button will DROP DATABASES. <br>
+					Try it.
 				</div>
 			</div>
 
 			<div class="elem" onclick="throwBasicError('example error')">
 				<div class="elemValue">
-					THROW ERROR
+					Errors are also importatnt. <br>
+					Click here to  THROW ERROR
 				</div>
 			</div>
 
 
 			<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
 				<div class="elemValue">
-					send metric:<br>
-					measurement name: fem_NewMetric, <br>
-					value: 5000, <br>
-					tags: None
+					Click on this button to send the metric with <br>				
+					value 5000 and NO tags
 				</div>
 			</div>
 
 			<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
 				<div class="elemValue">
-					send metric:<br>
-					measurement name: fem_newMetric, <br>
-					value: 3000 <br>
-					tags: None
+					Click on this button to send the metric with value 3000<br>				
+					and measurement name: fem_newMetric, <br>
 				</div>
 			</div>
 
 			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
 				<div class="elemValue">
+					If you click, here You will<br>
 					simulate long calculations
 				</div>
 			</div>
@@ -139,16 +132,14 @@
 			</div>
 
 			<div class="img" id="image">
-					<img src="img/logo.png" alt="logo" width="350", height="250">
+					<img src="img/logo.png" alt="logo" style="width:30%;">
 				</div>
-
-				
 
 		<div class="footer">
 			<a id="Links"></a>
 			<div class="img_container">
 				<a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics">
-					<img src="img/github-logo.png" alt="git" width="50", height="50">
+					<img src="img/github-logo.png" alt="git" style="width:3%;">
 				</a>
 			</div>
 		</div>
