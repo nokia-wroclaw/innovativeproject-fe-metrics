@@ -106,10 +106,10 @@ nav a {
     width: 60%;
 	margin: 0 auto;
 	margin-top: 50px;
-    text-align: center;
+	text-align: center;
+	
 
 }
-
 .elemValue{
     margin: 0;
     position: relative;
@@ -120,7 +120,6 @@ nav a {
     font-size: 20px;
 
 }
-
 .img{
 	position: relative;
 	top: 70px;
@@ -128,12 +127,18 @@ nav a {
 	margin-top: 50px;
 
 }
-
-
 .elem:hover{
-    background-color: #404040;
+	
+	box-shadow: 5px 10px 18px  #36486b; 
 }
 
+.elem:active {
+	background: #404040;
+	-webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+	   -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+			box-shadow: inset 0px 0px 5px #c1c1c1;
+	 outline: none;
+  }
 
 .footer{
 	height: 80px;
@@ -150,4 +155,5 @@ nav a {
 	margin: 10px auto;
 	height: 100%
 }
+
 
