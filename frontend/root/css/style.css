@@ -9,7 +9,7 @@ body{
 	margin: 0 auto;
 }
 header {
-	height: 13%;
+	height: 10%;
 	background: #262626;
 	width: 100%;
 	z-index: 10;
@@ -62,7 +62,7 @@ nav a {
 	position: relative;
 	top: 550px;
 	background: #ebebeb;
-	height: 4700px;
+	height: 3800px;
 
 }
 .content-area h2 {
@@ -77,10 +77,20 @@ nav a {
 	font-family: poppins;
 	line-height: 30px;
 }
+.columnTeam {
+	float: left;
+	width: 40%;
+	padding: 10px;
+}
+.rowTeam:after {
+	content: "";
+	display: table;
+	clear: both;
+  }
 .column {
 	float: left;
-	width: 45%;
-	padding: 10px;
+	width: 38%;
+	padding-left: 9%;
 }
 .row:after {
 	content: "";
@@ -89,10 +99,10 @@ nav a {
   }
 .elem{
 	position: relative;
-	top: 70px;
+	top: 5%;
     background-color: darkgray;
     color: white;
-    height: 5%;
+	height: 140px;
     width: 60%;
 	margin: 0 auto;
 	margin-top: 50px;

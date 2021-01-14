@@ -49,15 +49,53 @@
 		<div class="navibar">
 			<a id="Team"></a>
 			<h2>Team</h2>
-			<p>	Hi ! We are a group of 4 IT students from University of Wrocław</p>
+			<div style="line-height:700%;">
+					<br>
+			</div>
+			<div class="rowTeam">
+				<div class="columnTeam">
+							<img src="img/Marek.jpeg" alt="Dawid"  style="width:35%;"><br>
+							<br>
+							<img src="img/Dawid.jpeg" alt="Dawid"  style="width:35%;"><br>
+							<br>
+							<img src="img/Karolina.png" alt="Dawid"  style="width:35%;"><br>
+							<br>
+							<img src="img/Gosia.jpeg" alt="Dawid"  style="width:35%;">
+
+				</div>
+				<div class="columnTeam">
+						<b>Marek Kwaśny</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+							Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. 
+							Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra . </p>
+						<div style="line-height:305%;">
+								<br>
+						</div>
+						<b>Dawid Dudek</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+								Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Phasellus pharetra nulla ac diam.</p>
+						<div style="line-height:350%;">
+								<br>
+						</div>
+						<b>Karolina Szlęk</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+								Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. 
+								Cras vel lorem. Etiam pellentesque aliquet tellus.  </p>
+						<div style="line-height:300%;">
+								<br>
+						</div>
+									
+						<b>Małogrzata Leśniak</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+								Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. 
+								Cras vel lorem. Etiam pellentesque . Phasellus pharetra nulla ac diam. </p>
+				</div>
+			</div>	
 		</div>
 		
 		<div class="navibar">
 				<a id="Demo Page"></a>
 			<h2>Demo Page</h2>
-			<p> Below are several buttons that shows how our porject works.<br>
-				Each button has a different use and was carefuly described.<br>
-				After pressing the button, we can see the effect in the grafana</p>
 		</div>
 
 		<div class="form-popup blank" id="myForm">
@@ -80,30 +118,41 @@
 
 		<div class="row">
 				<div class="column" >
-				  <h2>Column 1</h2>
-				  <p>Some text..</p>
+						<h2>Short tutorial</h2>
+				  <p>Some explaining...<br>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+					  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+					  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+					  Duis aute irure dolor in 
+					  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+					  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+					  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+					  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+					  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+					  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+					  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+					  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
+					  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+					  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 				</div>
 
 				<div class="column">
+						<div style="line-height:550%;">
+								<br>
+						</div>
+
 			<div class="elem" onclick="prepareQuery('metric' ,4200,
 {'tag1':'test', tag2:3000, 'tag3':4000})">
 				<div class="elemValue">
-					Click on this button to send the metric with <br>				
+					Send the metric <br>
 					value 4200 and 3 tags <br>
-				</div>
-			</div>
-
-			<div class="elem" onclick="dropDatabase('http://localhost:8086')">
-				<div class="elemValue">
-
-					This button will DROP DATABASES. <br>
-					Try it.
 				</div>
 			</div>
 
 			<div class="elem" onclick="throwBasicError('example error')">
 				<div class="elemValue">
-					Errors are also importatnt. <br>
 					Click here to  THROW ERROR
 				</div>
 			</div>
@@ -111,36 +160,32 @@
 
 			<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
 				<div class="elemValue">
-					Click on this button to send the metric with <br>				
-					value 5000 and NO tags
+					Send the metric with 			
+					value 5000 only
 				</div>
 			</div>
 
 			<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
 				<div class="elemValue">
-					Click on this button to send the metric with value 3000<br>				
-					and measurement name: fem_newMetric, <br>
+					Send the metric with value 3000<br>				
+					measurement name: fem_newMetric, <br>
 				</div>
 			</div>
 
 			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
 				<div class="elemValue">
-					If you click, here You will<br>
-					simulate long calculations
+					Simulate long calculations
 				</div>
 			</div>
 
 			<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
 				<div class="elemValue">
-					simulate short calculations
+					Simulate short calculations
 				</div>
 			</div>
-
-			<div class="img" id="image">
-					<img src="img/logo.png" alt="logo" style="width:30%;">
-				</div>
 			</div>
 		</div>
+
 
 		<div class="footer">
 			<a id="Links"></a>
