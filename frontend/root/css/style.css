@@ -16,19 +16,19 @@ header {
 	position: fixed;
 }
 .logo {
-	width: 30%;
+	width: 20%;
 	float: left;
 	line-height: 100px;
 }
 .logo a {
 	text-decoration: none;
-	font-size: 1.7vw;
+	font-size: 25px;
 	font-family: poppins;
 	color: #fff;
 	letter-spacing: 5px;
 }
 nav {
-	width: 60%;
+	width: 40%;
 	float: right;
 	line-height: 100px;
 }
@@ -36,7 +36,7 @@ nav a {
     text-decoration: none;
 	font-family: poppins;
 	letter-spacing: 4px;
-	font-size: 1.2vw;
+	font-size: 20px;
 	margin: 0 15px;
 	color: #fff;
 }
@@ -62,7 +62,7 @@ nav a {
 	position: relative;
 	top: 550px;
 	background: #ebebeb;
-	height: 3800px;
+	height: 4500px;
 
 }
 .content-area h2 {
