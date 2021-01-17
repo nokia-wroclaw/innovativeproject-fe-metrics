@@ -97,9 +97,10 @@
 				<a id="Demo Page"></a>
 			<h2>Demo Page</h2>
 		</div>
+			<p> To connect buttonnect with data base click </p>
 
-		<div class="form-popup blank" id="myForm">
-			<p> To conect with data base click Conect button</p>
+			<button type="button" class="open-button" onclick="openForm()">Connect with Database</button>
+			<div class="form-popup" id="myForm">
 			<form action="" class="form-container">
 				<h1>Connect</h1>
 	
@@ -113,6 +114,7 @@
 				<input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
 	
 				<button type="button" class="btn" id="connectBtn" >Connect</button>
+			    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
 			</form>
 		</div>
 
@@ -197,7 +199,10 @@
 		</div>
 
 	</div>
+	
 	<script src="lib/sender.js"></script>
+
+
 </body>
 </main>
 

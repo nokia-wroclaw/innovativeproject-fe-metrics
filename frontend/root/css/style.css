@@ -107,7 +107,6 @@ nav a {
 	margin: 0 auto;
 	margin-top: 50px;
 	text-align: center;
-	
 
 }
 .elemValue{
@@ -118,14 +117,34 @@ nav a {
     margin-right: -50%;
     transform: translate(-50%, -50%) ;
     font-size: 20px;
-
 }
+.open-button {
+	background-color: #555;
+	color: white;
+	padding: 16px 20px;
+	border: none;
+	cursor: pointer;
+  
+  }
 .img{
 	position: relative;
 	top: 70px;
 	margin: 0 auto;
 	margin-top: 50px;
 
+}
+.form-popup{
+	display: none;
+	max-width: 100%;
+	padding: 10px;
+
+  
+}
+.form-container {
+	max-width: 100%;
+	margin-top: 35px;
+	padding: 10px;
+	background-color: white;
 }
 .elem:hover{
 	

@@ -222,3 +222,11 @@ function CountSend(measurement_name, limit) {
 		basicSend(measurement_name, i);
 	}
 }
+
+function openForm() {
+	document.getElementById("myForm").style.display = "block";
+  }
+  
+function closeForm() {
+	document.getElementById("myForm").style.display = "none";
+  }
