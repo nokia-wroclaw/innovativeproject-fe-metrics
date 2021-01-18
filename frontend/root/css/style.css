@@ -9,7 +9,7 @@ body{
 	margin: 0 auto;
 }
 header {
-	height: 10%;
+	height: 80px;
 	background: #262626;
 	width: 100%;
 	z-index: 10;
@@ -19,24 +19,25 @@ header {
 	width: 20%;
 	float: left;
 	line-height: 100px;
+	margin-left: 10%;
 }
 .logo a {
 	text-decoration: none;
-	font-size: 25px;
+	font-size: 1.2vw;
 	font-family: poppins;
 	color: #fff;
 	letter-spacing: 5px;
 }
 nav {
-	width: 40%;
 	float: right;
 	line-height: 100px;
+	margin-right: 10%;
 }
 nav a {
     text-decoration: none;
 	font-family: poppins;
 	letter-spacing: 4px;
-	font-size: 20px;
+	font-size: 1.2vw;
 	margin: 0 15px;
 	color: #fff;
 }
@@ -62,7 +63,7 @@ nav a {
 	position: relative;
 	top: 550px;
 	background: #ebebeb;
-	height: 4500px;
+	height: 5500px;
 
 }
 .content-area h2 {
@@ -169,6 +170,7 @@ nav a {
     position: absolute;
     bottom: 0;
 }
+
 .img_container{
 	display: blocks;
 	margin: 10px auto;

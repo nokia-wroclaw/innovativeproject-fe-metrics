@@ -12,7 +12,7 @@
 <body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();catchingErrors();getPerformance()">
 	
 	<header>
-		<div class="navibar">
+		
 			<div class="logo">
 				<a href="#">eFEmetrics</a> 
 			</div>
@@ -22,7 +22,7 @@
 				<a href="#Demo Page">Demo Page</a> 
 				<a href="#Links">Links</a> 
 			</nav>
-		</div>
+		
 	</header>
 	
 	<main>
@@ -137,74 +137,108 @@
 		</div>
 
 		<div class="row">
-				<div class="column" >
-						<h2>Short tutorial</h2>
-				  <p>Some explaining...<br>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-					  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-					  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
-					  Duis aute irure dolor in 
-					  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-					  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-					  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-					  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-					  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-					  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
-					  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-					  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-					  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-					  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				</div>
+				<h2>Short tutorial</h2>
+			<div class="column">
+					<div style="line-height:1050%;">
+							<br>
+					</div>
 
-				<div class="column">
-						<div style="line-height:750%;">
-								<br>
+					<p>Some explaining...<br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+						  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+						  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
+						  Duis aute irure dolor in </p>
+				</div>
+			<div class="column">
+					<div style="line-height:750%;">
+							<br>
+					</div>
+					<div class="elem" onclick="prepareQuery('metric' ,4200,
+					{'tag1':'test', tag2:3000, 'tag3':4000})">
+									<div class="elemValue">
+										<p style="font-size:1.1vw;">Send the metric <br>
+										value 4200 and 3 tags <br></p>
+									</div>
+								</div>
+					
+								<div class="elem" onclick="throwBasicError('example error')">
+									<div class="elemValue">
+										<p style="font-size:1.1vw;">Click here to  THROW ERROR</p>
+									</div>
+								</div>
+			</div>	
+		</div>		
+		<div class="row">
+			<div class="column">
+					<div style="line-height:1050%;">
+							<br>
+					</div>
+
+						<p>Some explaining...<br>
+							Do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+							  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
+							  Duis aute irure dolor in Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							  Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p> 
+				</div>
+			<div class="column">
+					<div style="line-height:750%;">
+							<br>
+					</div>
+					<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Send the metric with 	<br>		
+								value 5000 only</p>
+							</div>
 						</div>
-
-			<div class="elem" onclick="prepareQuery('metric' ,4200,
-{'tag1':'test', tag2:3000, 'tag3':4000})">
-				<div class="elemValue">
-					Send the metric <br>
-					value 4200 and 3 tags <br>
-				</div>
-			</div>
-
-			<div class="elem" onclick="throwBasicError('example error')">
-				<div class="elemValue">
-					Click here to  THROW ERROR
-				</div>
-			</div>
-
-
-			<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
-				<div class="elemValue">
-					Send the metric with 			
-					value 5000 only
-				</div>
-			</div>
-
-			<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
-				<div class="elemValue">
-					Send the metric with value 3000<br>				
-					measurement name: fem_newMetric, <br>
-				</div>
-			</div>
-
-			<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
-				<div class="elemValue">
-					Simulate long calculations
-				</div>
-			</div>
-
-			<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
-				<div class="elemValue">
-					Simulate short calculations
-				</div>
-			</div>
-			</div>
+			
+						<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Send metric with value 3000<br>				
+								name: fem_newMetric</p>
+							</div>
+						</div>
+			</div>	
 		</div>
+		<div class="row">
+			<div class="column">
+					<div style="line-height:1050%;">
+							<br>
+					</div>
+
+					<p>Some explaining...<br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+						  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+						  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
+						  Duis aute irure dolor in </p>
+				</div>
+			<div class="column">
+					<div style="line-height:750%;">
+							<br>
+					</div>
+					<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Simulate long calculations</p>
+							</div>
+						</div>
+			
+						<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Simulate short calculations</p>
+							</div>
+						</div>
+						</div>
+					</div>
+		
+
+			
+						
+
+
+
+
+
+
 
 
 		<div class="footer">
