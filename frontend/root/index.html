@@ -2,90 +2,259 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Docker Nginx hello-world</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>Sample page </title>
 	<link rel="stylesheet" href="/css/style.css"/>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 </head>
-<body>
-<div class="header">
-		<h3>Example page created by group of students for innovite project in nokia</h3>
+<body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();catchingErrors();getPerformance()">
+	
+	<header>
+		
+			<div class="logo">
+				<a href="#">eFEmetrics</a> 
+			</div>
+			<nav>
+				<a href="#About">About</a> 
+				<a href="#Team">Team</a> 
+				<a href="#Demo Page">Demo Page</a> 
+				<a href="#Links">Links</a> 
+			</nav>
+		
+	</header>
+	
+	<main>
+	<div class="banner-area">
+			<h2>.</h2>
 	</div>
+	<div class="content-area">
 
-	<div class="form-popup blank" id="myForm">
-		<form action="" class="form-container">
-			<h1>Connect</h1>
+		<div class="navibar">
+			<a id="About"> </a>
+			<h2 style="font-size:vw">About</h2>
+			<p>	eFEmetrics - timers and logins counter for frontend applications</p>
+			<p>	
+					The main purpose of the project was to find a solution to reporting metrics and events from a web application. 
+					To achieve that, we have created a library. Its basic functionality is sending metrics. 
+					Each metric has a separate field indicating the sending time, value and tag list. 
+					Sending the metric can be initiated by event such as click on button or run completely in the background. 
+					It allows, inter alia, to: .... [...]
 
-			<label for="bucket"><b>Bucket</b></label>
-			<input type="text" placeholder="metrics" value="metrics" name="bucket" id="bucket" required>
+			</p>
+		</div>
 
-			<label for="psw"><b>Token</b></label>
-			<input type="password" placeholder="Enter Password" name="psw" id="psw">
+		<div class="navibar">
+			<a id="Team"></a>
+			<h2>Team</h2>
+			<div style="line-height:700%;">
+					<br>
+			</div>
+			<div class="rowTeam">
+				<div class="columnTeam">
+							<img src="img/Marek.jpeg" alt="Dawid"  style="width:35%;"><br>
+	
+				</div>
+				<div class="columnTeam">
+						<b>Marek Kwaśny</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+							Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. 
+							Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra . </p>
+				</div>
+			</div>	
+	
+		<div class="rowTeam">
+			<div class="columnTeam">
+						
+						<img src="img/Dawid.jpeg" alt="Dawid"  style="width:35%;"><br>
+	
+	
+			</div>
+			<div class="columnTeam">
+	
+					<b>Dawid Dudek</b>
+					<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+							Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Phasellus pharetra nulla ac diam.</p>
+			</div>	
+		</div>	
 
-			<label for="addr"><b>DB Address</b></label>
-			<input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
+			<div class="rowTeam">
+				<div class="columnTeam">
 
-			<button type="button" class="btn" id="connectBtn" >Connect</button>
-		</form>
-	</div>
+							<img src="img/Karolina.png" alt="Dawid"  style="width:35%;"><br>
+				</div>
+				<div class="columnTeam">
 
-	<div class="container">
-
-		<div class="column">
-			<div class="elem" id="basicSendOne">
-				<div class="elemValue">
-					send metric:<br>
-					measurement name: fem_metric, <br>
-					value: 4200, <br>
-					tags: tag1:'test', tag2:3000, 'tag3':4000
+						<b>Karolina Szlęk</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+								Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. 
+								Cras vel lorem. Etiam pellentesque aliquet tellus.  </p>
 				</div>
 			</div>
-			<div class="elem" id="dropDb">
-				<div class="elemValue">
-					DROP DATABASES
+			<div class="rowTeam">
+				<div class="columnTeam">
+							
+							<img src="img/Gosia.jpeg" alt="Dawid"  style="width:35%;">
+
 				</div>
-			</div>
-			<div class="elem" id="basicError">
-				<div class="elemValue">
-					THROW ERROR
+				<div class="columnTeam">
+						
+						<b>Małogrzata Leśniak</b>
+						<p>	Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+								Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. 
+								Cras vel lorem. Etiam pellentesque . Phasellus pharetra nulla ac diam. </p>
 				</div>
-			</div>
-			<div class="elem" id="image">
-				<img src="img/logo.png" alt="logo" width="700", height="500">
+			</div>	
+		</div>
+		
+	
+
+		
+		<div class="navibar">
+				<a id="Demo Page"></a>
+			<h2>Demo Page</h2>
+		</div>
+			<p> To connect buttonnect with data base click </p>
+
+			<button type="button" class="open-button" onclick="openForm()">Connect with Database</button>
+			<div class="form-popup" id="myForm">
+			<form action="" class="form-container">
+				<h1>Connect</h1>
+	
+				<label for="bucket"><b>Bucket</b></label>
+				<input type="text" placeholder="metrics" value="metrics" name="bucket" id="bucket" required>
+	
+				<label for="psw"><b>Token</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" id="psw">
+	
+				<label for="addr"><b>DB Address</b></label>
+				<input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
+	
+				<button type="button" class="btn" id="connectBtn" >Connect</button>
+			    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+			</form>
+		</div>
+
+		<div class="row">
+				<h2>Short tutorial</h2>
+			<div class="column">
+					<div style="line-height:1050%;">
+							<br>
+					</div>
+
+					<p>Some explaining...<br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+						  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+						  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
+						  Duis aute irure dolor in </p>
+				</div>
+			<div class="column">
+					<div style="line-height:750%;">
+							<br>
+					</div>
+					<div class="elem" onclick="prepareQuery('metric' ,4200,
+					{'tag1':'test', tag2:3000, 'tag3':4000})">
+									<div class="elemValue">
+										<p style="font-size:1.1vw;">Send the metric <br>
+										value 4200 and 3 tags <br></p>
+									</div>
+								</div>
+					
+								<div class="elem" onclick="throwBasicError('example error')">
+									<div class="elemValue">
+										<p style="font-size:1.1vw;">Click here to  THROW ERROR</p>
+									</div>
+								</div>
+			</div>	
+		</div>		
+		<div class="row">
+			<div class="column">
+					<div style="line-height:1050%;">
+							<br>
+					</div>
+
+						<p>Some explaining...<br>
+							Do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+							  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
+							  Duis aute irure dolor in Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							  Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+								sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  </p> 
+				</div>
+			<div class="column">
+					<div style="line-height:750%;">
+							<br>
+					</div>
+					<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Send the metric with 	<br>		
+								value 5000 only</p>
+							</div>
+						</div>
+			
+						<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Send metric with value 3000<br>				
+								name: fem_newMetric</p>
+							</div>
+						</div>
+			</div>	
+		</div>
+		<div class="row">
+			<div class="column">
+					<div style="line-height:1050%;">
+							<br>
+					</div>
+
+					<p>Some explaining...<br>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, 
+						  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
+						  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
+						  Duis aute irure dolor in </p>
+				</div>
+			<div class="column">
+					<div style="line-height:750%;">
+							<br>
+					</div>
+					<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Simulate long calculations</p>
+							</div>
+						</div>
+			
+						<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
+							<div class="elemValue">
+								<p style="font-size:1.1vw;">Simulate short calculations</p>
+							</div>
+						</div>
+						</div>
+					</div>
+		
+
+			
+						
+
+
+
+
+
+
+
+
+		<div class="footer">
+			<a id="Links"></a>
+			<div class="img_container">
+				<a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics">
+					<img src="img/github-logo.png" alt="git" style="width:3%;">
+				</a>
 			</div>
 		</div>
 
-		<div class="column">
-			<div class="elem" id="basicSendTwo">
-				<div class="elemValue">
-					send metric:<br>
-					measurement name: fem_NewMetric, <br>
-					value: 5000, <br>
-					tags: None
-				</div>
-			</div>
-			<div class="elem" id="basicSendThree">
-				<div class="elemValue">
-					send metric:<br>
-					measurement name: fem_newMetric, <br>
-					value: 3000 <br>
-					tags: None
-				</div>
-			</div>
-			<div class="elem" id="longCount">
-				<div class="elemValue">
-					simulate long calculations
-				</div>
-			</div>
-			<div class="elem" id="shortCount">
-				<div class="elemValue">
-					simulate short calculations
-				</div>
-			</div>
-		</div>
-
 	</div>
+	
+	<script src="lib/sender.js"></script>
 
-	<script src="example-page/sender.js"></script>
+
 </body>
+</main>
+
 </html>
