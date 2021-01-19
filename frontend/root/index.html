@@ -8,7 +8,7 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 </head>
-<body onload="init('http://localhost:8086/write?db=metrics','metrics'); catchingEventsLogs();catchingErrors();getPerformance()">
+<body>
 	
 
 	<header>
@@ -144,15 +144,14 @@
 				<div style="line-height:750%;">
 						<br>
 				</div>
-				<div class="elem" onclick="prepareQuery('metric' ,4200,
-					{'tag1':'test', tag2:3000, 'tag3':4000})">
+				<div class="elem" id="basicSendOne">
 									<div class="elemValue">
 										<p style="font-size:1.1vw;">Send the metric <br>
 										value 4200 and 3 tags <br></p>
 									</div>
 				</div>
 					
-				<div class="elem" onclick="throwBasicError('example error')">
+				<div class="elem" id="basicError">
 									<div class="elemValue">
 										<p style="font-size:1.1vw;">Click here to  THROW ERROR</p>
 									</div>
@@ -175,14 +174,14 @@
 				<div style="line-height:750%;">
 						<br>
 				</div>
-				<div class="elem" onclick="prepareQuery('NewMetric' ,5000)">
+				<div class="elem" id="basicSendTwo">
 							<div class="elemValue">
 								<p style="font-size:1.1vw;">Send the metric with 	<br>		
 								value 5000 only</p>
 							</div>
 				</div>
 			
-				<div class="elem" onclick="prepareQuery('newMetric' ,3000)">
+				<div class="elem" id="basicSendThree">
 							<div class="elemValue">
 								<p style="font-size:1.1vw;">Send metric with value 3000<br>				
 								name: fem_newMetric</p>
@@ -205,13 +204,13 @@
 				<div style="line-height:750%;">
 						<br>
 				</div>
-				<div class="elem" onclick="checkHowLong(function(){longCount()},'longStart','longEnd')" >
+				<div class="elem" id="longCount" >
 							<div class="elemValue">
 								<p style="font-size:1.1vw;">Simulate long calculations</p>
 							</div>
 				</div>
 			
-				<div class="elem" onclick="checkHowLong(function(){shortCount()},'shortStart','shortEnd')" >
+				<div class="elem" id="shortCount" >
 							<div class="elemValue">
 								<p style="font-size:1.1vw;">Simulate short calculations</p>
 							</div>
