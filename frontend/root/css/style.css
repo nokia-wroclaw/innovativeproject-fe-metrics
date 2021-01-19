@@ -116,8 +116,8 @@ nav a {
 	margin: 0 auto;
 	margin-top: 50px;
 }
-.form-popup{
-	display: none;
+.form-popup {
+	display: block;
 	max-width: 100%;
 	padding: 10px;
 }

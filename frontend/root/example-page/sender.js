@@ -43,9 +43,9 @@ function setListeners(){
 		DatabaseController.prepareQuery('newMetric' ,3000)
 	})
 
-	document.getElementById("dropDb").addEventListener("click",function (){
-		DatabaseController.dropDatabase();
-	})
+	//document.getElementById("dropDb").addEventListener("click",function (){
+	//	DatabaseController.dropDatabase();
+	//})
 
 	document.getElementById("basicError").addEventListener("click",function (){
 		DatabaseController.throwBasicError("example error")
@@ -112,10 +112,10 @@ function formFunction(){
 
 	//setInterval(sendInCycle,300);
 }
-function openForm() {
-	document.getElementById("myForm").style.display = "block";
-  }
+//function openMyForm() {
+//	document.getElementById("myForm").style.display = "block";
+////  }
   
-function closeForm() {
-	document.getElementById("myForm").style.display = "none";
-  }
+//function closeForm() {
+//	document.getElementById("myForm").style.display = "none";
+//  }
