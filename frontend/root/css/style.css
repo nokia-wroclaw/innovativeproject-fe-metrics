@@ -109,6 +109,7 @@ nav a {
 	padding: 16px 20px;
 	border: none;
 	cursor: pointer;
+	display: inline;
   }
 .img{
 	position: relative;
@@ -117,7 +118,7 @@ nav a {
 	margin-top: 50px;
 }
 .form-popup {
-	display: block;
+	display: none;
 	max-width: 100%;
 	padding: 10px;
 }
@@ -148,7 +149,7 @@ nav a {
     bottom: 0;
 }
 .img_container{
-	display: blocks;
+	display: block;
 	margin: 10px auto;
 	height: 100%
 }

@@ -9,9 +9,14 @@ function init(){
 		formFunction();
 	})
 	if (!DatabaseController.checkCookie()){
-		$("#myForm").css("display","block");
+		document.getElementById("connectWithDbBtn").innerText = "Connect with Database";
+		console.log("BRAK CIASTEK")
+		document.getElementById("connectWithDbBtn").addEventListener("click",function (){
+			handleConnectBtn();
+		})
 	}
 	else{
+		document.getElementById("connectWithDbBtn").innerText = "Disconnect";
 		let Url = DatabaseController.getCookie("database_address");
 		let Bucket = DatabaseController.getCookie("bucket");
 		let Token = DatabaseController.getCookie("token");
@@ -23,7 +28,11 @@ function init(){
 		DatabaseController.catchPerformanceMeasurements();
 		DatabaseController.checkDb(Bucket);
 		setInterval(DatabaseController.sendQueries,4000);
-		setListeners()
+		setListeners();
+		document.getElementById("connectWithDbBtn").innerText = "Disconnect";
+		document.getElementById("connectWithDbBtn").addEventListener("click",function (){
+			handleConnectBtn();
+		})
 		//setInterval(sendInCycle,300);
 	}
 }
@@ -57,7 +66,10 @@ function setListeners(){
 
 	document.getElementById("shortCount").addEventListener("click",function (){
 		DatabaseController.catchOwnFunctionPerformance(shortCount,"shortStart","shortEnd")
+
 	})
+
+
 }
 
 
@@ -98,6 +110,9 @@ function formFunction(){
 	DatabaseController.setCookie("database_address",Url);
 	DatabaseController.setCookie("token",Token)
 	DatabaseController.setCookie("bucket",Bucket);
+	let button = document.getElementById("connectWithDbBtn");
+	button.innerText = "Disconnect";
+	button.style.display = "inline";
 	$("#myForm").hide();
 	DatabaseController.setBucket(Bucket);
 	DatabaseController.setUrl(Url);
@@ -112,10 +127,32 @@ function formFunction(){
 
 	//setInterval(sendInCycle,300);
 }
-//function openMyForm() {
-//	document.getElementById("myForm").style.display = "block";
-////  }
-  
-//function closeForm() {
-//	document.getElementById("myForm").style.display = "none";
-//  }
+function disconnect() {
+	DatabaseController.setCookie("database_address","");
+	DatabaseController.setCookie("token","")
+	DatabaseController.setCookie("bucket","");
+	DatabaseController.setBucket("");
+	DatabaseController.setUrl("");
+	DatabaseController.setToken("")
+	let button = document.getElementById("connectWithDbBtn");
+	button.innerText = "Connect with Database"
+	document.getElementById("myForm").style.display = "none";
+}
+
+function openForm(){
+	let button = document.getElementById("connectWithDbBtn").style.display = "None";
+	document.getElementById("myForm").style.display = "block";
+
+}
+
+function handleConnectBtn(){
+	let button = document.getElementById("connectWithDbBtn");
+	if (button.innerText === "Connect with Database"){
+		openForm();
+	}
+	else {
+		disconnect();
+	}
+
+
+}
