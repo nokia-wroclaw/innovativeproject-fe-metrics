@@ -8,6 +8,7 @@ function init(){
 	document.getElementById("connectBtn").addEventListener("click",function (){
 		formFunction();
 	})
+	setListeners();
 	if (!DatabaseController.checkCookie()){
 		document.getElementById("connectWithDbBtn").innerText = "Connect with Database";
 		console.log("BRAK CIASTEK")
@@ -28,12 +29,11 @@ function init(){
 		DatabaseController.catchPerformanceMeasurements();
 		DatabaseController.checkDb(Bucket);
 		setInterval(DatabaseController.sendQueries,4000);
-		setListeners();
 		document.getElementById("connectWithDbBtn").innerText = "Disconnect";
 		document.getElementById("connectWithDbBtn").addEventListener("click",function (){
 			handleConnectBtn();
 		})
-		//setInterval(sendInCycle,300);
+		setInterval(sendInCycle,300);
 	}
 }
 
@@ -122,10 +122,7 @@ function formFunction(){
 	DatabaseController.catchPerformanceMeasurements();
 	DatabaseController.checkDb(Bucket);
 	setInterval(DatabaseController.sendQueries,4000);
-	setListeners()
-
-
-	//setInterval(sendInCycle,300);
+	setInterval(sendInCycle,300);
 }
 function disconnect() {
 	DatabaseController.setCookie("database_address","");
