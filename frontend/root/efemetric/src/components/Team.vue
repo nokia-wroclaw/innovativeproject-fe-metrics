@@ -1,12 +1,10 @@
 <template>
-  <div>
     <div class="navibar">
       <a id="Team"></a>
       <h2>Team</h2>
       <div style="line-height:700%;">
         <br>
       </div>
-    </div>
     <TeamMember msg="Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
                         Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra ."

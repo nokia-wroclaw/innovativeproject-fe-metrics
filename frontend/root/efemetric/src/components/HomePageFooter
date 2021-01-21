@@ -1,0 +1,9 @@
+
+		<div class="footer">
+			<a id="Links"></a>
+			<div class="img_container">
+				<a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics">
+					<img src="img/github-logo.png" alt="git" style="width:3%;">
+				</a>
+			</div>
+		</div>

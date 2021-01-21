@@ -1,0 +1,25 @@
+<div class="navibar">
+			<a id="Demo Page"></a>
+			<h2>Demo Page</h2>
+		</div>
+			<p> To connect buttonnect with data base click </p>
+
+			<button type="button" class="open-button" id="connectWithDbBtn">Connect with Database</button>
+			
+			<div class="form-popup blank" id="myForm">
+			<form action="" class="form-container">
+				<h1>Connect</h1>
+	
+				<label for="bucket"><b>Bucket</b></label>
+				<input type="text" placeholder="metrics" value="metrics" name="bucket" id="bucket" required>
+	
+				<label for="psw"><b>Token</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" id="psw">
+	
+				<label for="addr"><b>DB Address</b></label>
+				<input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
+	
+				<button type="button" class="btn" id="connectBtn" >Connect</button>
+			    <!--<button type="button" class="btn cancel" onclick="closeForm()">Close</button>-->
+			</form>
+		</div>

@@ -1,23 +1,27 @@
 <template>
   <div id="app">
     <HomePageHeader></HomePageHeader>
+	<AboutProject msg="The main purpose of the project was to find a solution to reporting metrics and events from a web application. 
+					To achieve that, we have created a library. Its basic functionality is sending metrics. 
+					Each metric has a separate field indicating the sending time, value and tag list. 
+					Sending the metric can be initiated by event such as click on button or run completely in the background. 
+					It allows, inter alia, to: .... [...]
+"
+title="eFEmetrics - timers and logins counter for frontend applications" ></AboutProject>
     <Team></Team>
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Witaj to Your Vue.js App"/>
-
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 import HomePageHeader from "@/components/HomePageHeader";
 import Team from "@/components/Team";
+import AboutProject from "@/components/AboutProject.vue";
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     HomePageHeader,
-    Team
+    Team,
+	AboutProject
   }
 }
 </script>
