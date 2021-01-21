@@ -21,7 +21,13 @@
           button1="Send the metric <br>
                             value 4200 and 3 tags <br>"
           button2="Click here to  THROW ERROR"
-          about="Pierwsze">
+          about="Pierwsze"
+          button11 = "Send the metric"
+          button12 = "value 4200 and 3 tags"
+          button21 = "Click here to  THROW ERROR"
+          button22 = ""
+          id1 = "basicSendOne"
+          id2 = "basicError">
 
       </TwoActionButtons>
 
@@ -35,7 +41,13 @@
                             value 5000 only"
           button2="Send metric with value 3000<br>
                             name: fem_newMetric"
-          about="Drugie">
+          about="Drugie"
+          button11 = "Send the metric with"
+          button12 = "value 5000 only"
+          button21 = "Send metric with value 3000"
+          button22 = "name: fem_newMetric"
+          id1="basicSendTwo"
+          id2="basicSendThree">
 
       </TwoActionButtons>
 
@@ -47,7 +59,14 @@
       Duis aute irure dolor in"
       button1="Simulate long calculations"
       button2="Simulate short calculations"
-      about="Trzecie">
+      about="Trzecie"
+      button11 = "Simulate long calculations"
+      button12 = ""
+      button21 = "Simulate short calculation"
+      button22 = ""
+      id1="longCount"
+      id2="shortCount">
+
       </TwoActionButtons>
     </div>
   </main>

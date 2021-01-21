@@ -13,9 +13,9 @@
       <div style="line-height:750%;">
         <br>
       </div>
-      <ActionButton mess1=4r3 mess2="CZXCZXCz">
+      <ActionButton :mess1="button11" :mess2="button12" :id="id1">
       </ActionButton>
-      <ActionButton mess1="CXZCXZCXZ" mess2="CZXCZXCz">
+      <ActionButton :mess1="button21" :mess2="button22" :id="id2">
       </ActionButton>
     </div>
   </div>
@@ -37,6 +37,8 @@ export default {
     title:String,
     message:String,
     about:String,
+    id1:String,
+    id2:String
   },
 }
 </script>

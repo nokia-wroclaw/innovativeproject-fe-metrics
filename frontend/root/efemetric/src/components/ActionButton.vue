@@ -1,5 +1,5 @@
 <template>
-  <div class="elem" >
+  <div class="elem" :id="id">
     <div class="elemValue">
 
       <p style="font-size:1.1vw;">
