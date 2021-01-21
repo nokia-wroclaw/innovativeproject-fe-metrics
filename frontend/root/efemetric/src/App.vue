@@ -1,27 +1,22 @@
 <template>
   <div id="app">
     <HomePageHeader></HomePageHeader>
-	<AboutProject msg="The main purpose of the project was to find a solution to reporting metrics and events from a web application. 
-					To achieve that, we have created a library. Its basic functionality is sending metrics. 
-					Each metric has a separate field indicating the sending time, value and tag list. 
-					Sending the metric can be initiated by event such as click on button or run completely in the background. 
-					It allows, inter alia, to: .... [...]
-"
-title="eFEmetrics - timers and logins counter for frontend applications" ></AboutProject>
-    <Team></Team>
+    <MainContent></MainContent>
+    <HomePageFooter></HomePageFooter>
   </div>
 </template>
 
 <script>
+
+import MainContent from "@/components/MainContent";
 import HomePageHeader from "@/components/HomePageHeader";
-import Team from "@/components/Team";
-import AboutProject from "@/components/AboutProject.vue";
+import HomePageFooter from "@/components/HomePageFooter";
 export default {
   name: 'App',
   components: {
     HomePageHeader,
-    Team,
-	AboutProject
+    MainContent,
+    HomePageFooter
   }
 }
 </script>
@@ -30,20 +25,6 @@ export default {
 body{
   margin: 0;
   text-align: center;
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
 }
 .navibar {
   width: 70%;
@@ -55,6 +36,19 @@ header {
   width: 100%;
   z-index: 10;
   position: fixed;
+}
+.logo {
+  width: 20%;
+  float: left;
+  line-height: 100px;
+  margin-left: 10%;
+}
+.logo a {
+  text-decoration: none;
+  font-size: 1.2vw;
+  font-family: poppins;
+  color: #fff;
+  letter-spacing: 5px;
 }
 nav {
   float: right;
@@ -69,22 +63,12 @@ nav a {
   margin: 0 15px;
   color: #fff;
 }
-.banner-area {
-  width: 100%;
-  height: 450px;
-  position: fixed;
-  top: 80px;
-  background-image: url(/img/nokia2.png);
-  -webkit-background-size: cover;
-  background-size: cover;
-  background-position: center center;
-}
+
 .content-area {
   width: 100%;
   position: relative;
-  top: 550px;
   background: #ebebeb;
-  height: 4700px;
+  padding-bottom: 40px;
 }
 .content-area h2 {
   font-family: poppins;
@@ -175,12 +159,14 @@ nav a {
   margin: 0 auto;
   text-align: center;
   color: #fff;
-  position: absolute;
   bottom: 0;
 }
 .img_container{
   display: block;
-  margin: 10px auto;
   height: 100%
+
 }
+
+
+
 </style>
