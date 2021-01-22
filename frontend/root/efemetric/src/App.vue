@@ -11,6 +11,7 @@
 import MainContent from "@/components/MainContent";
 import HomePageHeader from "@/components/HomePageHeader";
 import HomePageFooter from "@/components/HomePageFooter";
+import $ from 'jquery'
 export default {
   name: 'App',
   components: {
@@ -132,7 +133,7 @@ nav a {
   margin-top: 50px;
 }
 .form-popup {
-  display: none;
+  display: block;
   max-width: 100%;
   padding: 10px;
 }

@@ -1,35 +1,98 @@
 <template>
   <div>
+    {{isVisible}}
     <div class="navibar">
       <a id="Demo Page"></a>
       <h2>Demo Page</h2>
     </div>
     <p> To connect buttonnect with data base click </p>
 
-    <button type="button" class="open-button" id="connectWithDbBtn">Connect with Database</button>
+    <button  v-if="!isVisible" type="button" class="open-button" id="connectWithDbBtn" @click="handleConnectBtn">
+      {{ buttonMsg }}</button>
 
-    <div class="form-popup blank" id="myForm">
+    <div v-if="isVisible" class="form-popup blank" id="myForm">
       <form action="" class="form-container">
         <h1>Connect</h1>
 
         <label for="bucket"><b>Bucket</b></label>
-        <input type="text" placeholder="metrics" value="metrics" name="bucket" id="bucket" required>
+        <input v-model="bucket" type="text" placeholder="Enter Bucket"  name="bucket" id="bucket" required>
 
         <label for="psw"><b>Token</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" id="psw">
+        <input v-model="token" type="password" placeholder="Enter Password" name="psw" id="psw">
 
         <label for="addr"><b>DB Address</b></label>
-        <input type="text" placeholder="Enter DB address" value="http://localhost:8086" name="addr" id="addr" required>
+        <input v-model="addr" type="text" placeholder="Enter DB address"  name="addr" id="addr" required>
 
-        <button type="button" class="btn" id="connectBtn" >Connect</button>
+        <button type="button" class="btn" id="connectBtn" @click="formFunction" >Connect</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import * as DatabaseController from "efemetrics2";
+
 export default {
-  name: "ConnectWithDb"
+  name: "ConnectWithDb",
+  data() {
+    return {
+      bucket: "metrics",
+      token: "",
+      addr: "http://localhost:8086",
+      isVisible: false,
+      buttonMsg: DatabaseController.checkCookie()? "Disconnect" : "Connect with db"
+    }
+  },
+  methods: {
+    sendInCycle() {
+      let timestamp = new Date();
+      let tags = {}
+      tags['seconds'] = timestamp.getSeconds();
+      tags['minutes'] = timestamp.getMinutes();
+      DatabaseController.prepareQuery("time", timestamp.getSeconds(), tags);
+    },
+    formFunction() {
+      let Url = this.addr;
+      let Bucket = this.bucket;
+      let Token = this.token;
+      DatabaseController.setCookie("database_address", Url);
+      DatabaseController.setCookie("token", Token)
+      DatabaseController.setCookie("bucket", Bucket);
+      DatabaseController.setBucket(Bucket);
+      DatabaseController.setUrl(Url);
+      DatabaseController.setToken(Token)
+      //DatabaseController.catchEvents(document.getElementById("image"), ["click"])
+      DatabaseController.catchErrors();
+      DatabaseController.catchPerformanceMeasurements();
+      DatabaseController.checkDb(Bucket);
+      setInterval(DatabaseController.sendQueries, 4000);
+      setInterval(this.sendInCycle, 300);
+      this.isVisible = false;
+      alert("DYSA")
+    },
+    handleConnectBtn() {
+      let button = document.getElementById("connectWithDbBtn");
+      if (button.innerText === "Connect with Database") {
+        this.openForm();
+      } else {
+        this.disconnect();
+      }
+    },
+    disconnect() {
+      DatabaseController.setCookie("database_address", "");
+      DatabaseController.setCookie("token", "")
+      DatabaseController.setCookie("bucket", "");
+      DatabaseController.setBucket("");
+      DatabaseController.setUrl("");
+      DatabaseController.setToken("")
+      let button = document.getElementById("connectWithDbBtn");
+      button.innerText = "Connect with Database"
+      this.isVisible = false
+    },
+    openForm() {
+      this.isVisible = true;
+    }
+  }
 }
 </script>
 

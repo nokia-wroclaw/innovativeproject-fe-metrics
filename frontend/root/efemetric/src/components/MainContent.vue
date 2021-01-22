@@ -4,7 +4,7 @@
     <div class="content-area">
       <AboutProject
           msg="The main purpose of the project was to find a solution to reporting metrics and events from a web application.
-					To achieve that, we have created a library. Its basic functionality is sending metrics.
+					To achieve that, we have created a library. Its basic functionality is \g metrics.
 					Each metric has a separate field indicating the sending time, value and tag list.
 					Sending the metric can be initiated by event such as click on button or run completely in the background.
 					It allows, inter alia, to: .... [...]"
@@ -98,9 +98,6 @@ export default {
     msg: String
   },
   methods:{
-    testx(){
-      alert("DSADAS")
-    },
     basicSendOne(){
       DatabaseController.prepareQuery('metric' ,4200,
           {'tag1':'test', 'tag2':3000, 'tag3':4000})
@@ -117,16 +114,18 @@ export default {
     longCount(){
       DatabaseController.catchOwnFunctionPerformance(function (){
         let random =  100000000 + Math.floor((1000000000 - 100000000) * Math.random());
+        let x = 0;
         for (let i = 0; i <random ; i++) {
-          let x = i;
+          x = x + i;
         }
       },"longStart","longEnd")
     },
     shortCount(){
       DatabaseController.catchOwnFunctionPerformance(function (){
         let random = 1000000 + Math.floor((10000000 - 1000000) * Math.random());
+        let x = 0;
         for (let i = 0; i <random ; i++) {
-          let x = i;
+          x = x+i
         }
       },"shortStart","shortEnd")
     }
