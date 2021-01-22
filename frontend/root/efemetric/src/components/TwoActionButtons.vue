@@ -13,9 +13,9 @@
       <div style="line-height:750%;">
         <br>
       </div>
-      <ActionButton :mess1="button11" :mess2="button12" :id="id1">
+      <ActionButton :mess1="button11" :mess2="button12" :id="id1" :click-f=clickF1>
       </ActionButton>
-      <ActionButton :mess1="button21" :mess2="button22" :id="id2">
+      <ActionButton :mess1="button21" :mess2="button22" :id="id2" :click-f=clickF2>
       </ActionButton>
     </div>
   </div>
@@ -38,8 +38,15 @@ export default {
     message:String,
     about:String,
     id1:String,
-    id2:String
+    id2:String,
+    clickF1: Function,
+    clickF2: Function
   },
+  methods:{
+    test1(){
+      alert("MOZES DA ")
+    }
+  }
 }
 </script>
 

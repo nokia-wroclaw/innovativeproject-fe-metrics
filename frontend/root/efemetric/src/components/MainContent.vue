@@ -27,7 +27,9 @@
           button21 = "Click here to  THROW ERROR"
           button22 = ""
           id1 = "basicSendOne"
-          id2 = "basicError">
+          id2 = "basicError"
+          :click-f1=basicSendOne
+          :click-f2=basicError>
 
       </TwoActionButtons>
 
@@ -47,7 +49,9 @@
           button21 = "Send metric with value 3000"
           button22 = "name: fem_newMetric"
           id1="basicSendTwo"
-          id2="basicSendThree">
+          id2="basicSendThree"
+          :click-f1=basicSendTwo
+          :click-f2=basicSendThree>
 
       </TwoActionButtons>
 
@@ -65,7 +69,9 @@
       button21 = "Simulate short calculation"
       button22 = ""
       id1="longCount"
-      id2="shortCount">
+      id2="shortCount"
+      :click-f1="longCount"
+      :click-f2="shortCount">>
 
       </TwoActionButtons>
     </div>
@@ -78,6 +84,7 @@ import TwoActionButtons from "./TwoActionButtons";
 import AboutProject from "./AboutProject";
 import Team from "./Team";
 import ConnectWithDb from "./ConnectWithDb";
+import  * as DatabaseController   from "efemetrics2";
 
 export default {
   name: 'MainContent',
@@ -89,6 +96,44 @@ export default {
   },
   props: {
     msg: String
+  },
+  methods:{
+    testx(){
+      alert("DSADAS")
+    },
+    basicSendOne(){
+      DatabaseController.prepareQuery('metric' ,4200,
+          {'tag1':'test', 'tag2':3000, 'tag3':4000})
+    },
+    basicError(){
+      DatabaseController.throwBasicError("example error")
+    },
+    basicSendTwo(){
+      DatabaseController.prepareQuery('NewMetric' ,5000)
+    },
+    basicSendThree(){
+      DatabaseController.prepareQuery('newMetric' ,3000)
+    },
+    longCount(){
+      DatabaseController.catchOwnFunctionPerformance(function (){
+        let random =  100000000 + Math.floor((1000000000 - 100000000) * Math.random());
+        for (let i = 0; i <random ; i++) {
+          let x = i;
+        }
+      },"longStart","longEnd")
+    },
+    shortCount(){
+      DatabaseController.catchOwnFunctionPerformance(function (){
+        let random = 1000000 + Math.floor((10000000 - 1000000) * Math.random());
+        for (let i = 0; i <random ; i++) {
+          let x = i;
+        }
+      },"shortStart","shortEnd")
+    }
+
+
+
+
   }
 }
 </script>
