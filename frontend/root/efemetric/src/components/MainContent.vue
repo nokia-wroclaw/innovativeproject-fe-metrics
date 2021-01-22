@@ -1,79 +1,69 @@
 <template>
   <main>
-    <img src="../assets/nokia2.png">
+    <img class="photo" src="../assets/tra.png">
     <div class="content-area">
       <AboutProject
           msg="The main purpose of the project was to find a solution to reporting metrics and events from a web application.
-					To achieve that, we have created a library. Its basic functionality is \g metrics.
-					Each metric has a separate field indicating the sending time, value and tag list.
-					Sending the metric can be initiated by event such as click on button or run completely in the background.
-					It allows, inter alia, to: .... [...]"
+					To achieve that, we have created a library. Its basic functionality is sending metrics.
+					Each metric has a separate field indicating the creating time, value and tag list.
+					Sending the metric can be initiated by event such as click on button or run completely in the background."
           title="eFEmetrics - timers and logins counter for frontend applications" ></AboutProject>
       <Team></Team>
       <Connect-with-db></Connect-with-db>
 
-      <TwoActionButtons
-          title="Some explaining..."
-          message="Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
-                    Duis aute irure dolor in"
+      <ThreeActionButtons
+          title="Basic use case."
+          message="The most basic use case is when sending metrics.
+          Each metric has a value, name and time of its creation.
+          Additionally, each metric can have a list of tags.
+          The value can be a number, a boolean value, or a string.
+          Same with tags. They are constructed as key-value pairs.
+          The chart below shows the values of metrics sent with the buttons next to them.
+          As we can see, every few seconds, if we pressed the button, the value is sent."
           button1="Send the metric <br>
                             value 4200 and 3 tags <br>"
           button2="Click here to  THROW ERROR"
-          about="Pierwsze"
+          about="Sending metrics"
           button11 = "Send the metric"
           button12 = "value 4200 and 3 tags"
-          button21 = "Click here to  THROW ERROR"
-          button22 = ""
+          button21 = "Send the metric with"
+          button22 = "value 5000 only"
+          button31 = "Send the metric with"
+          button32 = "value 3000 only"
           id1 = "basicSendOne"
-          id2 = "basicError"
+          id2 = "basicSendTwo"
+          id3 = "basicSendThree"
           :click-f1=basicSendOne
-          :click-f2=basicError>
+          :click-f2=basicSendTwo
+          :click-f3=basicSendThree>
+      </ThreeActionButtons>
 
-      </TwoActionButtons>
-
-      <TwoActionButtons
-          title="Some explaining..."
-          message="Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
-                    Duis aute irure dolor in"
-          button1="Send the metric with 	<br>
-                            value 5000 only"
-          button2="Send metric with value 3000<br>
-                            name: fem_newMetric"
-          about="Drugie"
-          button11 = "Send the metric with"
-          button12 = "value 5000 only"
-          button21 = "Send metric with value 3000"
-          button22 = "name: fem_newMetric"
-          id1="basicSendTwo"
-          id2="basicSendThree"
-          :click-f1=basicSendTwo
-          :click-f2=basicSendThree>
-
-      </TwoActionButtons>
+      <NoActionButtons
+          title="they hide behind"
+          message="The sending may not always be due to explicit user interaction.
+          We may want to collect e.g. loading times of individual elements,
+          execution of code fragments to find problematic places on the page.
+          We can also collect information about the number of people currently
+          staying on the website, e.g. to know when the most traffic in our online store is"
+          about="Collect the information you need">
+      </NoActionButtons>
 
       <TwoActionButtons
-      title="Some explaining..."
-      message="Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. <br>
-      Duis aute irure dolor in"
-      button1="Simulate long calculations"
-      button2="Simulate short calculations"
-      about="Trzecie"
-      button11 = "Simulate long calculations"
-      button12 = ""
-      button21 = "Simulate short calculation"
-      button22 = ""
-      id1="longCount"
-      id2="shortCount"
-      :click-f1="longCount"
-      :click-f2="shortCount">>
+          title="Each event can be important"
+          message="You already know that you can send metrics, e.g. by clicking a button
+          or send them in the background, regardless of user actions.
+          However, we know that every event can be important.
+          That is why our library allows you to listen to events occurring on some elements.
+          You can define the scope of listening and what exactly events are of interest to you.
+          You can use this to send information about how many people have touched the items
+          you have selected in your store within an hour (e.g. by sending information about
+          the number of clicks or hovers over them with the mouse)."
+          about="Grab all the information"
+          id="image"
+          :click-f=catchEvents>
 
       </TwoActionButtons>
+
     </div>
   </main>
 
@@ -81,10 +71,12 @@
 
 <script>
 import TwoActionButtons from "./TwoActionButtons";
+import ThreeActionButtons from "@/components/ThreeActionButtons";
 import AboutProject from "./AboutProject";
 import Team from "./Team";
 import ConnectWithDb from "./ConnectWithDb";
 import  * as DatabaseController   from "efemetrics2";
+import NoActionButtons from "@/components/NoActionButtons";
 
 export default {
   name: 'MainContent',
@@ -93,6 +85,8 @@ export default {
     Team,
     AboutProject,
     TwoActionButtons,
+    ThreeActionButtons,
+    NoActionButtons
   },
   props: {
     msg: String
@@ -128,7 +122,12 @@ export default {
           x = x+i
         }
       },"shortStart","shortEnd")
+    },
+    catchEvents(){
+      DatabaseController.catchEvents(document.getElementById("image"),["click"])
     }
+
+
 
 
 
@@ -139,4 +138,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.photo{
+  width:500px;
+  height:500px;
+  margin-bottom: 0;
+  padding-bottom: 0px;
+  border-bottom: 0px;
+}
+
 </style>

@@ -11,9 +11,8 @@
                 alt-img="Marek"
                 picture_src="Marek.jpeg"
                 name="Marek Kwaśny"></TeamMember>
-    <TeamMember msg="Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
-                        Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra ."
+    <TeamMember msg="I am a sophomore. I like reading books - preferably crime fiction and fantasy,
+    riding a bike and programming. My favorite programming language is java. My favorite dish is spaghetti"
                 alt-img="Dawid"
                 picture_src="Dawid.jpeg"
                 name="Dawid Dudek"></TeamMember>
@@ -43,4 +42,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

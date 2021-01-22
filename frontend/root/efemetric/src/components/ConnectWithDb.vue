@@ -1,11 +1,12 @@
 <template>
   <div>
-    {{isVisible}}
     <div class="navibar">
       <a id="Demo Page"></a>
       <h2>Demo Page</h2>
     </div>
-    <p> To connect buttonnect with data base click </p>
+    <h4>Below is a page that shows an example of our library usage. You can use it to see example use cases.</h4>
+    <p> To use our library, you first need to connect to some database. Below is an example form that will allow you to do this.<br/>
+      The application is adapted to work with TSDB, so it is enough to provide a bucket, token, and database address</p>
 
     <button  v-if="!isVisible" type="button" class="open-button" id="connectWithDbBtn" @click="handleConnectBtn">
       {{ buttonMsg }}</button>
@@ -68,7 +69,6 @@ export default {
       setInterval(DatabaseController.sendQueries, 4000);
       setInterval(this.sendInCycle, 300);
       this.isVisible = false;
-      alert("DYSA")
     },
     handleConnectBtn() {
       let button = document.getElementById("connectWithDbBtn");

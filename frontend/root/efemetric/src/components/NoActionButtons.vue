@@ -10,22 +10,20 @@
       </p>
     </div>
     <div class="rightColumn">
-      <img src="../assets/nokia2.png" width="90%" @click="clickF" :id="id">
+      <iframe src="https://efemetric.site/grafana/d-solo/zDQGM52Gk/metric-basic-dashboard?orgId=1&refresh=5s&panelId=26"
+              height="300px" width="100%" style="float: left; margin-right: 10px "
+              align="left"></iframe>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: "TwoActionButtons",
-
+  name: "NoActionButtons",
   props: {
     title:String,
     message:String,
     about:String,
-    id:String,
-    clickF: Function
   }
 }
 </script>
@@ -46,7 +44,6 @@ export default {
 .rightColumn {
   float: left;
   width: 38%;
-  padding-top: 3%;
   padding-left: 2%;
 }
 .frame{

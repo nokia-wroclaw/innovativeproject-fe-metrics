@@ -11,15 +11,21 @@
 import MainContent from "@/components/MainContent";
 import HomePageHeader from "@/components/HomePageHeader";
 import HomePageFooter from "@/components/HomePageFooter";
-import $ from 'jquery'
+
 export default {
   name: 'App',
   components: {
     HomePageHeader,
     MainContent,
     HomePageFooter
+  },
+  head() {
+    return {
+      title: "efemetrics",
+
+    }
   }
-}
+  }
 </script>
 
 <style>
@@ -66,10 +72,11 @@ nav a {
 }
 
 .content-area {
+  margin-top: 0px;
   width: 100%;
   position: relative;
   background: #ebebeb;
-  padding-bottom: 40px;
+  padding-bottom: 0px;
 }
 .content-area h2 {
   font-family: poppins;
@@ -93,6 +100,7 @@ nav a {
   width: 38%;
   padding-left: 9%;
 }
+
 .row:after {
   content: "";
   display: table;
