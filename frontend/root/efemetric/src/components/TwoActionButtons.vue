@@ -10,14 +10,14 @@
       </p>
     </div>
     <div class="rightColumn">
-      <img src="../assets/nokia2.png" width="90%" @click="clickF" :id="id">
+      <img src="../assets/nokia2.png" width="90%" @click="clickF1" :id="id">
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
+
   name: "TwoActionButtons",
 
   props: {
@@ -25,7 +25,8 @@ export default {
     message:String,
     about:String,
     id:String,
-    clickF: Function
+    clickF1: Function,
+    clickF2: Function
   }
 }
 </script>

@@ -8,6 +8,7 @@
     <p> To use our library, you first need to connect to some database. Below is an example form that will allow you to do this.<br/>
       The application is adapted to work with TSDB, so it is enough to provide a bucket, token, and database address</p>
 
+
     <button  v-if="!isVisible" type="button" class="open-button" id="connectWithDbBtn" @click="handleConnectBtn">
       {{ buttonMsg }}</button>
 
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-import * as DatabaseController from "efemetrics2";
+import * as DatabaseController from "efemetrics3";
 
 export default {
   name: "ConnectWithDb",
@@ -41,7 +42,12 @@ export default {
       token: "",
       addr: "http://localhost:8086",
       isVisible: false,
-      buttonMsg: DatabaseController.checkCookie()? "Disconnect" : "Connect with db"
+      cookie: DatabaseController.checkCookie(),
+    }
+  },
+  computed:{
+    buttonMsg(){
+      return this.cookie? "Disconnect" : "Connect with Database";
     }
   },
   methods: {
@@ -62,13 +68,14 @@ export default {
       DatabaseController.setBucket(Bucket);
       DatabaseController.setUrl(Url);
       DatabaseController.setToken(Token)
+      DatabaseController.setExist(true)
       //DatabaseController.catchEvents(document.getElementById("image"), ["click"])
-      DatabaseController.catchErrors();
       DatabaseController.catchPerformanceMeasurements();
-      DatabaseController.checkDb(Bucket);
       setInterval(DatabaseController.sendQueries, 4000);
       setInterval(this.sendInCycle, 300);
       this.isVisible = false;
+      this.cookie = true;
+
     },
     handleConnectBtn() {
       let button = document.getElementById("connectWithDbBtn");
@@ -85,13 +92,28 @@ export default {
       DatabaseController.setBucket("");
       DatabaseController.setUrl("");
       DatabaseController.setToken("")
-      let button = document.getElementById("connectWithDbBtn");
-      button.innerText = "Connect with Database"
       this.isVisible = false
+      this.cookie = false
     },
     openForm() {
       this.isVisible = true;
+    },
+    setListeners(){
+      if (this.cookie){
+        DatabaseController.catchPerformanceMeasurements();
+      }
     }
+  },
+  mounted() {
+      DatabaseController.setBucket(DatabaseController.getCookie("bucket"));
+      DatabaseController.setUrl(DatabaseController.getCookie("database_address"));
+      DatabaseController.setToken(DatabaseController.getCookie("token"));
+      DatabaseController.setExist(true);
+      setInterval(DatabaseController.sendQueries, 4000);
+      this.setListeners();
+  },
+  updated() {
+    DatabaseController.catchPerformanceMeasurements();
   }
 }
 </script>

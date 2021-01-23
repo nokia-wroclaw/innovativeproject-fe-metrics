@@ -28,7 +28,8 @@ export function preparePerformanceMeasurement(entry,name="performance"){
         }
         else if (typeof entry[property] === "string") {
             let string = '"'+entry[property]+'"';
-            tags[property] = string.replaceAll(" ", "_");
+            let x = string.replaceAll(" ", "_");
+            tags[property] = x.replaceAll("=", "EQUALS");
         }
         else if (typeof entry[property] === "number" || typeof entry[property] ==="boolean") {
             tags[property] = entry[property];

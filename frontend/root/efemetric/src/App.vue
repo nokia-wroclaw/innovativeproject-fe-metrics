@@ -11,6 +11,7 @@
 import MainContent from "@/components/MainContent";
 import HomePageHeader from "@/components/HomePageHeader";
 import HomePageFooter from "@/components/HomePageFooter";
+import * as DatabaseController from "efemetrics3";
 
 export default {
   name: 'App',
@@ -19,13 +20,15 @@ export default {
     MainContent,
     HomePageFooter
   },
-  head() {
-    return {
-      title: "efemetrics",
-
-    }
-  }
-  }
+  mounted() {
+    window.addEventListener('load', () => {
+      DatabaseController.catchPerformanceMeasurements();
+    })
+  },
+  updated() {
+    DatabaseController.catchPerformanceMeasurements();
+  },
+}
 </script>
 
 <style>

@@ -34,6 +34,7 @@ export function prepareQuery(measurement_name, value, tags={}){
         let str = '' + Measurement_prefix+ '_' + measurement_name;
         for (const [key, key_value] of Object.entries(tags)){
             str = str + ','+key+'='+key_value;
+
         }
         str = str + ' value=' + value;
         str = str+" "+ (Date.now()*1000000) +"\n";
@@ -127,11 +128,10 @@ export function catchPerformanceMeasurements(){
     }
 }
 
-export function catchErrors(){
-        window.addEventListener('error',function (ev){
-            const errorMeasurement = catchingErrors(ev);
-            prepareQuery(errorMeasurement[0],errorMeasurement[1],errorMeasurement[2]);
-        })
+export function catchErrors(ev){
+    const errorMeasurement = catchingErrors(ev);
+    prepareQuery(errorMeasurement[0],errorMeasurement[1],errorMeasurement[2]);
+    console.log(ev)
     }
 
 export function catchEvents(elem,eventList){

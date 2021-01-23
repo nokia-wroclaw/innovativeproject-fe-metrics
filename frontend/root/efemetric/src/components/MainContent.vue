@@ -20,14 +20,11 @@
           Same with tags. They are constructed as key-value pairs.
           The chart below shows the values of metrics sent with the buttons next to them.
           As we can see, every few seconds, if we pressed the button, the value is sent."
-          button1="Send the metric <br>
-                            value 4200 and 3 tags <br>"
-          button2="Click here to  THROW ERROR"
           about="Sending metrics"
           button11 = "Send the metric"
           button12 = "value 4200 and 3 tags"
-          button21 = "Send the metric with"
-          button22 = "value 5000 only"
+          button21 = "Random walk"
+          button22 = "between 1000 and 6000"
           button31 = "Send the metric with"
           button32 = "value 3000 only"
           id1 = "basicSendOne"
@@ -60,7 +57,8 @@
           the number of clicks or hovers over them with the mouse)."
           about="Grab all the information"
           id="image"
-          :click-f=catchEvents>
+          :click-f1=catchEvents
+          :click-f2="basicError">
 
       </TwoActionButtons>
 
@@ -75,7 +73,7 @@ import ThreeActionButtons from "@/components/ThreeActionButtons";
 import AboutProject from "./AboutProject";
 import Team from "./Team";
 import ConnectWithDb from "./ConnectWithDb";
-import  * as DatabaseController   from "efemetrics2";
+import  * as DatabaseController   from "efemetrics3";
 import NoActionButtons from "@/components/NoActionButtons";
 
 export default {
@@ -97,10 +95,10 @@ export default {
           {'tag1':'test', 'tag2':3000, 'tag3':4000})
     },
     basicError(){
-      DatabaseController.throwBasicError("example error")
+      throw new Error("TEST");
     },
     basicSendTwo(){
-      DatabaseController.prepareQuery('NewMetric' ,5000)
+      DatabaseController.prepareQuery('NewMetric' ,1000 + Math.floor((6000 - 1000) * Math.random()))
     },
     basicSendThree(){
       DatabaseController.prepareQuery('newMetric' ,3000)
@@ -126,12 +124,6 @@ export default {
     catchEvents(){
       DatabaseController.catchEvents(document.getElementById("image"),["click"])
     }
-
-
-
-
-
-
   }
 }
 </script>

@@ -1,8 +1,8 @@
 
 export function catchingErrors(errorEvent,measurementName='error') {
-        errorEvent.preventDefault();
-        errorEvent.stopImmediatePropagation();
-        console.log(errorEvent.message);
+        //errorEvent.preventDefault();
+        //errorEvent.stopImmediatePropagation();
+        //console.log(errorEvent.message);
         let tags = {};
         for (let property in errorEvent) {
             if (typeof errorEvent[property] === "object") {
