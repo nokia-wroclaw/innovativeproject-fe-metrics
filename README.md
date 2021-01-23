@@ -29,7 +29,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics">
-    <img src="https://raw.githubusercontent.com/nokia-wroclaw/innovativeproject-fe-metrics/main/frontend/root/efemetric/src/assets/tra.png" alt="Logo" width="200" height="200">
+    <img src="https://raw.githubusercontent.com/nokia-wroclaw/innovativeproject-fe-metrics/main/frontend/root/efemetric/src/assets/tra.png" alt="Logo" width="400" height="300">
   </a>
 
 <h3 align="center">eFEmetrics</h3>
@@ -42,12 +42,10 @@
     <br />
     <a href="https://efemetric.site/">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/issues">Request Feature</a>
   </p>
-</p>
-
 
 
 <!-- TABLE OF CONTENTS -->
