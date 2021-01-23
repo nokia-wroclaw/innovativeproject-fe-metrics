@@ -104,7 +104,7 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+This is a list of things you need to run the project locally and how to install them.
 * npm
   ```sh
   npm install npm@latest -g
@@ -190,4 +190,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Dawid Dudek - [contact me](https://github.com/DaDudek) - github account of one of the creators
+* [Dawid Dudek](https://github.com/DaDudek)
+* [Marek Kwaśny](https://github.com/marekkwasny)
+* [Karolina Szlęk](https://github.com/Karolina-Szlek)
