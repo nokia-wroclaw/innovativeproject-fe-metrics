@@ -29,7 +29,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/nokia-wroclaw/innovativeproject-fe-metrics">
-    <img src="https://raw.githubusercontent.com/nokia-wroclaw/innovativeproject-fe-metrics/main/frontend/root/efemetric/src/assets/tra.png" alt="Logo" width="400" height="300">
+    <img src="https://raw.githubusercontent.com/nokia-wroclaw/innovativeproject-fe-metrics/main/frontend/root/efemetric/src/assets/tra.png" alt="Logo" width="400" height="400">
   </a>
 
 <h3 align="center">eFEmetrics</h3>
