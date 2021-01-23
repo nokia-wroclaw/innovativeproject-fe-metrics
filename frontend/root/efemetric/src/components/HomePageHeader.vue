@@ -7,7 +7,6 @@
       <a href="#About">About</a>
       <a href="#Team">Team</a>
       <a href="#Demo Page">Demo Page</a>
-      <a href="#Links">Links</a>
     </nav>
   </header>
 </template>

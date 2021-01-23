@@ -101,6 +101,7 @@ export default {
     setListeners(){
       if (this.cookie){
         DatabaseController.catchPerformanceMeasurements();
+        setInterval(this.sendInCycle, 1000);
       }
     }
   },

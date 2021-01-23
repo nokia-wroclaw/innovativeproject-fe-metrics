@@ -61,8 +61,11 @@
           :click-f2="basicError">
 
       </TwoActionButtons>
-
+      <div style="line-height:1000%;">
+        <br>
+      </div>
     </div>
+
   </main>
 
 </template>
@@ -133,9 +136,6 @@ export default {
 .photo{
   width:500px;
   height:500px;
-  margin-bottom: 0;
-  padding-bottom: 0px;
-  border-bottom: 0px;
 }
 
 </style>
