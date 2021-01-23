@@ -116,7 +116,7 @@ export default {
           {'tag1':'test', 'tag2':3000, 'tag3':4000})
     },
     basicError(){
-      throw new Error("TEST");
+      throw new Error("you throw simple error");
     },
     basicSendTwo(){
       DatabaseController.prepareQuery('NewMetric' ,1000 + Math.floor((6000 - 1000) * Math.random()))

@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "efemetrics3": "^1.0.11",
+    "efemetrics3": "^1.0.12",
     "jquery": "^3.5.1",
     "vue": "^2.6.11"
   },

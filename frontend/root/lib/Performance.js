@@ -3,7 +3,9 @@ export function getPerformance(){
         const performanceMeasurements = []
         for(let i = 0; i < entries.length; i++){
             let entry = entries[i].toJSON();
-            performanceMeasurements.push(preparePerformanceMeasurement(entry));
+            if (!entry.name.includes("api/v2/write?bucket=")){
+                performanceMeasurements.push(preparePerformanceMeasurement(entry));
+            }
         }
         return performanceMeasurements
     }

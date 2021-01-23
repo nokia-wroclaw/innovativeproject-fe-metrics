@@ -1,3 +1,3 @@
 FROM nginx:latest
 
-COPY ./root/dist /usr/share/nginx/html
+COPY ./root/efemetric/dist /usr/share/nginx/html

@@ -6,7 +6,6 @@ window.$ = window.jQuery = require('jquery');
 Vue.config.productionTip = false
 Vue.config.errorHandler = (event) =>
   {DatabaseController.catchErrors(event);
-  console.log(event)
   }
 new Vue({
   render: h => h(App),
