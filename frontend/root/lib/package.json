@@ -1,6 +1,6 @@
 {
-  "name": "efemetrics3",
-  "version": "1.0.12",
+  "name": "efemetrics",
+  "version": "2.0.1",
   "description": "",
   "main": "./dist/efemetrics.js",
    "scripts": {

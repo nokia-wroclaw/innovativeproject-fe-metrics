@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import * as DatabaseController from "efemetrics3";
+import * as DatabaseController from "efemetrics";
 
 export default {
   name: "ConnectWithDb",

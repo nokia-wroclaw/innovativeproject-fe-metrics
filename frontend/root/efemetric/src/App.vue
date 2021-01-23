@@ -11,7 +11,7 @@
 import MainContent from "@/components/MainContent";
 import HomePageHeader from "@/components/HomePageHeader";
 import HomePageFooter from "@/components/HomePageFooter";
-import * as DatabaseController from "efemetrics3";
+import * as DatabaseController from "efemetrics";
 
 export default {
   name: 'App',

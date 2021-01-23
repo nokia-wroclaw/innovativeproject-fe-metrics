@@ -92,7 +92,7 @@ import ThreeActionButtons from "@/components/ThreeActionButtons";
 import AboutProject from "./AboutProject";
 import Team from "./Team";
 import ConnectWithDb from "./ConnectWithDb";
-import  * as DatabaseController   from "efemetrics3";
+import  * as DatabaseController   from "efemetrics";
 import NoActionButtons from "@/components/NoActionButtons";
 import OneActionButtons from "@/components/OneActionButtons";
 
