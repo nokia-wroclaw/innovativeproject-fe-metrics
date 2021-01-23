@@ -61,6 +61,22 @@
           :click-f2="basicError">
 
       </TwoActionButtons>
+
+      <OneActionButtons
+          title="With our library you will not miss any information about them"
+          message="We know that it is impossible to avoid mistakes.
+          Some, however, are difficult to spot.
+          However, the most important thing is to have as much information as possible about the error.
+          Our library makes it easy to collect all kinds of logs - including errors.
+          Functions that allow proper parsing of all information can be connected to any element of the page.
+          Thanks to this, you are able to catch information about all problems"
+          about="Don't be afraid of errors"
+          id="basicError"
+          button11="throw Error"
+          button12=""
+          :click-f="basicError">
+
+      </OneActionButtons>
       <div style="line-height:1000%;">
         <br>
       </div>
@@ -78,16 +94,18 @@ import Team from "./Team";
 import ConnectWithDb from "./ConnectWithDb";
 import  * as DatabaseController   from "efemetrics3";
 import NoActionButtons from "@/components/NoActionButtons";
+import OneActionButtons from "@/components/OneActionButtons";
 
 export default {
   name: 'MainContent',
   components:{
+    OneActionButtons,
     ConnectWithDb,
     Team,
     AboutProject,
     TwoActionButtons,
     ThreeActionButtons,
-    NoActionButtons
+    NoActionButtons,
   },
   props: {
     msg: String

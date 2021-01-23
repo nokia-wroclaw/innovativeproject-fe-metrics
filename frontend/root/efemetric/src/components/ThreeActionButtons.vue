@@ -9,7 +9,7 @@
         {{message}}
       </p>
       <div class="frame">
-        <iframe src="https://efemetric.site/grafana/d-solo/zDQGM52Gk/metric-basic-dashboard?orgId=1&refresh=5s&panelId=22"
+        <iframe src="http://localhost:3003/d-solo/zDQGM52Gk/metric-basic-dashboard?orgId=1&refresh=5s&panelId=22"
                 height="300px" width="100%" style="float: left; margin-right: 10px "
                 align="left"></iframe>
       </div>

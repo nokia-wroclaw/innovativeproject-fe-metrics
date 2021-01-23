@@ -1,20 +1,16 @@
 <template>
   <div class="row">
-    <h2>Short tutorial</h2>
-    <div class="column">
-      <div style="line-height:1050%;">
-        <br>
-      </div>
-      <p>{{title}}<br>
+    <div class="heading">
+      <h2>{{ about }}</h2>
+    </div>
+    <div class="leftColumn">
+      <h4>{{title}}</h4>
+      <p>
         {{message}}
       </p>
     </div>
-    <div class="column">
-      <div style="line-height:750%;">
-        <br>
-      </div>
-      <ActionButton>
-        {{button1}}
+    <div class="rightColumn">
+      <ActionButton :mess1="button11" :mess2="button12" :id=id :click-f=clickF>
       </ActionButton>
     </div>
   </div>
@@ -22,20 +18,45 @@
 
 <script>
 import ActionButton from "./ActionButton";
+
 export default {
   name: "OneActionButtons",
   components: {
     ActionButton
   },
   props: {
-    button1:String,
     title:String,
-    message:String
-  },
+    message:String,
+    about:String,
+    id:String,
+    clickF: Function,
+    button11: String,
+    button12:String
+  }
 
 }
 </script>
 
 <style scoped>
-
+.row p{
+  text-align: justify;
+  text-justify: inter-word;
+}
+.heading{
+  margin-bottom: 90px;
+}
+.leftColumn {
+  float: left;
+  width: 38%;
+  padding-left: 15%;
+}
+.rightColumn {
+  float: left;
+  width: 38%;
+  padding-top: 3%;
+  padding-left: 2%;
+}
+.frame{
+  padding-top: 10px;
+}
 </style>
