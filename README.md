@@ -69,7 +69,6 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -111,11 +110,16 @@ This is an example of how to list things you need to use the software and how to
   npm install npm@latest -g
   ```
 
+* docker
+  ```sh
+   $ sudo apt-get install docker-ce docker-ce-cli containerd.io
+  ```
+
 ### Installation
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/nokia-wroclaw/innovativeproject-fe-metrics.git
    ```
 2. Go to front folder
    ```sh
@@ -159,7 +163,7 @@ If you want to test locally, do not change the data in the database connection f
 _For more examples, please refer to the [Documentation](https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/tree/main/doc)_
 
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/nokia-wroclaw/innovativeproject-fe-metrics/issues) for a list of proposed features (and known issues).
 
 
 
