@@ -16,9 +16,10 @@
                 alt-img="Dawid"
                 picture_src="Dawid.jpeg"
                 name="Dawid Dudek"></TeamMember>
-    <TeamMember msg="Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi.
-                        Cras vel lorem. Etiam pellentesque aliquet tellus. Phasellus pharetra ."
+    <TeamMember msg="Hi! I am a computer science student at Wrocław University.
+              I love mountains. There are many things I like to do, but what I enjoy most are definitely outdoor sports.
+              My favourite programming language is Python.
+              I like to keep a positive attitude"
                 alt-img="Karolina"
                 name="Karolina Szlęk"
                 picture_src="Karolina.png"></TeamMember>

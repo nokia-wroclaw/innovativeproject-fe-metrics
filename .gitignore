@@ -9,5 +9,4 @@ frontend/root/lib/.cache/
 frontend/root/node_modules/
 frontend/dist/
 frontend/node_modules/
-!docker-influx-volume/db_init.txt
 
