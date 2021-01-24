@@ -68,8 +68,8 @@ export default {
       DatabaseController.setBucket(Bucket);
       DatabaseController.setUrl(Url);
       DatabaseController.setToken(Token)
-      DatabaseController.setExist(true)
-      //DatabaseController.catchEvents(document.getElementById("image"), ["click"])
+      //DatabaseController.setExist(true)
+      DatabaseController.checkDb(Bucket)
       DatabaseController.catchPerformanceMeasurements();
       setInterval(DatabaseController.sendQueries, 4000);
       setInterval(this.sendInCycle, 300);
