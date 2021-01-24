@@ -153,7 +153,7 @@ This is a list of things you need to run the project locally and how to install 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-You can test our library on the demo page at the [app demo page](http://localhost:8080/).
+After build docker-compose you can test our library on the demo page at the [app demo page](http://localhost:8080/).
 We have also created example dashboards in [grafana](http://localhost:3003/) that will allow you to visualize the data sent.
 If you want to test locally, do not change the data in the database connection form
 
