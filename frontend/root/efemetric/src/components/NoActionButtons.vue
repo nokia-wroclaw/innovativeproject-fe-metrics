@@ -10,7 +10,7 @@
       </p>
     </div>
     <div class="rightColumn">
-      <iframe src="http://localhost:3003/d-solo/zDQGM52Gk/metric-basic-dashboard?orgId=1&refresh=5s&panelId=26"
+      <iframe src="https://efemetric.site/grafana/d-solo/zDQGM52Gk/metric-basic-dashboard?orgId=1&panelId=26"
               height="300px" width="100%" style="float: left; margin-right: 10px "
               align="left"></iframe>
     </div>

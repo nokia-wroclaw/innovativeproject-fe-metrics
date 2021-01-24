@@ -40,7 +40,7 @@ export default {
     return {
       bucket: "metrics",
       token: "",
-      addr: "http://localhost:8086",
+      addr: "https://efemetric.site/database",
       isVisible: false,
       cookie: DatabaseController.checkCookie(),
     }
