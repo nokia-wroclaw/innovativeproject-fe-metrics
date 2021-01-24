@@ -142,9 +142,7 @@ export default {
         }
       },"shortStart","shortEnd")
     },
-    catchEvents(){
-      DatabaseController.catchEvents(document.getElementById("image"),["click"])
-    }
+
   }
 }
 </script>

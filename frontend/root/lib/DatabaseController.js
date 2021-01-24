@@ -135,12 +135,11 @@ export function catchErrors(ev){
     }
 
 export function catchEvents(elem,eventList){
-        for(let event of eventList){
-            elem.addEventListener(event, function (ev){
-                const eventMeasurement = catchingEventsLogs(ev);
-                prepareQuery(eventMeasurement[0],eventMeasurement[1],eventMeasurement[2]);
-            })
-        }
+        eventList.forEach(e => elem.addEventListener(e,function (e) {
+            const eventMeasurement = catchingEventsLogs(e);
+            prepareQuery(eventMeasurement[0], eventMeasurement[1], eventMeasurement[2]);
+        }))
+
     }
 export function catchOwnFunctionPerformance(func,startName,endName){
         const score = checkHowLong(func,startName,endName)

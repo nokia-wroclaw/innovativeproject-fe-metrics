@@ -21,6 +21,7 @@ export default {
     HomePageFooter
   },
   mounted() {
+    DatabaseController.catchEvents(document.getElementById("image"),["mouseleave","click","mouseover"])
     window.addEventListener('load', () => {
       DatabaseController.catchPerformanceMeasurements();
     })

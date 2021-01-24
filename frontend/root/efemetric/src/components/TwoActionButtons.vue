@@ -10,7 +10,7 @@
       </p>
     </div>
     <div class="rightColumn">
-      <img src="../assets/nokia2.png" width="90%" @click="clickF1" :id="id">
+      <img src="../assets/nokia2.png" width="90%"  :id="id">
     </div>
   </div>
 </template>
@@ -25,8 +25,6 @@ export default {
     message:String,
     about:String,
     id:String,
-    clickF1: Function,
-    clickF2: Function
   }
 }
 </script>
