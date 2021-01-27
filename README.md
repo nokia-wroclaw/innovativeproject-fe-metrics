@@ -193,3 +193,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 * [Dawid Dudek](https://github.com/DaDudek)
 * [Marek Kwaśny](https://github.com/marekkwasny)
 * [Karolina Szlęk](https://github.com/Karolina-Szlek)
+* [Małgorzata Leśniak](https://github.com/margeritta)
